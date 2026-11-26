@@ -92,7 +92,7 @@ export function CaseStudyDialog({
       ref={dialogRef}
       aria-labelledby={titleId}
       {...({ closedby: "any" } as Record<string, string>)}
-      className="case-study-dialog m-auto max-h-[88dvh] w-[min(760px,calc(100vw-2rem))] overflow-y-auto rounded-[28px] border border-zinc-200/80 bg-white p-0 text-left text-[#18181b] shadow-[0_32px_90px_rgba(0,0,0,0.28)]"
+      className="case-study-dialog no-scrollbar m-auto max-h-[88dvh] w-[min(760px,calc(100vw-2rem))] overflow-y-auto rounded-[28px] border border-zinc-200/80 bg-white p-0 text-left text-[#18181b] shadow-[0_32px_90px_rgba(0,0,0,0.28)]"
     >
       {project ? (
         <div>

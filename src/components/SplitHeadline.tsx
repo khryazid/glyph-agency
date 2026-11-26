@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -29,26 +29,27 @@ export function SplitHeadline({
 
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const chars = el.querySelectorAll<HTMLElement>(".split-char");
-      if (!chars.length) return;
+      const words = el.querySelectorAll<HTMLElement>(".split-word");
+      if (!words.length) return;
 
       const animConfig: gsap.TweenVars = {
         yPercent: 0,
         opacity: 1,
-        duration: 0.65,
-        stagger: 0.015,
+        duration: 0.45,
+        stagger: 0.04,
         ease: "power3.out",
+        clearProps: "transform,willChange",
       };
 
       if (!immediate) {
         animConfig.scrollTrigger = {
           trigger: el,
-          start: "top 86%",
+          start: "top 92%",
           once: true,
         };
       }
 
-      gsap.fromTo(chars, { yPercent: 45, opacity: 0 }, animConfig);
+      gsap.fromTo(words, { yPercent: 28, opacity: 0 }, animConfig);
     });
 
     return () => {
@@ -63,17 +64,12 @@ export function SplitHeadline({
     <Tag ref={containerRef} aria-label={text} className={className}>
       <span aria-hidden="true" className="inline">
         {words.map((word, wIdx) => (
-          <span key={`${word}-${wIdx}`} className="inline-block whitespace-nowrap">
-            {Array.from(word).map((char, cIdx) => (
-              <span
-                key={`${wIdx}-${cIdx}`}
-                className="split-char inline-block will-change-transform"
-              >
-                {char}
-              </span>
-            ))}
-            {wIdx < words.length - 1 ? <span>&nbsp;</span> : null}
-          </span>
+          <Fragment key={`${word}-${wIdx}`}>
+            <span className="split-word inline-block will-change-transform">
+              {word}
+            </span>
+            {wIdx < words.length - 1 ? " " : null}
+          </Fragment>
         ))}
       </span>
     </Tag>

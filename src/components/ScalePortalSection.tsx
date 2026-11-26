@@ -7,6 +7,8 @@ import {
   Coins,
   FileText,
   Megaphone,
+  Pause,
+  Play,
   ShieldCheck,
   Sparkles,
   WifiOff,
@@ -39,19 +41,29 @@ const CAPABILITY_ICONS = [
 export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) {
   const wrapperRef = useRef<HTMLElement | null>(null);
   const [pillIdx, setPillIdx] = useState(0);
+  const [pillPaused, setPillPaused] = useState(false);
 
   useEffect(() => {
+    if (pillPaused) return;
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
     const id = setInterval(() => {
       setPillIdx((prev) => (prev + 1) % SCALE_CATEGORY_PILLS.length);
     }, 2600);
     return () => clearInterval(id);
-  }, []);
+  }, [pillPaused]);
 
   useEffect(() => {
     const el = wrapperRef.current;
     if (!el) return;
 
     const mm = gsap.matchMedia();
+
     mm.add(
       "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
       () => {
@@ -83,6 +95,54 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
       }
     );
 
+    mm.add(
+      "(max-width: 1023px) and (prefers-reduced-motion: no-preference)",
+      () => {
+        const archStack = el.querySelector(".scale-arch-stack");
+        const copyBlock = el.querySelector(".scale-phase-a-copy");
+        const badges = gsap.utils.toArray<HTMLElement>(".scale-cap-badge", el);
+
+        if (archStack) {
+          gsap.fromTo(
+            archStack,
+            { scale: 0.92, opacity: 0 },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.65,
+              ease: "power2.out",
+              clearProps: "transform",
+              scrollTrigger: {
+                trigger: archStack,
+                start: "top 88%",
+                once: true,
+              },
+            }
+          );
+        }
+
+        if (badges.length && copyBlock) {
+          gsap.fromTo(
+            badges,
+            { y: 14, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.05,
+              duration: 0.4,
+              ease: "power2.out",
+              clearProps: "transform",
+              scrollTrigger: {
+                trigger: copyBlock,
+                start: "top 88%",
+                once: true,
+              },
+            }
+          );
+        }
+      }
+    );
+
     return () => mm.revert();
   }, []);
 
@@ -96,10 +156,10 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
     >
       <div className="relative flex min-h-[760px] flex-col justify-between overflow-hidden lg:sticky lg:top-16 lg:h-[calc(100vh-4rem)]">
         {/* FASE A: Arcos concéntricos + 6 beneficios */}
-        <div className="relative flex flex-1 flex-col items-center justify-center px-4 py-16 sm:px-6">
+        <div className="relative flex flex-1 flex-col items-center justify-center px-4 py-14 sm:px-6 lg:py-16">
           <div
             aria-hidden="true"
-            className="relative flex h-[340px] w-[300px] items-end justify-center sm:h-[420px] sm:w-[400px]"
+            className="scale-arch-stack relative flex h-[320px] w-[280px] items-end justify-center sm:h-[420px] sm:w-[400px]"
           >
             <div
               className="grain-surface arch-shape absolute inset-0 shadow-lg"
@@ -118,14 +178,14 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
             <div className="scale-portal-core arch-shape absolute inset-x-16 top-16 bottom-0 bg-[#141417] shadow-2xl" />
           </div>
 
-          <div className="scale-phase-a-copy relative z-10 -mt-10 flex max-w-3xl flex-col items-center text-center">
+          <div className="scale-phase-a-copy relative z-10 mt-6 flex max-w-3xl flex-col items-center text-center lg:-mt-10">
             <div className="flex flex-wrap items-center justify-center gap-2.5">
               {CAPABILITY_BADGES.map((cap, idx) => {
                 const Icon = CAPABILITY_ICONS[idx % CAPABILITY_ICONS.length];
                 return (
                   <div
                     key={cap.label}
-                    className="inline-flex items-center gap-2 rounded-2xl border border-zinc-200/90 bg-white/95 px-3.5 py-2 shadow-sm backdrop-blur-sm"
+                    className="scale-cap-badge inline-flex items-center gap-2 rounded-2xl border border-zinc-200/90 bg-white/95 px-3.5 py-2 shadow-sm backdrop-blur-sm"
                   >
                     <span className="inline-flex size-6 items-center justify-center rounded-lg bg-[#171717] text-white">
                       <Icon className="size-3.5" aria-hidden="true" />
@@ -150,10 +210,10 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
         </div>
 
         {/* FASE B: Escena piedra cálida con píldora interactiva */}
-        <div className="scale-phase-b relative flex flex-col items-center justify-center bg-[#f4f3ef] px-4 py-16 text-center lg:absolute lg:inset-0 lg:z-20 lg:opacity-0">
+        <div className="scale-phase-b relative flex flex-col items-center justify-center bg-[#f4f3ef] px-4 py-14 text-center sm:py-16 lg:absolute lg:inset-0 lg:z-20 lg:opacity-0">
           <div
             aria-hidden="true"
-            className="pointer-events-none mx-auto mb-8 grid max-w-4xl grid-cols-3 gap-3 opacity-85 sm:grid-cols-6"
+            className="pointer-events-none mx-auto mb-8 grid w-full max-w-4xl grid-cols-2 gap-3 opacity-95 sm:grid-cols-3 lg:grid-cols-6"
           >
             {PROJECTS.map((proj) => (
               <div
@@ -178,19 +238,38 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
             Visibilidad · Orden · Crecimiento
           </p>
 
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-[clamp(1.85rem,4vw,3.1rem)] font-semibold tracking-[-0.03em] text-[#18181b]">
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5 text-[clamp(1.7rem,4vw,3.1rem)] font-semibold tracking-[-0.03em] text-[#18181b] sm:gap-3">
             <span>Con nosotros puedes impulsar</span>
-            <button
-              type="button"
-              onClick={() => {
-                setPillIdx((prev) => (prev + 1) % SCALE_CATEGORY_PILLS.length);
-              }}
-              title="Haz clic para cambiar de opción"
-              className="rounded-full px-5 py-1.5 transition-transform hover:scale-[1.03] active:scale-95"
-              style={{ backgroundColor: currentPill.bg, color: currentPill.text }}
-            >
-              {currentPill.label}
-            </button>
+            <div className="inline-flex items-center gap-2">
+              <button
+                key={currentPill.label}
+                type="button"
+                onClick={() => {
+                  setPillIdx((prev) => (prev + 1) % SCALE_CATEGORY_PILLS.length);
+                }}
+                title="Haz clic para cambiar de opción"
+                className="pill-swap-in rounded-full px-5 py-1.5 transition-transform hover:scale-[1.03] active:scale-95"
+                style={{ backgroundColor: currentPill.bg, color: currentPill.text }}
+              >
+                {currentPill.label}
+              </button>
+              <button
+                type="button"
+                onClick={() => setPillPaused((prev) => !prev)}
+                aria-label={
+                  pillPaused
+                    ? "Reanudar cambio de categorías"
+                    : "Pausar cambio de categorías"
+                }
+                className="inline-flex size-8 shrink-0 items-center justify-center rounded-full border border-zinc-300/90 bg-white/90 text-[#18181b] shadow-2xs transition-colors hover:bg-white"
+              >
+                {pillPaused ? (
+                  <Play className="size-3.5" aria-hidden="true" />
+                ) : (
+                  <Pause className="size-3.5" aria-hidden="true" />
+                )}
+              </button>
+            </div>
           </div>
 
           <p className="mt-4 max-w-lg text-sm text-[#52525b] sm:text-base">

@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ArrowUp, Sparkles } from "lucide-react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowUp, Pause, Play, Sparkles } from "lucide-react";
 import {
   HERO_CATEGORY_PILLS,
   HERO_TYPEWRITER_EXAMPLES,
@@ -11,6 +12,10 @@ import {
   type ProjectItem,
 } from "@/data/portfolio";
 import { SplitHeadline } from "./SplitHeadline";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface HeroSectionProps {
   onStartProject: (payload: { category: HeroCategory; brief: string }) => void;
@@ -29,6 +34,7 @@ const FLOATING_CARD_POSITIONS = [
 export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProps) {
   const stageRef = useRef<HTMLElement | null>(null);
   const [portalOpen, setPortalOpen] = useState(true);
+  const [motionPaused, setMotionPaused] = useState(false);
   const [selectedCategory, setSelectedCategory] =
     useState<HeroCategory>("Sistema a Medida");
   const [brief, setBrief] = useState("");
@@ -78,9 +84,31 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
     if (!el) return;
 
     const mm = gsap.matchMedia();
+
     mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const composer = el.querySelector(".hero-composer");
+      if (composer) {
+        gsap.fromTo(
+          composer,
+          { opacity: 0, y: 18 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.65,
+            delay: 0.25,
+            ease: "power3.out",
+            clearProps: "transform",
+          }
+        );
+      }
+    });
+
+    mm.add("(min-width: 1280px) and (prefers-reduced-motion: no-preference)", () => {
+      const slots = gsap.utils.toArray<HTMLElement>(".hero-float-slot", el);
+      if (!slots.length) return;
+
       gsap.fromTo(
-        el.querySelectorAll(".hero-float-card"),
+        slots,
         { opacity: 0, y: 26, scale: 0.94 },
         {
           opacity: 1,
@@ -93,11 +121,19 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
         }
       );
 
-      gsap.fromTo(
-        el.querySelector(".hero-composer"),
-        { opacity: 0, y: 18 },
-        { opacity: 1, y: 0, duration: 0.65, delay: 0.25, ease: "power3.out" }
-      );
+      slots.forEach((slot, idx) => {
+        gsap.to(slot, {
+          y: idx % 2 === 0 ? -38 : -22,
+          ease: "none",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: el,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.8,
+          },
+        });
+      });
     });
 
     return () => mm.revert();
@@ -116,7 +152,8 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
     <section
       id="top"
       ref={stageRef}
-      className="relative flex min-h-[calc(100dvh-4rem)] items-center justify-center overflow-hidden bg-[#fafafa] px-4 py-14 sm:px-6 lg:py-20"
+      data-motion-paused={motionPaused}
+      className="relative flex min-h-[calc(100dvh-4rem)] items-center justify-center overflow-hidden bg-[#fafafa] px-4 py-12 sm:px-6 lg:py-20"
     >
       <div
         aria-hidden="true"
@@ -127,35 +164,48 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
         }}
       />
 
-      {/* Collage periférico 3D en escritorio */}
+      {/* Collage periférico 3D en escritorio con flotación sutil y parallax */}
       <div
         aria-hidden="false"
-        className="pointer-events-none absolute inset-0 mx-auto hidden max-w-[1440px] lg:block"
+        className="pointer-events-none absolute inset-0 mx-auto hidden max-w-[1440px] xl:block"
         style={{ perspective: "1100px" }}
       >
         {PROJECTS.slice(0, 6).map((project, idx) => (
-          <button
+          <div
             key={project.id}
-            type="button"
-            onClick={() => onSelectProject(project)}
-            className={`hero-float-card pointer-events-auto absolute ${FLOATING_CARD_POSITIONS[idx]} group hidden w-52 rounded-xl border border-zinc-200/80 bg-white/90 p-2.5 text-left shadow-[0_12px_30px_rgba(24,24,27,0.06)] backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.03] xl:block`}
+            className={`hero-float-slot pointer-events-auto absolute ${FLOATING_CARD_POSITIONS[idx]} hidden xl:block`}
           >
-            <div className="mb-2 flex items-center justify-between gap-2">
-              <span
-                className="grain-surface arch-shape inline-block h-5 w-4 shrink-0"
-                style={{ background: project.gradient }}
-              />
-              <span className="truncate text-[11px] font-medium text-zinc-500">
-                {project.shortLabel}
-              </span>
+            <div
+              className="hero-float-anim"
+              style={{
+                animationName: idx % 2 === 0 ? "hero-float-a" : "hero-float-b",
+                animationDuration: `${5.2 + (idx % 3) * 0.7}s`,
+                animationDelay: `${idx * -0.8}s`,
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => onSelectProject(project)}
+                className="hero-float-card group w-52 rounded-xl border border-zinc-200/80 bg-white/92 p-2.5 text-left shadow-[0_12px_30px_rgba(24,24,27,0.06)] backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.03]"
+              >
+                <div className="mb-2 flex items-center justify-between gap-2">
+                  <span
+                    className="grain-surface arch-shape inline-block h-5 w-4 shrink-0"
+                    style={{ background: project.gradient }}
+                  />
+                  <span className="truncate text-[11px] font-medium text-zinc-500">
+                    {project.shortLabel}
+                  </span>
+                </div>
+                <p className="truncate text-xs font-semibold text-[#18181b] group-hover:text-black">
+                  {project.title}
+                </p>
+                <p className="mt-0.5 truncate text-[11px] text-[#737373]">
+                  {project.metrics[0]?.value} · {project.features[0]}
+                </p>
+              </button>
             </div>
-            <p className="truncate text-xs font-semibold text-[#18181b] group-hover:text-black">
-              {project.title}
-            </p>
-            <p className="mt-0.5 truncate text-[11px] text-[#737373]">
-              {project.metrics[0]?.value} · {project.features[0]}
-            </p>
-          </button>
+          </div>
         ))}
       </div>
 
@@ -222,7 +272,7 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
                 }
               }}
               aria-label="Cuéntanos qué necesita tu negocio"
-              className="w-full resize-none bg-transparent px-1.5 pt-1 text-[14px] leading-[22px] text-[#171717] focus:outline-none"
+              className="no-scrollbar w-full resize-none bg-transparent px-1.5 pt-1 text-[14px] leading-[22px] text-[#171717] focus:outline-none"
             />
             {brief.length === 0 && !isFocused ? (
               <div
@@ -279,15 +329,70 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
           </div>
         </form>
 
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-xs text-[#737373]">
+        <div className="mt-5 flex flex-col items-center justify-center gap-2 text-xs text-[#737373] sm:flex-row sm:flex-wrap sm:gap-3">
           <span>Venezuela · Atención Remota Internacional</span>
-          <span aria-hidden="true">·</span>
+          <span aria-hidden="true" className="hidden sm:inline">
+            ·
+          </span>
           <a
             href="#proyectos"
             className="font-medium text-[#18181b] underline decoration-zinc-300 underline-offset-4 hover:decoration-[#18181b]"
           >
             Explorar nuestras 6 soluciones
           </a>
+          <span aria-hidden="true" className="hidden xl:inline">
+            ·
+          </span>
+          <button
+            type="button"
+            onClick={() => setMotionPaused((prev) => !prev)}
+            className="inline-flex items-center gap-1 rounded-full border border-zinc-200/90 bg-white/90 px-2.5 py-1 text-[11px] font-medium text-[#52525b] transition-colors hover:border-zinc-300 hover:text-[#18181b]"
+          >
+            {motionPaused ? (
+              <>
+                <Play className="size-3" aria-hidden="true" />
+                <span>Reanudar</span>
+              </>
+            ) : (
+              <>
+                <Pause className="size-3" aria-hidden="true" />
+                <span>Pausar movimiento</span>
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* Cinta deslizable en móvil y tablet sin barra visible */}
+        <div className="mt-7 w-full max-w-[680px] xl:hidden">
+          <p className="mb-1.5 text-[11px] font-medium text-[#737373]">
+            Desliza nuestras 6 soluciones →
+          </p>
+          <div className="no-scrollbar flex snap-x snap-proximity gap-3 overflow-x-auto px-1 py-2 text-left">
+            {PROJECTS.slice(0, 6).map((project) => (
+              <button
+                key={project.id}
+                type="button"
+                onClick={() => onSelectProject(project)}
+                className="w-[218px] shrink-0 snap-start rounded-xl border border-zinc-200/85 bg-white/95 p-3 shadow-[0_8px_22px_rgba(24,24,27,0.05)] transition-transform active:scale-[0.98]"
+              >
+                <div className="mb-2 flex items-center justify-between gap-2">
+                  <span
+                    className="grain-surface arch-shape inline-block h-5 w-4 shrink-0"
+                    style={{ background: project.gradient }}
+                  />
+                  <span className="truncate text-[11px] font-medium text-zinc-500">
+                    {project.shortLabel}
+                  </span>
+                </div>
+                <p className="truncate text-xs font-semibold text-[#18181b]">
+                  {project.title}
+                </p>
+                <p className="mt-0.5 truncate text-[11px] text-[#737373]">
+                  {project.metrics[0]?.value} · {project.features[0]}
+                </p>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>

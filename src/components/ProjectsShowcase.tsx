@@ -43,7 +43,7 @@ export function ProjectsShowcase({ onSelectProject }: ProjectsShowcaseProps) {
           <div
             role="tablist"
             aria-label="Filtrar soluciones por tipo"
-            className="mt-8 flex items-center gap-6 border-b border-zinc-200/90"
+            className="no-scrollbar mt-8 flex max-w-full items-center gap-5 overflow-x-auto border-b border-zinc-200/90 px-1 sm:gap-7"
           >
             {TABS.map((tab) => {
               const isSelected = activeTab === tab.id;
@@ -53,20 +53,21 @@ export function ProjectsShowcase({ onSelectProject }: ProjectsShowcaseProps) {
                   role="tab"
                   aria-selected={isSelected}
                   type="button"
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`relative pb-3 text-sm font-medium transition-colors ${
+                  onClick={(e) => {
+                    setActiveTab(tab.id);
+                    e.currentTarget.scrollIntoView({
+                      block: "nearest",
+                      inline: "nearest",
+                      ...({ container: "nearest" } as unknown as ScrollIntoViewOptions),
+                    });
+                  }}
+                  className={`relative flex-none whitespace-nowrap pb-3 text-sm font-medium transition-colors ${
                     isSelected
                       ? "text-[#18181b]"
                       : "text-[#737373] hover:text-[#18181b]"
                   }`}
                 >
                   {tab.label}
-                  {isSelected ? (
-                    <span
-                      aria-hidden="true"
-                      className="absolute inset-x-0 -bottom-px h-[2px] rounded-full bg-[#18181b]"
-                    />
-                  ) : null}
                 </button>
               );
             })}

@@ -473,7 +473,7 @@ export function ContactSection({
                     placeholder="Ej: Queremos gestionar nuestras redes y pauta en Meta Ads, o implementar un sistema de ventas e inventario..."
                     value={message}
                     onChange={(e) => onMessageChange(e.target.value)}
-                    className="field-control mt-1 w-full resize-y rounded-xl border border-zinc-200 bg-[#fafafa] px-3.5 py-2.5 text-sm text-[#18181b] placeholder:text-zinc-400"
+                    className="field-control no-scrollbar mt-1 w-full resize-y rounded-xl border border-zinc-200 bg-[#fafafa] px-3.5 py-2.5 text-sm text-[#18181b] placeholder:text-zinc-400"
                   />
                   <div id="contact-message-error" className="error-msg">
                     <AlertCircle className="size-3.5 shrink-0" aria-hidden="true" />
