@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --bg-page: #fafafa;
+  --bg-stage: #efefef;
+  --bg-stone: #f4f3ef;
+  --bg-card: #ffffff;
+  --ink-primary: #18181b;
+  --ink-display: #2f2f2f;
+  --ink-muted: #737373;
+  --focus-ring: #3370ff;
+}
+
+@property --hero-portal-phase {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--ink-primary);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display), var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+code,
+pre,
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Motivo visual de Arco / Portal característico */
+.arch-shape {
+  border-radius: 50% 50% 2.5% 2.5% / 38% 38% 1.8% 1.8%;
+}
+
+/* Textura editorial granulada sobre degradados */
+.grain-surface {
+  position: relative;
+  overflow: hidden;
+}
+
+.grain-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.85'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* Gradiente radial animado del Portal 3D en el Hero */
+.portal-gradient-core {
+  background-color: #ff8400;
+  background-image: repeating-radial-gradient(
+    circle at 50% 62%,
+    #ffc157 calc(0% + var(--hero-portal-phase)),
+    #ff8400 calc(18% + var(--hero-portal-phase)),
+    #ff8ee5 calc(38% + var(--hero-portal-phase)),
+    #d559ff calc(60% + var(--hero-portal-phase)),
+    #ffc157 calc(85% + var(--hero-portal-phase))
+  );
+  background-size: 180% 180%;
+}
+
+@keyframes portal-pulse {
+  0% {
+    --hero-portal-phase: 0%;
+  }
+  100% {
+    --hero-portal-phase: 85%;
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.caret-blink {
+  animation: caret-blink 900ms steps(1, end) infinite;
+}
+
+/* Puerta 3D del Hero Portal */
+.hero-portal-scene {
+  perspective: 284px;
+}
+
+.hero-portal-leaf {
+  transform-origin: 0% 50%;
+  transform: rotateY(-58deg);
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-portal-trigger:hover .hero-portal-leaf,
+.hero-portal-trigger:focus-visible .hero-portal-leaf,
+.hero-portal-trigger[data-open="true"] .hero-portal-leaf {
+  transform: rotateY(-76deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .portal-gradient-core {
+    animation: portal-pulse 4.5s linear infinite;
+  }
+}
+
+/* Reglas obligatorias para <dialog> nativo (modern-web-guidance) */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background: rgba(15, 15, 18, 0.56);
+  backdrop-filter: blur(6px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog.case-study-dialog {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+    transition:
+      opacity 0.22s ease-out,
+      transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+      display 0.22s,
+      overlay 0.22s;
+    transition-behavior: allow-discrete;
+  }
+
+  dialog.case-study-dialog[open] {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  @starting-style {
+    dialog.case-study-dialog[open] {
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+    }
+  }
+}
+
+/* Validación de formularios después de la interacción (modern-web-guidance) */
+.field-control:is(:user-invalid, .user-invalid-fallback) {
+  border-color: #dc2626;
+  background-color: #fef2f2;
+}
+
+.field-control:is(:user-invalid, .user-invalid-fallback) + .error-msg {
+  display: flex;
+}
+
+.field-control:is(:user-valid, .user-valid-fallback) {
+  border-color: #16a34a;
+}
+
+.error-msg {
+  display: none;
+  align-items: center;
+  gap: 0.375rem;
+  color: #b91c1c;
+  font-size: 0.8125rem;
+  margin-top: 0.375rem;
+}
+
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}

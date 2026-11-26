@@ -1,0 +1,21 @@
+# Dependencias y build
+node_modules/
+.next/
+out/
+dist/
+.vercel/
+
+# Variables de entorno y secretos
+.env
+.env.*
+!.env.example
+
+# TypeScript y logs
+*.tsbuildinfo
+next-env.d.ts
+*.log
+npm-debug.log*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
