@@ -2,6 +2,7 @@
 
 import { ArrowUp, ArrowUpRight } from "lucide-react";
 import { PROFILE } from "@/data/portfolio";
+import { GlyphLockup } from "./GlyphLogo";
 
 export function Footer() {
   const scrollToTop = () => {
@@ -15,17 +16,14 @@ export function Footer() {
           <div className="lg:col-span-5">
             <a
               href="#top"
-              className="inline-flex items-center gap-2.5 text-sm font-semibold tracking-tight text-[#18181b]"
+              aria-label="Volver al inicio — Glyph Agency"
+              className="inline-flex items-center"
             >
-              <span
-                aria-hidden="true"
-                className="portal-gradient-core arch-shape inline-block h-6 w-5"
-              />
-              <span>{PROFILE.name}</span>
+              <GlyphLockup tone="light" markClassName="size-8" textClassName="text-xl" />
             </a>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#52525b]">
-              Fundador de Glyph Agency. Desarrollo de software a medida,
-              sistemas de gestión, webs comerciales y automatización para
+              {PROFILE.name} — Fundador de Glyph Agency. Desarrollo de software a
+              medida, sistemas de gestión, webs comerciales y automatización para
               negocios.
             </p>
           </div>

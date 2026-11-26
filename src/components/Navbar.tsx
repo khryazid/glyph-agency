@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { PROFILE } from "@/data/portfolio";
+import { GlyphMark } from "./GlyphLogo";
 
 const NAV_LINKS = [
   { href: "#proyectos", label: "Soluciones" },
@@ -30,10 +31,7 @@ export function Navbar() {
             href="#top"
             className="flex items-center gap-2.5 text-sm font-semibold tracking-tight text-[#18181b]"
           >
-            <span
-              aria-hidden="true"
-              className="portal-gradient-core arch-shape inline-block h-6 w-5 shrink-0 shadow-xs"
-            />
+            <GlyphMark tone="badge-dark" className="size-7 shrink-0" />
             <span>{PROFILE.name}</span>
           </a>
 

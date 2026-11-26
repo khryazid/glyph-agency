@@ -2,6 +2,7 @@
 
 import { ArrowRight, Sparkles } from "lucide-react";
 import { PROFILE, SERVICE_CARDS, type HeroCategory } from "@/data/portfolio";
+import { GlyphMark } from "./GlyphLogo";
 import { SplitHeadline } from "./SplitHeadline";
 
 interface ServicesSectionProps {
@@ -113,14 +114,12 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                     </div>
 
                     <div className="arch-shape relative z-10 flex h-48 w-36 flex-col items-center justify-center border-2 border-white/80 bg-[#141417] px-3 text-center text-white shadow-xl">
-                      <span
-                        aria-hidden="true"
-                        className="portal-gradient-core arch-shape mb-3 inline-block h-10 w-8 shadow-sm"
-                      />
-                      <span className="font-display text-2xl font-semibold tracking-tight text-white">
-                        KA
+                      <GlyphMark tone="dark" className="mb-2.5 size-14" />
+                      <span className="font-display text-sm tracking-[-0.02em] text-white">
+                        <strong className="font-semibold">Glyph</strong>{" "}
+                        <span className="font-normal text-zinc-400">Agency</span>
                       </span>
-                      <span className="mt-1 text-[10px] font-medium text-zinc-300">
+                      <span className="mt-1 text-[10px] font-medium text-zinc-400">
                         {PROFILE.name}
                       </span>
                     </div>

@@ -39,12 +39,23 @@ export default function OpenGraphImage() {
           >
             <div
               style={{
-                width: "26px",
-                height: "32px",
-                borderRadius: "16px 16px 3px 3px",
-                background: "linear-gradient(145deg, #ff8400 0%, #ff8ee5 55%, #d559ff 100%)",
+                width: "44px",
+                height: "44px",
+                borderRadius: "11px",
+                backgroundColor: "#141417",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
-            />
+            >
+              <svg width="32" height="32" viewBox="0 0 120 120" fill="none">
+                <path
+                  d="M88.24 34.57A38 38 0 1 0 98 60L98 53.75L69.5 53.75L75.75 60L69.5 66.25L84.72 66.25A25.5 25.5 0 1 1 78.95 42.94Z"
+                  fill="#FFFFFF"
+                />
+                <path d="M58.5 49L69.5 60L58.5 71L47.5 60Z" fill="#FF8400" />
+              </svg>
+            </div>
             <span
               style={{
                 fontSize: "24px",
@@ -52,7 +63,7 @@ export default function OpenGraphImage() {
                 color: "#52525b",
               }}
             >
-              Khristian Ali · Fundador de Glyph Agency
+              Khristian Ali · Glyph Agency
             </span>
           </div>
 
