@@ -23,12 +23,12 @@ interface HeroSectionProps {
 }
 
 const FLOATING_CARD_POSITIONS = [
-  "top-10 left-4 xl:left-10 -rotate-3",
-  "top-48 left-2 xl:left-6 rotate-2",
-  "bottom-12 left-6 xl:left-14 -rotate-2",
-  "top-12 right-4 xl:right-10 rotate-3",
-  "top-48 right-2 xl:right-6 -rotate-2",
-  "bottom-12 right-6 xl:right-14 rotate-2",
+  "top-[15%] left-8 2xl:left-12 -rotate-3",
+  "top-[43%] left-2 2xl:left-5 rotate-2",
+  "top-[69%] left-10 2xl:left-14 -rotate-2",
+  "top-[16%] right-8 2xl:right-12 rotate-3",
+  "top-[44%] right-2 2xl:right-5 -rotate-2",
+  "top-[68%] right-10 2xl:right-14 rotate-2",
 ];
 
 export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProps) {
@@ -167,7 +167,7 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
       {/* Collage periférico 3D en escritorio con flotación sutil y parallax */}
       <div
         aria-hidden="false"
-        className="pointer-events-none absolute inset-0 mx-auto hidden max-w-[1440px] xl:block"
+        className="pointer-events-none absolute inset-0 mx-auto hidden max-w-[1240px] xl:block"
         style={{ perspective: "1100px" }}
       >
         {PROJECTS.slice(0, 6).map((project, idx) => (
