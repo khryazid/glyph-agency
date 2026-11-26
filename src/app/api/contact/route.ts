@@ -4,11 +4,16 @@ import { z } from "zod";
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Ingresa tu nombre completo.").max(120),
   email: z.string().trim().email("Ingresa un correo electrónico válido."),
-  category: z.enum(["SaaS B2B", "App con IA", "Plataforma Web", "Equipo Senior"]),
+  category: z.enum([
+    "Sistema a Medida",
+    "Web Comercial",
+    "Automatización e IA",
+    "Asesoría Digital",
+  ]),
   message: z
     .string()
     .trim()
-    .min(15, "Cuéntame un poco más sobre el proyecto (mínimo 15 caracteres).")
+    .min(15, "Cuéntame un poco más sobre tu negocio o proyecto (mínimo 15 caracteres).")
     .max(3000),
   companyWebsite: z.string().optional(),
 });
@@ -60,8 +65,8 @@ export async function POST(request: Request) {
           from: fromEmail,
           to: [toEmail],
           reply_to: email,
-          subject: `[Portafolio · ${category}] Nuevo mensaje de ${name}`,
-          text: `Nombre: ${name}\nCorreo: ${email}\nTipo: ${category}\n\nMensaje:\n${message}`,
+          subject: `[Portafolio · ${category}] Nuevo contacto de ${name}`,
+          text: `Nombre: ${name}\nCorreo: ${email}\nInterés: ${category}\n\nMensaje:\n${message}`,
         }),
       });
 
@@ -73,7 +78,7 @@ export async function POST(request: Request) {
     }
   }
 
-  const subject = encodeURIComponent(`[Portafolio · ${category}] Contacto de ${name}`);
+  const subject = encodeURIComponent(`[Consulta · ${category}] Mensaje de ${name}`);
   const mailBody = encodeURIComponent(
     `Hola Khristian,\n\nSoy ${name} (${email}).\nCategoría: ${category}\n\n${message}`
   );

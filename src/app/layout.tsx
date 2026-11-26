@@ -27,37 +27,37 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Khristian Ali — Full-Stack Product Engineer & Founder @ Glyph Agency",
+    default: "Khristian Ali — Fundador de Glyph Agency | Software y Soluciones Digitales",
     template: "%s | Khristian Ali",
   },
   description:
-    "Portafolio de Khristian Ali (Founder @ Glyph Agency). Diseño y desarrollo SaaS offline-first, arquitecturas multi-tenant con PostgreSQL RLS y aplicaciones con IA en Next.js, TypeScript, Supabase y Python.",
+    "Desarrollo software a medida, sistemas de ventas e inventario, plataformas web y automatizaciones con IA para negocios y empresas. Fundador de Glyph Agency.",
   keywords: [
     "Khristian Ali",
     "Glyph Agency",
-    "Full-Stack Product Engineer",
-    "Next.js",
-    "Supabase RLS",
-    "Offline-First SaaS",
-    "AI Engineering",
+    "Software para empresas",
+    "Sistemas a medida",
+    "Páginas web comerciales",
+    "Punto de venta",
+    "Automatización con IA",
     "Portafolio",
   ],
-  authors: [{ name: "Khristian Ali", url: PROFILE.githubUrl }],
+  authors: [{ name: "Khristian Ali", url: PROFILE.linkedinUrl }],
   openGraph: {
     type: "website",
     locale: "es_ES",
     url: SITE_URL,
     siteName: "Khristian Ali — Glyph Agency",
-    title: "Khristian Ali — Cada idea abre un producto real",
+    title: "Khristian Ali — Software que ordena y hace crecer tu negocio",
     description:
-      "SaaS offline-first, plataformas multi-tenant con PostgreSQL RLS y aplicaciones con IA listas para producción.",
+      "Sistemas a medida, webs que atraen clientes y automatización práctica para empresas y negocios.",
   },
   twitter: {
     card: "summary_large_image",
     creator: "@khr_yazid",
-    title: "Khristian Ali — Full-Stack Product Engineer & Founder @ Glyph Agency",
+    title: "Khristian Ali — Fundador de Glyph Agency",
     description:
-      "SaaS offline-first, plataformas multi-tenant y apps con IA en Next.js, Supabase y Python.",
+      "Desarrollo software, sistemas de gestión, webs comerciales y automatizaciones para negocios.",
   },
 };
 
@@ -70,17 +70,17 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     name: PROFILE.name,
-    jobTitle: "Full-Stack Product Engineer & Founder",
+    jobTitle: "Fundador y Desarrollador de Software",
     worksFor: {
       "@type": "Organization",
       name: "Glyph Agency",
     },
     url: SITE_URL,
     sameAs: [
-      PROFILE.githubUrl,
       PROFILE.linkedinUrl,
       PROFILE.xUrl,
       PROFILE.instagramUrl,
+      PROFILE.githubUrl,
     ],
   };
 

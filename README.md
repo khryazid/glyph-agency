@@ -1,13 +1,13 @@
-# Portafolio — Khristian Ali (Founder @ Glyph Agency)
+# Portafolio — Khristian Ali (Fundador de Glyph Agency)
 
-Web de portafolio editorial en español diseñada con **Next.js 16**, **React 19**, **TypeScript**, **Tailwind CSS v4** y **GSAP + ScrollTrigger**, orientada a presentar productos SaaS *offline-first*, sistemas multi-tenant con PostgreSQL RLS, proyectos Open Source de IA y servicios de ingeniería full-stack.
+Web de portafolio comercial y editorial en español enfocada en dueños de negocios y empresas: presenta soluciones reales (sistemas de ventas e inventario, gestión clínica, plataformas B2B, webs corporativas y automatización con IA) con diseño luminoso, transiciones suaves y formulario de contacto directo.
 
-## Stack Tecnológico
+## Stack del Proyecto
 
-- **Framework:** Next.js 16 (App Router, RSC), React 19, TypeScript (`strict`)
-- **Estilos:** Tailwind CSS v4, `@property` CSS gradients, texturas granuladas editoriales y motivo visual de arco/portal
+- **Framework:** Next.js 16 (App Router, RSC), React 19, TypeScript
+- **Estilos:** Tailwind CSS v4, `@property` CSS gradients y texturas granuladas editoriales
 - **Animaciones:** GSAP + ScrollTrigger (respetando `prefers-reduced-motion`)
-- **Validación y API:** Zod + Route Handler `POST /api/contact` (soporte opcional para Resend)
+- **Validación y Contacto:** Zod + `POST /api/contact` (soporte opcional para Resend y fallback directo)
 - **Despliegue:** Vercel (producción en `main`, previews en `test` y `dev`)
 
 ## Instalación y Ejecución Local

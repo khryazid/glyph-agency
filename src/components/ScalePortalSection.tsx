@@ -5,9 +5,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   Bot,
-  Cloud,
   Coins,
-  Database,
+  FileText,
+  ShieldCheck,
   Smartphone,
   WifiOff,
 } from "lucide-react";
@@ -27,13 +27,12 @@ interface ScalePortalSectionProps {
   onPickCategory: (category: HeroCategory) => void;
 }
 
-const CAPABILITY_ICONS = [WifiOff, Database, Bot, Coins, Smartphone, Cloud];
+const CAPABILITY_ICONS = [WifiOff, Coins, FileText, Bot, ShieldCheck, Smartphone];
 
 export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) {
   const wrapperRef = useRef<HTMLElement | null>(null);
   const [pillIdx, setPillIdx] = useState(0);
 
-  // Rotación automática suave de la píldora de categoría en la fase B
   useEffect(() => {
     const id = setInterval(() => {
       setPillIdx((prev) => (prev + 1) % SCALE_CATEGORY_PILLS.length);
@@ -41,7 +40,6 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
     return () => clearInterval(id);
   }, []);
 
-  // Transición de zoom del portal concéntrico al hacer scroll en escritorio
   useEffect(() => {
     const el = wrapperRef.current;
     if (!el) return;
@@ -89,15 +87,13 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
       ref={wrapperRef}
       className="relative bg-[#fafafa] lg:h-[200vh]"
     >
-      {/* Escena sticky en desktop / apilada en móvil y reduced-motion */}
       <div className="relative flex min-h-[760px] flex-col justify-between overflow-hidden lg:sticky lg:top-16 lg:h-[calc(100vh-4rem)]">
-        {/* FASE A: Arcos concéntricos + 6 píldoras de capacidades */}
+        {/* FASE A: Arcos concéntricos + 6 beneficios */}
         <div className="relative flex flex-1 flex-col items-center justify-center px-4 py-16 sm:px-6">
           <div
             aria-hidden="true"
             className="relative flex h-[340px] w-[300px] items-end justify-center sm:h-[420px] sm:w-[400px]"
           >
-            {/* Arco externo ámbar/naranja */}
             <div
               className="grain-surface arch-shape absolute inset-0 shadow-lg"
               style={{
@@ -105,7 +101,6 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
                   "linear-gradient(180deg, #ffc157 0%, #ff8400 60%, #ff8ee5 100%)",
               }}
             />
-            {/* Arco medio rosa/violeta */}
             <div
               className="grain-surface arch-shape absolute inset-x-7 top-8 bottom-0"
               style={{
@@ -113,12 +108,10 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
                   "linear-gradient(180deg, #ff8ee5 0%, #d559ff 100%)",
               }}
             />
-            {/* Portal central negro que hace zoom */}
             <div className="scale-portal-core arch-shape absolute inset-x-16 top-16 bottom-0 bg-[#141417] shadow-2xl" />
           </div>
 
           <div className="scale-phase-a-copy relative z-10 -mt-10 flex max-w-3xl flex-col items-center text-center">
-            {/* 6 badges de capacidades */}
             <div className="flex flex-wrap items-center justify-center gap-2.5">
               {CAPABILITY_BADGES.map((cap, idx) => {
                 const Icon = CAPABILITY_ICONS[idx % CAPABILITY_ICONS.length];
@@ -143,15 +136,14 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
 
             <SplitHeadline
               as="h2"
-              text="Ingeniería pensada para escalar"
+              text="Pensado para hacer crecer tu negocio"
               className="mt-7 text-[clamp(1.85rem,3.8vw,2.9rem)] font-semibold tracking-[-0.03em] text-[#18181b]"
             />
           </div>
         </div>
 
-        {/* FASE B: Escena piedra cálida con píldora interactiva y collage */}
+        {/* FASE B: Escena piedra cálida con píldora interactiva */}
         <div className="scale-phase-b relative flex flex-col items-center justify-center bg-[#f4f3ef] px-4 py-16 text-center lg:absolute lg:inset-0 lg:z-20 lg:opacity-0">
-          {/* Collage sutil en desktop */}
           <div
             aria-hidden="true"
             className="pointer-events-none mx-auto mb-8 grid max-w-4xl grid-cols-3 gap-3 opacity-85 sm:grid-cols-6"
@@ -168,15 +160,15 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
                 <p className="truncate text-[11px] font-semibold text-[#18181b]">
                   {proj.title}
                 </p>
-                <p className="truncate font-mono text-[9px] text-[#737373]">
-                  {proj.stack[0]}
+                <p className="truncate text-[10px] text-[#737373]">
+                  {proj.shortLabel}
                 </p>
               </div>
             ))}
           </div>
 
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#737373]">
-            Arquitectura · Producto · IA
+            Orden · Ventas · Crecimiento
           </p>
 
           <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-[clamp(1.85rem,4vw,3.1rem)] font-semibold tracking-[-0.03em] text-[#18181b]">
@@ -186,7 +178,7 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
               onClick={() => {
                 setPillIdx((prev) => (prev + 1) % SCALE_CATEGORY_PILLS.length);
               }}
-              title="Haz clic para cambiar de categoría"
+              title="Haz clic para cambiar de opción"
               className="rounded-full px-5 py-1.5 transition-transform hover:scale-[1.03] active:scale-95"
               style={{ backgroundColor: currentPill.bg, color: currentPill.text }}
             >
@@ -195,8 +187,8 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
           </div>
 
           <p className="mt-4 max-w-lg text-sm text-[#52525b] sm:text-base">
-            Desde MVPs veloces hasta plataformas multi-tenant listas para miles de
-            operaciones diarias.
+            Desde una web que genere confianza inmediata hasta un sistema completo
+            para controlar ventas, inventario y cobranzas.
           </p>
 
           <button

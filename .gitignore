@@ -16,6 +16,7 @@ next-env.d.ts
 *.log
 npm-debug.log*
 
-# Sistema operativo
+# Sistema operativo y generados locales
 .DS_Store
 Thumbs.db
+AGENTS.md

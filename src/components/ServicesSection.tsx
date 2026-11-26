@@ -19,12 +19,12 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
         <div className="mx-auto max-w-2xl text-center">
           <SplitHeadline
             as="h2"
-            text="Empieza fácil. Construye con criterio senior."
+            text="Empieza claro. Avanza con respaldo directo."
             className="text-[clamp(2rem,4.4vw,3.35rem)] font-semibold tracking-[-0.03em] leading-[1.02] text-[#18181b]"
           />
           <p className="mt-4 text-base text-[#52525b]">
-            Ya sea lanzando un SaaS desde cero, integrando IA en tu operación o
-            sumándome directamente a tu equipo de ingeniería.
+            Ya sea ordenando la operación diaria de tu empresa, lanzando tu web
+            comercial o automatizando tareas repetitivas.
           </p>
         </div>
 
@@ -35,32 +35,31 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
               className="flex flex-col justify-between rounded-[28px] border border-zinc-200/80 bg-[#fafafa] p-4 shadow-[0_10px_30px_rgba(24,24,27,0.03)]"
             >
               <div>
-                {/* Cabecera visual fiel a los 3 cards de la referencia */}
                 {card.variant === "templates" ? (
                   <div className="relative flex h-60 items-center justify-center overflow-hidden rounded-[22px] bg-[#ecebe7] p-5">
                     <div className="relative h-full w-full">
                       <div className="absolute top-3 left-2 w-44 -rotate-3 rounded-xl border border-zinc-200 bg-white p-3 shadow-sm">
                         <p className="text-[10px] font-semibold text-zinc-400">
-                          GLYPHCORE B2B
+                          DISTRIBUIDORAS
                         </p>
                         <p className="mt-1 text-xs font-semibold text-[#18181b]">
-                          4 Portales · Offline-First
+                          Pedidos, rutas y cobranzas
                         </p>
                         <div className="mt-2 h-1.5 w-20 rounded-full bg-[#ff8400]" />
                       </div>
                       <div className="absolute right-2 bottom-3 w-48 rotate-2 rounded-xl border border-zinc-200 bg-white p-3.5 shadow-md">
                         <p className="text-[10px] font-semibold text-zinc-400">
-                          MULTI-TENANT RLS
+                          CONTROL DE NEGOCIO
                         </p>
                         <p className="mt-1 text-xs font-semibold text-[#18181b]">
-                          PostgreSQL 17 + Stripe + PDF
+                          Ventas · Crédito · Reportes PDF
                         </p>
                         <div className="mt-2.5 flex gap-1.5">
                           <span className="rounded-full bg-zinc-900 px-2 py-0.5 text-[10px] text-white">
-                            Next.js 16
+                            Sin internet
                           </span>
                           <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] text-zinc-700">
-                            Supabase
+                            Multimoneda
                           </span>
                         </div>
                       </div>
@@ -80,22 +79,22 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                       <div className="flex items-center gap-1.5">
                         <span className="inline-flex items-center gap-1 rounded-full bg-fuchsia-100 px-2.5 py-0.5 text-[11px] font-semibold text-fuchsia-950">
                           <Sparkles className="size-3" aria-hidden="true" />
-                          Gemini AI
+                          Lectura de facturas
                         </span>
                         <span className="rounded-full bg-lime-100 px-2.5 py-0.5 text-[11px] font-semibold text-lime-950">
-                          pgvector
+                          Atención 24/7
                         </span>
                       </div>
                       <p className="mt-3 text-xs text-[#52525b]">
-                        Automatiza clasificación, lectura de documentos y
-                        asistentes con tus datos...
+                        Automatiza cotizaciones, inventario, citas y reportes
+                        diarios sin transcribir a mano...
                       </p>
                       <div className="mt-3 flex items-center justify-between border-t border-zinc-100 pt-2.5">
-                        <span className="rounded-full border border-zinc-200 px-2.5 py-0.5 font-mono text-[10px] text-[#18181b]">
-                          PyTorch / ONNX
+                        <span className="rounded-full border border-zinc-200 px-2.5 py-0.5 text-[10px] font-medium text-[#18181b]">
+                          WhatsApp + PDF
                         </span>
                         <span className="rounded-full bg-[#171717] px-2.5 py-0.5 text-[10px] font-medium text-white">
-                          Tool Calling
+                          Ahorro real
                         </span>
                       </div>
                     </div>
@@ -114,7 +113,6 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                       Glyph Agency
                     </div>
 
-                    {/* Foto real de Khristian enmarcada en el Arco central */}
                     <div className="arch-shape relative z-10 h-48 w-36 overflow-hidden border-2 border-white/80 bg-zinc-900 shadow-xl">
                       <Image
                         src="/khristian.jpg"
@@ -126,7 +124,7 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                     </div>
 
                     <div className="relative z-10 mb-5 hidden rounded-xl bg-white/90 px-2.5 py-2 text-[10px] font-semibold text-[#18181b] shadow-sm sm:block">
-                      Remoto · UTC-4
+                      Trato directo
                     </div>
                   </div>
                 ) : null}

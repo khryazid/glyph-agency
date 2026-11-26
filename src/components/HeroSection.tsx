@@ -29,12 +29,12 @@ const FLOATING_CARD_POSITIONS = [
 export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProps) {
   const stageRef = useRef<HTMLElement | null>(null);
   const [portalOpen, setPortalOpen] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<HeroCategory>("SaaS B2B");
+  const [selectedCategory, setSelectedCategory] =
+    useState<HeroCategory>("Sistema a Medida");
   const [brief, setBrief] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [typedText, setTypedText] = useState("");
 
-  // Efecto typewriter para sugerencias de proyecto en español
   useEffect(() => {
     if (brief.length > 0 || isFocused) return;
 
@@ -73,7 +73,6 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
     return () => clearTimeout(timeoutId);
   }, [brief, isFocused]);
 
-  // Animación de entrada del Hero + tarjetas flotantes 3D
   useEffect(() => {
     const el = stageRef.current;
     if (!el) return;
@@ -109,7 +108,7 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
     const fallbackBrief =
       brief.trim() ||
       typedText.trim() ||
-      `Hola Khristian, me interesa conversar sobre un proyecto de ${selectedCategory}.`;
+      `Hola Khristian, me interesa conversar sobre una solución de ${selectedCategory} para mi negocio.`;
     onStartProject({ category: selectedCategory, brief: fallbackBrief });
   };
 
@@ -119,7 +118,6 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
       ref={stageRef}
       className="relative flex min-h-[calc(100dvh-4rem)] items-center justify-center overflow-hidden bg-[#fafafa] px-4 py-14 sm:px-6 lg:py-20"
     >
-      {/* Resplandor editorial suave detrás del portal */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute top-1/3 left-1/2 h-[380px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-35 blur-3xl"
@@ -129,7 +127,7 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
         }}
       />
 
-      {/* Collage periférico 3D en escritorio (flancos izquierdo y derecho sin invadir el centro) */}
+      {/* Collage periférico 3D en escritorio */}
       <div
         aria-hidden="false"
         className="pointer-events-none absolute inset-0 mx-auto hidden max-w-[1440px] lg:block"
@@ -140,7 +138,7 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
             key={project.id}
             type="button"
             onClick={() => onSelectProject(project)}
-            className={`hero-float-card pointer-events-auto absolute ${FLOATING_CARD_POSITIONS[idx]} group hidden w-48 rounded-xl border border-zinc-200/80 bg-white/90 p-2.5 text-left shadow-[0_12px_30px_rgba(24,24,27,0.06)] backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.03] xl:block`}
+            className={`hero-float-card pointer-events-auto absolute ${FLOATING_CARD_POSITIONS[idx]} group hidden w-52 rounded-xl border border-zinc-200/80 bg-white/90 p-2.5 text-left shadow-[0_12px_30px_rgba(24,24,27,0.06)] backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.03] xl:block`}
           >
             <div className="mb-2 flex items-center justify-between gap-2">
               <span
@@ -155,15 +153,14 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
               {project.title}
             </p>
             <p className="mt-0.5 truncate text-[11px] text-[#737373]">
-              {project.metrics[0]?.value} · {project.stack[0]}
+              {project.metrics[0]?.value} · {project.features[0]}
             </p>
           </button>
         ))}
       </div>
 
       {/* Centro protagonista */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[660px] flex-col items-center text-center">
-        {/* Portal 3D interactivo */}
+      <div className="relative z-10 mx-auto flex w-full max-w-[680px] flex-col items-center text-center">
         <button
           type="button"
           onClick={() => setPortalOpen((prev) => !prev)}
@@ -171,7 +168,7 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
           aria-label="Portal interactivo de Khristian Ali"
           className="hero-portal-trigger hero-portal-scene group mb-6 flex flex-col items-center focus-visible:rounded-2xl"
         >
-          <div className="relative h-20 w-16 p-1 rounded-t-full rounded-b-[4px] border border-zinc-300/80 bg-white shadow-sm">
+          <div className="relative h-20 w-16 rounded-t-full rounded-b-[4px] border border-zinc-300/80 bg-white p-1 shadow-sm">
             <div className="portal-gradient-core arch-shape relative h-full w-full overflow-hidden">
               <div
                 aria-hidden="true"
@@ -179,34 +176,34 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
               />
             </div>
           </div>
-          <span className="mt-2.5 inline-flex items-center gap-1.5 rounded-full border border-zinc-200/90 bg-white px-3 py-1 text-[11px] font-medium text-[#52525b] shadow-2xs">
+          <span className="mt-2.5 inline-flex items-center gap-1.5 rounded-full border border-zinc-200/90 bg-white px-3.5 py-1 text-[11px] font-medium text-[#52525b] shadow-2xs">
             <Sparkles className="size-3 text-[#ff8400]" aria-hidden="true" />
-            Khristian Ali · Founder @ Glyph Agency
+            Khristian Ali · Fundador de Glyph Agency
           </span>
         </button>
 
         <SplitHeadline
           as="h1"
           immediate
-          text="Cada idea abre un producto real."
-          className="text-[clamp(2.5rem,5.5vw,4.15rem)] font-semibold tracking-[-0.03em] leading-[0.96] text-[#2f2f2f]"
+          text="Software que ordena y hace crecer tu negocio."
+          className="text-[clamp(2.4rem,5.2vw,4rem)] font-semibold tracking-[-0.03em] leading-[0.98] text-[#2f2f2f]"
         />
 
-        <p className="mt-5 max-w-[540px] text-base leading-relaxed text-[#52525b] sm:text-[17px]">
-          Diseño y lanzo software en producción: plataformas{" "}
-          <span className="font-medium text-[#18181b]">SaaS offline-first</span>,
-          arquitecturas multi-tenant con{" "}
-          <span className="font-medium text-[#18181b]">PostgreSQL RLS</span> y
-          aplicaciones con <span className="font-medium text-[#18181b]">IA</span>.
+        <p className="mt-5 max-w-[560px] text-base leading-relaxed text-[#52525b] sm:text-[17px]">
+          Desarrollo{" "}
+          <span className="font-medium text-[#18181b]">sistemas a medida</span>,{" "}
+          <span className="font-medium text-[#18181b]">webs comerciales</span> y{" "}
+          <span className="font-medium text-[#18181b]">automatizaciones con IA</span>{" "}
+          para que vendas más, controles tu operación y no te frenes si falla el internet.
         </p>
 
-        {/* Caja central interactiva estilo prompt */}
+        {/* Caja central interactiva */}
         <form
           onSubmit={handleSubmit}
-          className="hero-composer mt-8 w-full max-w-[540px] rounded-[26px] border border-zinc-200/90 bg-white p-3.5 text-left shadow-[0_20px_55px_rgba(24,24,27,0.07)] transition-shadow focus-within:border-zinc-300 focus-within:shadow-[0_24px_65px_rgba(24,24,27,0.1)]"
+          className="hero-composer mt-8 w-full max-w-[560px] rounded-[26px] border border-zinc-200/90 bg-white p-3.5 text-left shadow-[0_20px_55px_rgba(24,24,27,0.07)] transition-shadow focus-within:border-zinc-300 focus-within:shadow-[0_24px_65px_rgba(24,24,27,0.1)]"
         >
           <label htmlFor="hero-brief" className="sr-only">
-            Cuéntame qué quieres construir
+            Cuéntame qué necesita tu negocio
           </label>
           <div className="relative min-h-[62px]">
             <textarea
@@ -221,7 +218,7 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
                   handleSubmit();
                 }
               }}
-              aria-label="Cuéntame qué quieres construir"
+              aria-label="Cuéntame qué necesita tu negocio"
               className="w-full resize-none bg-transparent px-1.5 pt-1 text-[14px] leading-[22px] text-[#171717] focus:outline-none"
             />
             {brief.length === 0 && !isFocused ? (
@@ -238,13 +235,17 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 px-1.5 pt-1 text-[14px] leading-[22px] text-[#a1a1aa]"
               >
-                Cuéntame qué producto, sistema o equipo quieres impulsar...
+                Cuéntame qué proceso quieres ordenar o qué quieres lanzar en tu empresa...
               </div>
             ) : null}
           </div>
 
-          <div className="mt-2.5 flex items-center justify-between gap-2 pt-2 border-t border-zinc-100">
-            <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label="Tipo de proyecto">
+          <div className="mt-2.5 flex items-center justify-between gap-2 border-t border-zinc-100 pt-2">
+            <div
+              className="flex flex-wrap items-center gap-1.5"
+              role="group"
+              aria-label="Tipo de solución"
+            >
               {HERO_CATEGORY_PILLS.map((pill) => {
                 const active = selectedCategory === pill;
                 return (
@@ -276,10 +277,13 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
         </form>
 
         <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-xs text-[#737373]">
-          <span>Venezuela · UTC-4</span>
+          <span>Venezuela · Atención Remota</span>
           <span aria-hidden="true">·</span>
-          <a href="#proyectos" className="font-medium text-[#18181b] underline decoration-zinc-300 underline-offset-4 hover:decoration-[#18181b]">
-            Explorar los 6 casos destacados
+          <a
+            href="#proyectos"
+            className="font-medium text-[#18181b] underline decoration-zinc-300 underline-offset-4 hover:decoration-[#18181b]"
+          >
+            Explorar las 6 soluciones
           </a>
         </div>
       </div>

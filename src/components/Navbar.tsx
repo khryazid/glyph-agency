@@ -1,15 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { PROFILE } from "@/data/portfolio";
 
 const NAV_LINKS = [
-  { href: "#proyectos", label: "Proyectos" },
-  { href: "#proceso", label: "Proceso" },
-  { href: "#capacidades", label: "Capacidades" },
+  { href: "#proyectos", label: "Soluciones" },
+  { href: "#proceso", label: "Cómo trabajo" },
+  { href: "#capacidades", label: "Beneficios" },
   { href: "#servicios", label: "Servicios" },
-  { href: "#faq", label: "FAQ" },
+  { href: "#faq", label: "Preguntas" },
 ];
 
 export function Navbar() {
@@ -51,19 +51,16 @@ export function Navbar() {
 
           <div className="hidden items-center gap-2.5 md:flex">
             <a
-              href={PROFILE.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded-full bg-[#f3f3f4] px-4 py-2 text-xs font-medium text-[#18181b] transition-colors hover:bg-zinc-200/80"
+              href="#proyectos"
+              className="inline-flex items-center rounded-full bg-[#f3f3f4] px-4 py-2 text-xs font-medium text-[#18181b] transition-colors hover:bg-zinc-200/80"
             >
-              GitHub
-              <ArrowUpRight className="size-3.5 text-zinc-500" aria-hidden="true" />
+              Ver casos
             </a>
             <a
               href="#contacto"
               className="inline-flex items-center rounded-full bg-[#171717] px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-black"
             >
-              Iniciar proyecto
+              Cotizar proyecto
             </a>
           </div>
 
@@ -91,22 +88,20 @@ export function Navbar() {
                   {item.label}
                 </a>
               ))}
-              <div className="mt-2 flex items-center gap-2.5 pt-2 border-t border-zinc-100">
+              <div className="mt-2 flex items-center gap-2.5 border-t border-zinc-100 pt-2">
                 <a
-                  href={PROFILE.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex flex-1 items-center justify-center gap-1 rounded-full bg-[#f3f3f4] px-4 py-2.5 text-xs font-medium text-[#18181b]"
+                  href="#proyectos"
+                  onClick={() => setMobileOpen(false)}
+                  className="inline-flex flex-1 items-center justify-center rounded-full bg-[#f3f3f4] px-4 py-2.5 text-xs font-medium text-[#18181b]"
                 >
-                  GitHub
-                  <ArrowUpRight className="size-3.5" aria-hidden="true" />
+                  Ver casos
                 </a>
                 <a
                   href="#contacto"
                   onClick={() => setMobileOpen(false)}
                   className="inline-flex flex-1 items-center justify-center rounded-full bg-[#171717] px-4 py-2.5 text-xs font-medium text-white"
                 >
-                  Iniciar proyecto
+                  Cotizar proyecto
                 </a>
               </div>
             </nav>

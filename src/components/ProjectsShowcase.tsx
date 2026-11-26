@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, Lock, Sparkles } from "lucide-react";
+import { ArrowRight, Briefcase, Sparkles } from "lucide-react";
 import { PROJECTS, type ProjectItem, type ProjectTab } from "@/data/portfolio";
 import { SplitHeadline } from "./SplitHeadline";
 
@@ -11,8 +11,8 @@ interface ProjectsShowcaseProps {
 
 const TABS: { id: ProjectTab; label: string }[] = [
   { id: "all", label: "Todos" },
-  { id: "saas", label: "SaaS & Sistemas" },
-  { id: "ai-oss", label: "IA & Open Source" },
+  { id: "gestion", label: "Sistemas de Gestión" },
+  { id: "web-apps", label: "Webs y Apps" },
 ];
 
 export function ProjectsShowcase({ onSelectProject }: ProjectsShowcaseProps) {
@@ -32,18 +32,17 @@ export function ProjectsShowcase({ onSelectProject }: ProjectsShowcaseProps) {
         <div className="flex flex-col items-center text-center">
           <SplitHeadline
             as="h2"
-            text="¿Qué he construido?"
+            text="Soluciones reales en acción"
             className="text-[clamp(2rem,4.5vw,3.35rem)] font-semibold tracking-[-0.03em] leading-[1.02] text-[#18181b]"
           />
           <p className="mt-4 max-w-xl text-base text-[#52525b]">
-            Sistemas SaaS privados en producción y proyectos Open Source auditables.
-            Haz clic en cualquier arco para abrir el análisis técnico completo.
+            Sistemas de ventas, plataformas médicas, sitios web ejecutivos y
+            aplicaciones móviles creadas para resolver problemas reales de negocio.
           </p>
 
-          {/* Tabs estilo subrayado minimalista */}
           <div
             role="tablist"
-            aria-label="Filtrar proyectos por categoría"
+            aria-label="Filtrar soluciones por tipo"
             className="mt-8 flex items-center gap-6 border-b border-zinc-200/90"
           >
             {TABS.map((tab) => {
@@ -74,7 +73,6 @@ export function ProjectsShowcase({ onSelectProject }: ProjectsShowcaseProps) {
           </div>
         </div>
 
-        {/* Grilla de tarjetas en forma de Arco */}
         <div
           role="tabpanel"
           className="mt-12 grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3"
@@ -87,26 +85,25 @@ export function ProjectsShowcase({ onSelectProject }: ProjectsShowcaseProps) {
                 className="grain-surface arch-shape relative flex min-h-[430px] w-full flex-col justify-between p-6 pt-10 text-left shadow-[0_14px_38px_rgba(24,24,27,0.06)] transition-transform duration-300 hover:-translate-y-1.5"
                 style={{ background: project.gradient }}
               >
-                {/* Badge superior */}
                 <div className="relative z-10 flex items-center justify-center">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-[#18181b] shadow-2xs backdrop-blur-sm">
-                    {project.repoUrl ? (
+                    {project.tab === "web-apps" ? (
                       <Sparkles className="size-3 text-[#ff8400]" aria-hidden="true" />
                     ) : (
-                      <Lock className="size-3 text-zinc-700" aria-hidden="true" />
+                      <Briefcase className="size-3 text-zinc-700" aria-hidden="true" />
                     )}
                     {project.category}
                   </span>
                 </div>
 
-                {/* Mockup blanco incrustado en el centro del arco */}
+                {/* Mockup blanco centrado */}
                 <div className="relative z-10 my-5 rounded-2xl border border-white/60 bg-white/95 p-4 shadow-md backdrop-blur-sm">
                   <div className="mb-3 flex items-center justify-between border-b border-zinc-100 pb-2">
                     <span className="text-xs font-semibold text-[#18181b]">
                       {project.shortLabel}
                     </span>
-                    <span className="font-mono text-[10px] text-[#737373]">
-                      {project.stack[0]}
+                    <span className="text-[11px] font-medium text-[#737373]">
+                      {project.metrics[0]?.value}
                     </span>
                   </div>
                   <div className="space-y-2.5">
@@ -131,21 +128,20 @@ export function ProjectsShowcase({ onSelectProject }: ProjectsShowcaseProps) {
                   </div>
                 </div>
 
-                {/* Botón glass oscuro flotante en la base del arco */}
                 <div className="relative z-10 flex items-center justify-between gap-2">
                   <div className="flex flex-wrap gap-1">
-                    {project.stack.slice(0, 2).map((tech) => (
+                    {project.features.slice(0, 2).map((feat) => (
                       <span
-                        key={tech}
-                        className="rounded-full bg-white/80 px-2.5 py-0.5 font-mono text-[11px] font-medium text-[#18181b]"
+                        key={feat}
+                        className="rounded-full bg-white/85 px-2.5 py-0.5 text-[11px] font-medium text-[#18181b]"
                       >
-                        {tech}
+                        {feat}
                       </span>
                     ))}
                   </div>
 
                   <span className="inline-flex items-center gap-1 rounded-full bg-[#1d1d1d]/85 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur-md transition-colors group-hover:bg-black">
-                    Ver caso
+                    Ver solución
                     <ArrowRight
                       className="size-3.5 transition-transform group-hover:translate-x-0.5"
                       aria-hidden="true"

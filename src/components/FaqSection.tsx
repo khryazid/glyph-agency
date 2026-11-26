@@ -13,7 +13,6 @@ export function FaqSection() {
       className="bg-[#ffffff] px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
     >
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
-        {/* Columna izquierda sticky */}
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-28">
             <SplitHeadline
@@ -22,8 +21,8 @@ export function FaqSection() {
               className="text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[-0.03em] leading-[1.05] text-[#18181b]"
             />
             <p className="mt-4 text-sm leading-relaxed text-[#52525b] sm:text-base">
-              Detalles sobre cómo trabajo, repositorios privados vs. Open Source,
-              tiempos de entrega y modalidad remota.
+              Respuestas claras sobre cómo trabajamos, tiempos de entrega,
+              operación sin internet y soporte para tu negocio.
             </p>
             <div className="mt-6 flex flex-wrap gap-3 text-sm">
               <a
@@ -47,7 +46,6 @@ export function FaqSection() {
           </div>
         </div>
 
-        {/* Columna derecha acordeón */}
         <div className="divide-y divide-zinc-200/80 border-y border-zinc-200/80 lg:col-span-7">
           {FAQ_ITEMS.map((item) => {
             const isOpen = openId === item.id;

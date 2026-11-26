@@ -15,7 +15,8 @@ import { Footer } from "./Footer";
 
 export function PortfolioClientShell() {
   const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
-  const [contactCategory, setContactCategory] = useState<HeroCategory>("SaaS B2B");
+  const [contactCategory, setContactCategory] =
+    useState<HeroCategory>("Sistema a Medida");
   const [contactMessage, setContactMessage] = useState("");
   const [resetSignal, setResetSignal] = useState(0);
 
@@ -41,13 +42,13 @@ export function PortfolioClientShell() {
           onPickCategory={(category) =>
             jumpToContact({
               category,
-              brief: `Hola Khristian, me gustaría conversar sobre construir ${
-                category === "App con IA"
-                  ? "una aplicación con IA"
-                  : category === "Plataforma Web"
-                  ? "una plataforma web de alto impacto"
-                  : "un sistema SaaS B2B"
-              }.`,
+              brief: `Hola Khristian, me gustaría conversar sobre implementar ${
+                category === "Automatización e IA"
+                  ? "automatizaciones con inteligencia artificial"
+                  : category === "Web Comercial"
+                  ? "una web comercial de alto impacto"
+                  : "un sistema a medida"
+              } para mi negocio.`,
             })
           }
         />

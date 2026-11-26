@@ -1,8 +1,17 @@
-export type ProjectTab = "all" | "saas" | "ai-oss";
+export type ProjectTab = "all" | "gestion" | "web-apps";
 
-export type ProjectCategory = "SaaS Privado" | "Open Source" | "Plataforma Web";
+export type ProjectCategory =
+  | "Sistema Empresarial"
+  | "Salud & Clínicas"
+  | "Comercio & Retail"
+  | "Plataforma Web"
+  | "App Móvil";
 
-export type HeroCategory = "SaaS B2B" | "App con IA" | "Plataforma Web" | "Equipo Senior";
+export type HeroCategory =
+  | "Sistema a Medida"
+  | "Web Comercial"
+  | "Automatización e IA"
+  | "Asesoría Digital";
 
 export interface ProjectItem {
   id: string;
@@ -12,15 +21,13 @@ export interface ProjectItem {
   category: ProjectCategory;
   tab: Exclude<ProjectTab, "all">;
   gradient: string;
-  badgeTone: string;
   summary: string;
   problem: string;
   solution: string;
   highlights: string[];
   metrics: { label: string; value: string }[];
-  stack: string[];
-  repoUrl?: string;
-  mockupLines: { title: string; subtitle: string; stat: string; pill: string }[];
+  features: string[];
+  mockupLines: { title: string; subtitle: string; stat: string }[];
 }
 
 export interface ProcessStep {
@@ -64,14 +71,14 @@ export interface FaqItem {
 }
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://khryazid-portfolio.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+  "https://khryazid-portfolio.vercel.app";
 
 export const PROFILE = {
   name: "Khristian Ali",
   handle: "@khryazid",
-  role: "Full-Stack Product Engineer & Founder @ Glyph Agency",
-  location: "Venezuela · Remoto Global (UTC-4)",
-  emailHint: "contacto vía formulario o LinkedIn",
+  role: "Fundador de Glyph Agency — Desarrollador de Software & Soluciones Digitales para Empresas",
+  location: "Venezuela · Atención Remota",
   githubUrl: "https://github.com/khryazid",
   linkedinUrl: "https://www.linkedin.com/in/khyazid",
   xUrl: "https://x.com/khr_yazid",
@@ -79,333 +86,334 @@ export const PROFILE = {
 };
 
 export const HERO_TYPEWRITER_EXAMPLES = [
-  "Un SaaS B2B offline-first multi-empresa con cobranza multimoneda y reportes PDF...",
-  "Una app con Gemini AI y búsqueda semántica pgvector sobre nuestros documentos internos...",
-  "Un sistema clínico o POS resiliente que siga operando aunque falle el internet...",
-  "Incorporar a un ingeniero full-stack senior para diseñar arquitectura y lanzar a producción...",
+  "Un sistema para controlar ventas, inventario, crédito y cobranzas en varias monedas...",
+  "Una página web profesional que atraiga clientes y cotice nuestros servicios al instante...",
+  "Automatizar lectura de facturas, citas o atención al cliente con inteligencia artificial...",
+  "Un portal donde mis vendedores tomen pedidos en la calle aunque se caiga el internet...",
 ];
 
 export const HERO_CATEGORY_PILLS: HeroCategory[] = [
-  "SaaS B2B",
-  "App con IA",
-  "Equipo Senior",
+  "Sistema a Medida",
+  "Web Comercial",
+  "Automatización e IA",
 ];
 
 export const PROJECTS: ProjectItem[] = [
   {
     id: "glyphcore",
     title: "GlyphCore B2B",
-    shortLabel: "SaaS Multi-Tenant",
-    tagline: "Plataforma B2B offline-first para distribuidoras y mayoristas en Latinoamérica.",
-    category: "SaaS Privado",
-    tab: "saas",
+    shortLabel: "Distribuidoras y Mayoristas",
+    tagline:
+      "Plataforma comercial completa para controlar pedidos, vendedores en ruta, crédito y cobranzas sin depender del internet.",
+    category: "Sistema Empresarial",
+    tab: "gestion",
     gradient: "linear-gradient(145deg, #ff8400 0%, #ff8ee5 52%, #d559ff 100%)",
-    badgeTone: "bg-orange-100 text-orange-950",
     summary:
-      "Ecosistema SaaS multi-empresa con 4 portales (Comprador, Vendedor en Campo, Comercio Mayorista y Administrador de Plataforma), operación offline-first y contabilidad multimoneda exacta.",
+      "Sistema integral para distribuidoras y comercios mayoristas con cuatro espacios independientes: compradores, vendedores en calle, gerencia del comercio y administración global.",
     problem:
-      "Las distribuidoras mayoristas sufren caídas de conectividad en ruta, errores de redondeo entre USD/VES/COP y descontrol en aprobaciones parciales de pedidos y abonos.",
+      "Muchas distribuidoras pierden ventas cuando sus vendedores se quedan sin señal en ruta, cometen errores al manejar USD/Bs/COP y sufren desorden entre lo pedido, lo despachado y lo cobrado.",
     solution:
-      "Arquitectura con aislamiento estricto por tenant en PostgreSQL RLS (migraciones 0001–0010 verificadas en PGlite), caché local en Dexie IndexedDB v3 con PWA Service Worker y aritmética decimal exacta con decimal.js.",
+      "Una plataforma lista para funcionar desde el teléfono o computadora incluso sin conexión, con reglas claras de crédito, aprobación parcial de pedidos, control de rutas y estados de cuenta en PDF con un clic.",
     highlights: [
-      "4 portales aislados por rol (BUYER, SALES_REP, ADMIN/INVENTORY_MANAGER, PLATFORM_OWNER)",
-      "Motor de reorden en 1 clic, ruta diaria de vendedores y estados de cuenta PDF con jsPDF",
-      "Seguridad auditada en PostgreSQL 17: column-locks y RPCs SECURITY DEFINER",
-      "Empaquetado web PWA con base lista para Tauri v2 y Capacitor",
+      "4 accesos independientes: Comprador, Vendedor en Ruta, Comercio y Dirección",
+      "Repetición de pedidos en 1 clic y lista diaria priorizada por cliente",
+      "Manejo exacto de múltiples monedas (USD / Bs / COP) y abonos parciales",
+      "Estados de cuenta, recibos y reportes listos para imprimir o enviar",
     ],
     metrics: [
-      { label: "Portales integrados", value: "4 roles" },
-      { label: "Monedas nativas", value: "USD / VES / COP" },
-      { label: "Pruebas E2E & RLS", value: "268+ checks" },
+      { label: "Áreas cubiertas", value: "4 portales" },
+      { label: "Monedas", value: "USD / Bs / COP" },
+      { label: "Operación", value: "Con y sin señal" },
     ],
-    stack: ["Next.js 16", "React 19", "TypeScript", "Supabase RLS", "Dexie IndexedDB", "decimal.js", "Tailwind v4"],
+    features: ["Pedidos sin internet", "Crédito y cobranzas", "Reportes PDF"],
     mockupLines: [
-      { title: "Portal Comercio Mayorista", subtitle: "Aprobación parcial bilateral", stat: "$14,820.00", pill: "Sync OK" },
-      { title: "Mi Ruta de Hoy", subtitle: "12 clientes asignados offline", stat: "98.4%", pill: "IndexedDB" },
-      { title: "Auditoría Multi-Tenant", subtitle: "RLS PostgreSQL 17 activo", stat: "0 leaks", pill: "Verificado" },
+      { title: "Panel del Comercio", subtitle: "Aprobación y despacho de pedidos", stat: "$14,820" },
+      { title: "Ruta de Vendedores", subtitle: "12 clientes asignados hoy", stat: "Al día" },
+      { title: "Cuentas por Cobrar", subtitle: "Abonos y límite de crédito", stat: "Controlado" },
     ],
   },
   {
-    id: "glyphix-hce",
-    title: "Glyphix (HCE)",
-    shortLabel: "HealthTech SaaS",
-    tagline: "Motor clínico inteligente offline-first, multi-tenant e impulsado por Gemini AI.",
-    category: "SaaS Privado",
-    tab: "saas",
+    id: "glyphix",
+    title: "Glyphix",
+    shortLabel: "Clínicas y Consultorios",
+    tagline:
+      "Sistema de gestión clínica e historias médicas que sigue trabajando aunque falle la conexión de tu centro de salud.",
+    category: "Salud & Clínicas",
+    tab: "gestion",
     gradient: "linear-gradient(145deg, #ff70b8 0%, #cf67ff 55%, #7c6bff 100%)",
-    badgeTone: "bg-fuchsia-100 text-fuchsia-950",
     summary:
-      "Plataforma médica diseñada para operar a 0 ms de latencia sin internet, sincronizando historias clínicas en segundo plano con encriptación y aislamiento criptográfico por clínica.",
+      "Plataforma diseñada para consultorios independientes y redes de clínicas: agenda en vivo, historias clínicas rápidas, asistente inteligente de apoyo médico y control de caja por turnos.",
     problem:
-      "Los consultorios y clínicas no pueden detener la atención médica cuando falla la red, ni arriesgar fugas de datos clínicos entre organizaciones.",
+      "Cuando falla el internet en una clínica, la recepción y los doctores se frenan, se duplican citas y el historial del paciente queda disperso entre papeles y archivos sueltos.",
     solution:
-      "Lectura/escritura directa en IndexedDB con Sync Worker de reintentos exponenciales, políticas RLS en PostgreSQL por organization_id, asistente diagnóstico CIE-11 con Gemini 2.0 Flash y facturación SaaS vía Stripe.",
+      "Una herramienta médica que guarda cada consulta al instante en el equipo y sincroniza automáticamente al volver la red, protegiendo la privacidad de cada sede y permitiendo exportar expedientes completos.",
     highlights: [
-      "RBAC granular para 8 roles clínicos y administrativos con guards SSR",
-      "Agenda en tiempo real con WebSockets de Supabase y control de turnos de caja",
-      "Exportación de expedientes PDF y paquetes ZIP generados 100% en navegador",
-      "Suite de calidad automatizada con Vitest y Playwright E2E",
+      "Accesos diferenciados para dueño, médicos, asistentes y laboratorio",
+      "Agenda actualizada en tiempo real y control estricto de caja por turno",
+      "Apoyo inteligente para agilizar diagnósticos y notas de consulta",
+      "Descarga inmediata de récipes, informes y expedientes completos",
     ],
     metrics: [
-      { label: "Latencia offline", value: "0 ms local" },
-      { label: "Roles RBAC", value: "8 perfiles" },
-      { label: "Asistente IA", value: "CIE-11" },
+      { label: "Atención", value: "Sin interrupciones" },
+      { label: "Perfiles", value: "8 roles claros" },
+      { label: "Expedientes", value: "PDF al instante" },
     ],
-    stack: ["Next.js 16", "React 19", "Supabase RLS", "IndexedDB", "Gemini AI", "Stripe", "Playwright"],
+    features: ["Historias clínicas", "Agenda y caja", "Multisede privado"],
     mockupLines: [
-      { title: "Wizard Clínico Offline", subtitle: "Guardado local instantáneo", stat: "Sync 100%", pill: "IndexedDB" },
-      { title: "Sugerencia CIE-11", subtitle: "Análisis contextual de anamnesis", stat: "Gemini", pill: "IA Activa" },
-      { title: "Turnos & Suscripción", subtitle: "Cash shifts + Stripe Billing", stat: "Activo", pill: "Multi-Tenant" },
-    ],
-  },
-  {
-    id: "glyphbrain",
-    title: "GlyphBrain",
-    shortLabel: "Open Source · IA",
-    tagline: "Segundo cerebro con grafo 2D interactivo, búsqueda semántica pgvector y voz en vivo.",
-    category: "Open Source",
-    tab: "ai-oss",
-    gradient: "linear-gradient(145deg, #a7f34d 0%, #5eead4 50%, #7dd3fc 100%)",
-    badgeTone: "bg-lime-100 text-lime-950",
-    summary:
-      "Red personal de conocimiento que combina edición por bloques estilo Notion, visualización en grafo de fuerzas 2D y un asistente Gemini AI capaz de buscar, sintetizar y enlazar notas por significado.",
-    problem:
-      "Las apps tradicionales de notas organizan archivos en carpetas rígidas donde las conexiones conceptuales se pierden y la búsqueda exacta falla si cambias las palabras.",
-    solution:
-      "Generación de embeddings en Supabase PostgreSQL + pgvector, grafo dinámico con react-force-graph-2d, editor BlockNote con menciones @, interacción por voz con Gemini Live API y soporte PWA offline con Serwist.",
-    highlights: [
-      "Búsqueda semántica vectorial y auto-sugerencia inteligente de enlaces",
-      "Asistente Gemini AI con tool calling sobre tu grafo personal",
-      "Interacción por voz de baja latencia mediante Gemini Live API",
-      "Código fuente abierto en GitHub bajo licencia MIT",
-    ],
-    metrics: [
-      { label: "Motor vectorial", value: "pgvector" },
-      { label: "Interfaz", value: "Grafo 2D + Voz" },
-      { label: "Licencia", value: "MIT Pública" },
-    ],
-    stack: ["Next.js 16", "React 19", "Supabase pgvector", "Google Gemini", "BlockNote", "Zustand", "Serwist PWA"],
-    repoUrl: "https://github.com/khryazid/glyphbrain",
-    mockupLines: [
-      { title: "Grafo Semántico 2D", subtitle: "Clústeres por similitud coseno", stat: "48 nodos", pill: "ForceGraph" },
-      { title: "Agente Gemini + Tools", subtitle: "Síntesis y cruce de notas", stat: "Live API", pill: "Voz + Texto" },
-      { title: "Editor BlockNote", subtitle: "Bloques y menciones @ rápidas", stat: "PWA", pill: "Open Source" },
-    ],
-  },
-  {
-    id: "ai-image-upscaler",
-    title: "AI Image Upscaler",
-    shortLabel: "Open Source · PyTorch",
-    tagline: "Superresolución Real-ESRGAN (2x/4x) y colorización ECCV16 100% local en Python.",
-    category: "Open Source",
-    tab: "ai-oss",
-    gradient: "linear-gradient(145deg, #ffd15c 0%, #ff8400 55%, #ff5c8a 100%)",
-    badgeTone: "bg-amber-100 text-amber-950",
-    summary:
-      "Aplicación web local en Python y Flask para restaurar, escalar hasta 4x y colorizar imágenes antiguas sin enviar ni un byte a servidores externos.",
-    problem:
-      "Las herramientas online de mejora de imágenes imponen límites de pago, marcas de agua y suben material privado de usuarios o clientes a la nube.",
-    solution:
-      "Implementación directa de arquitectura RRDBNet (Real-ESRGAN) y generador ECCV16 sobre PyTorch y ONNX Runtime con procesamiento por tiles en CPU para evitar desbordamientos de memoria.",
-    highlights: [
-      "Procesamiento por mosaicos (tiles) optimizado para CPU sin colapsar RAM",
-      "Soporte dual PyTorch y ONNX Runtime para inferencia acelerada",
-      "Descarga automática de pesos oficiales e interfaz web lista en 1 clic",
-      "Repositorio público limpio en GitHub bajo licencia MIT",
-    ],
-    metrics: [
-      { label: "Escalas IA", value: "2x / 4x" },
-      { label: "Privacidad", value: "100% Local" },
-      { label: "Modelos", value: "ESRGAN + ECCV16" },
-    ],
-    stack: ["Python", "Flask", "PyTorch", "Real-ESRGAN", "ONNX Runtime", "OpenCV", "Pillow"],
-    repoUrl: "https://github.com/khryazid/ai-image-upscaler",
-    mockupLines: [
-      { title: "Pipeline Real-ESRGAN", subtitle: "Inferencia por tiles en CPU", stat: "4x PNG", pill: "PyTorch" },
-      { title: "Colorizador ECCV16", subtitle: "Restauración cromática automática", stat: "Local", pill: "ONNX" },
-      { title: "Comparador Antes/Después", subtitle: "Sin cuotas ni nube externa", stat: "0 bytes", pill: "Privado" },
+      { title: "Consulta Médica", subtitle: "Guardado instantáneo en equipo", stat: "En línea" },
+      { title: "Asistente de Consulta", subtitle: "Apoyo rápido en diagnósticos", stat: "Activo" },
+      { title: "Caja y Suscripciones", subtitle: "Cierre de turno ordenado", stat: "Auditado" },
     ],
   },
   {
     id: "pos-bimonetario",
-    title: "Sistema POS Bimonetario",
-    shortLabel: "Retail & Finanzas",
-    tagline: "Punto de venta, inventario dual USD/VES y lectura automática de facturas con IA.",
-    category: "SaaS Privado",
-    tab: "saas",
+    title: "Sistema POS & Inventario",
+    shortLabel: "Comercios y Tiendas",
+    tagline:
+      "Punto de venta, inventario inteligente, cotizaciones y lectura automática de facturas en varias monedas.",
+    category: "Comercio & Retail",
+    tab: "gestion",
     gradient: "linear-gradient(145deg, #b9f442 0%, #ffe657 55%, #ff9b42 100%)",
-    badgeTone: "bg-yellow-100 text-yellow-950",
     summary:
-      "Suite operativa para comercios con alta rotación que necesitan operar simultáneamente con dos regímenes cambiarios, controlar créditos de clientes y cerrar caja por turno con precisión.",
+      "Sistema administrativo pensado para tiendas y negocios con alto movimiento: facturación ágil, control real de inventario, ventas a crédito y cierres de caja X/Z transparentes.",
     problem:
-      "La volatilidad cambiaria y la carga manual de facturas de proveedores generan márgenes erróneos y pérdidas silenciosas en caja.",
+      "Cargar facturas de proveedores a mano toma horas y cualquier descuido con el cambio de moneda termina comiéndose el margen de ganancia del negocio.",
     solution:
-      "Motor de precios bimonetario BCV vs. Monitor en TypeScript estricto, store modular en Zustand, carga mágica de facturas asistida con IA (OCR + LLM), recibos 80 mm/WhatsApp y RPC atómicos en Supabase.",
+      "Un punto de venta rápido que calcula automáticamente precios y márgenes por tasa, lee facturas con inteligencia artificial para cargar mercancía en segundos y envía recibos por WhatsApp.",
     highlights: [
-      "Ventas al contado y a crédito con validación en tiempo real vs. límite de deuda",
-      "Cierres X / Z con desglose por método de pago, gastos y utilidad neta",
-      "Endurecimiento transaccional en PostgreSQL para devoluciones y stock",
-      "Renderizado optimizado para catálogos superiores a 1,000 SKUs",
+      "Ventas al contado o a crédito con alertas cuando un cliente supera su límite",
+      "Carga inteligente de facturas desde foto o PDF para actualizar costos y stock",
+      "Cotizaciones profesionales en PDF que se convierten en venta con 1 clic",
+      "Cierre de turno X/Z con gastos del día y utilidad neta real",
     ],
     metrics: [
-      { label: "Regímenes", value: "BCV + Monitor" },
-      { label: "Cierre de caja", value: "X / Z exacto" },
-      { label: "Carga facturas", value: "OCR + IA" },
+      { label: "Precios", value: "USD y Bs" },
+      { label: "Carga facturas", value: "Automática" },
+      { label: "Recibos", value: "80mm y WhatsApp" },
     ],
-    stack: ["React 19", "TypeScript", "Vite", "Zustand", "Supabase", "decimal.js", "Tailwind CSS"],
+    features: ["Punto de venta rápido", "Lectura de facturas", "Cierre X / Z"],
     mockupLines: [
-      { title: "Motor Bimonetario", subtitle: "Conversión USD ↔ VES al instante", stat: "BCV / TH", pill: "decimal.js" },
-      { title: "Carga Mágica de Factura", subtitle: "Extracción automática de SKUs", stat: "IA OCR", pill: "Ahorro 80%" },
-      { title: "Cierre de Turno Z", subtitle: "Utilidad neta y métodos de pago", stat: "Auditado", pill: "RPC SQL" },
+      { title: "Caja y Facturación", subtitle: "Conversión automática al cobro", stat: "BCV / Ref" },
+      { title: "Carga de Compras", subtitle: "Lectura inteligente de factura", stat: "-80% tiempo" },
+      { title: "Cierre del Día", subtitle: "Ventas, gastos y utilidad neta", stat: "Cuadrado" },
+    ],
+  },
+  {
+    id: "suite-comercial",
+    title: "Suite Comercial por Rubro",
+    shortLabel: "Negocios de Servicios",
+    tagline:
+      "Soluciones listas para barberías, clínicas dentales, ferreterías, concesionarios y agroindustria con reservas y cotizaciones.",
+    category: "Sistema Empresarial",
+    tab: "gestion",
+    gradient: "linear-gradient(145deg, #a7f34d 0%, #5eead4 50%, #7dd3fc 100%)",
+    summary:
+      "Ecosistema de aplicaciones comerciales enfocadas en captar clientes y ordenar la operación diaria de pymes: reservas 24/7 sin choques de horario, cotizadores mayoristas y seguimiento de prospectos.",
+    problem:
+      "Muchos negocios atienden citas, presupuestos y clientes por notas sueltas o mensajes perdidos en WhatsApp, dejando dinero sobre la mesa por falta de seguimiento.",
+    solution:
+      "Herramientas simples y directas adaptadas a cada rubro: agenda que bloquea horarios ocupados, cotizadores instantáneos con PDF, alertas de seguimiento comercial y reportes claros para gerencia.",
+    highlights: [
+      "Agenda de citas 24/7 con recordatorios automáticos por WhatsApp",
+      "Cotizador comercial y portal postventa con historial por cliente",
+      "Tablero de oportunidades para no olvidar ningún presupuesto enviado",
+      "Propuestas comerciales en PDF listas para entregar al cliente",
+    ],
+    metrics: [
+      { label: "Rubros listos", value: "4 verticales" },
+      { label: "Reservas", value: "24/7 sin choques" },
+      { label: "Presupuestos", value: "PDF + WhatsApp" },
+    ],
+    features: ["Agenda de citas", "Cotizador rápido", "Control de clientes"],
+    mockupLines: [
+      { title: "Agenda de Citas", subtitle: "Reservas web sin choques de hora", stat: "24/7" },
+      { title: "Cotizador Comercial", subtitle: "Lista mayorista y envío directo", stat: "1 clic" },
+      { title: "Seguimiento de Ventas", subtitle: "Alertas y tablero comercial", stat: "Ordenado" },
     ],
   },
   {
     id: "aerolex-global",
     title: "AeroLex Global",
-    shortLabel: "LegalTech & Aviation",
-    tagline: "Plataforma web, calculadora operativa y portal ejecutivo para firma aeronáutica.",
+    shortLabel: "Firma Legal & Brokerage",
+    tagline:
+      "Web corporativa premium, calculadora de costos y portal privado para firma aeronáutica internacional.",
     category: "Plataforma Web",
-    tab: "saas",
+    tab: "web-apps",
     gradient: "linear-gradient(145deg, #93c5fd 0%, #818cf8 52%, #e879f9 100%)",
-    badgeTone: "bg-sky-100 text-sky-950",
     summary:
-      "Presencia digital de alto nivel y herramientas interactivas para asesoría legal aeronáutica y corretaje ejecutivo multijurisdicción (INAC YV / FAA N-Number).",
+      "Presencia digital de alto nivel diseñada para transmitir autoridad desde el primer segundo, explicar servicios complejos de forma clara y captar clientes calificados.",
     problem:
-      "Los clientes de aviación ejecutiva necesitan evaluar costos reales de adquisición, agendar inspecciones técnicas PPI y consultar inventario off-market sin fricción.",
+      "Los clientes de alto valor descartan servicios profesionales cuando la web luce anticuada o no les permite estimar costos y agendar una asesoría sin vueltas.",
     solution:
-      "Aplicación Next.js 16 con pilares interactivos sticky, calculadora financiera operativa, flujo dedicado de inspección PPI in situ, portal de clientes y CMS respaldado por Supabase.",
+      "Sitio web editorial con recorrido interactivo por pilares de servicio, calculadora operativa en vivo, página dedicada de inspecciones, catálogo exclusivo y acceso directo a WhatsApp.",
     highlights: [
-      "Calculadora de costos operativos y de adquisición de aeronaves",
-      "Catálogo brokerage con fichas técnicas y alertas off-market",
-      "Integración directa de calificación y contacto ejecutivo",
-      "Portal y CMS gestionados sobre Supabase y Zod",
+      "Diseño moderno pensado para generar confianza inmediata en clientes exigentes",
+      "Calculadora interactiva de costos y estimación de operaciones",
+      "Catálogo de oportunidades privadas con ficha de detalles",
+      "Panel interno para actualizar inventario y contenido sin programar",
     ],
     metrics: [
-      { label: "Jurisdicciones", value: "INAC + FAA" },
-      { label: "Módulos", value: "6 rutas clave" },
-      { label: "Arquitectura", value: "Next.js 16" },
+      { label: "Enfoque", value: "Captación B2B" },
+      { label: "Herramienta", value: "Calculadora" },
+      { label: "Gestión", value: "Autoadministrable" },
     ],
-    stack: ["Next.js 16", "React 19", "TypeScript", "Tailwind v4", "Supabase", "Zod"],
+    features: ["Web corporativa", "Calculadora en vivo", "Portal de clientes"],
     mockupLines: [
-      { title: "Calculadora Operativa", subtitle: "Estimación de misión y costos", stat: "Tiempo real", pill: "Zod" },
-      { title: "Inspección PPI in situ", subtitle: "Alcance técnico SVCS / SVMI", stat: "YV / N-Num", pill: "Multijurisd." },
-      { title: "Portal Off-Market", subtitle: "Alertas y gestión CMS privada", stat: "Supabase", pill: "SSR" },
+      { title: "Recorrido de Servicios", subtitle: "Presentación ejecutiva clara", stat: "4 pilares" },
+      { title: "Calculadora Operativa", subtitle: "Estimación inmediata de costos", stat: "Interactiva" },
+      { title: "Catálogo Privado", subtitle: "Consultas y agenda directa", stat: "Calificado" },
+    ],
+  },
+  {
+    id: "nova-movride",
+    title: "Nova / MOVRIDE",
+    shortLabel: "Delivery y Movilidad",
+    tagline:
+      "Superapp de pedidos, comercios locales y traslados con pantallas separadas para cliente, tienda y repartidor.",
+    category: "App Móvil",
+    tab: "web-apps",
+    gradient: "linear-gradient(145deg, #ffd15c 0%, #ff8400 55%, #ff5c8a 100%)",
+    summary:
+      "Experiencia completa de aplicación móvil para validar modelos de delivery, comercio local y movilidad urbana, integrando todo el recorrido desde el pedido hasta la entrega.",
+    problem:
+      "Presentar una idea de negocio móvil ante socios o inversionistas con diapositivas estáticas no transmite cómo funciona realmente la operación.",
+    solution:
+      "Prototipo funcional navegable con vista de cliente, portal para comercios afiliados, aplicación de conductor y panel central de monitoreo en tiempo real.",
+    highlights: [
+      "Flujo completo de compra: catálogo, carrito, pago y seguimiento en ruta",
+      "Módulo de traslados urbanos con selección de ruta y flota",
+      "Vistas dedicadas para comercios aliados, conductores y administración",
+      "Diseño pensado 100% para usarse con una mano desde el celular",
+    ],
+    metrics: [
+      { label: "Ecosistema", value: "4 perfiles" },
+      { label: "Pantallas", value: "20+ flujos" },
+      { label: "Experiencia", value: "100% Móvil" },
+    ],
+    features: ["Pedidos y delivery", "Panel de comercios", "App de conductor"],
+    mockupLines: [
+      { title: "App del Cliente", subtitle: "Tiendas, carrito y seguimiento", stat: "Fluido" },
+      { title: "Portal de Aliados", subtitle: "Gestión de órdenes y menú", stat: "Tiempo real" },
+      { title: "Panel Central", subtitle: "Control de entregas y flota", stat: "Visión 360°" },
     ],
   },
 ];
 
 export const PROCESS_STEPS: ProcessStep[] = [
   {
-    id: "step-architecture",
+    id: "step-diagnosis",
     number: "01",
-    title: "Arquitectura y reglas antes de picar código",
+    title: "Entiendo tu operación antes de construir",
     description:
-      "Cada sistema arranca modelando dominio, aislamiento multi-empresa (RLS) y reglas financieras estrictas para evitar deuda técnica desde el día uno.",
+      "Primero revisamos cómo vendes, cobras y controlas tu negocio hoy. El software se adapta a tu flujo real, no al revés.",
     gradient: "linear-gradient(140deg, #ff8400 0%, #ff8ee5 100%)",
-    badge: "Diseño de Sistema",
-    mockupTitle: "Esquema PostgreSQL + RLS Multi-Tenant",
+    badge: "Paso 01 · Diagnóstico",
+    mockupTitle: "Mapa Claro de Tu Negocio",
     mockupBullets: [
-      "Políticas por tenant_id y roles SECURITY DEFINER",
-      "Contratos tipados end-to-end con TypeScript + Zod",
-      "Bitácora inmutable de auditoría para operaciones críticas",
+      "Identificamos cuellos de botella en ventas, caja o inventario",
+      "Definimos permisos claros para dueños, vendedores y personal",
+      "Te muestro una propuesta concreta con alcance y tiempos reales",
     ],
-    mockupTag: "0 fugas entre empresas",
+    mockupTag: "Sin rodeos",
   },
   {
-    id: "step-offline",
+    id: "step-resilience",
     number: "02",
-    title: "Resiliencia Offline-First y velocidad real",
+    title: "Sistemas pensados para el mundo real",
     description:
-      "Cuando el cliente pierde señal en calle o clínica, la app no se detiene: guarda en IndexedDB al instante y sincroniza de forma idempotente al volver.",
+      "Si en tu zona falla la luz o el internet, tu operación no puede parar. Construyo herramientas rápidas que siguen trabajando contigo.",
     gradient: "linear-gradient(140deg, #ff70b8 0%, #a855f7 100%)",
-    badge: "0 ms Local",
-    mockupTitle: "Motor Local-First + Cola de Sincronización",
+    badge: "Paso 02 · Continuidad",
+    mockupTitle: "Tu Negocio No Se Detiene",
     mockupBullets: [
-      "Persistencia inmediata en Dexie / IndexedDB v3",
-      "Sync Worker con reintentos exponenciales y delta-sync",
-      "Aritmética financiera exacta sin errores flotantes (decimal.js)",
+      "Registra ventas y pedidos incluso sin conexión a internet",
+      "Control exacto de precios y cobranzas en varias monedas",
+      "Cada sucursal y dato comercial protegido y separado",
     ],
-    mockupTag: "PWA Lista para Producción",
+    mockupTag: "Cero pausas",
   },
   {
     id: "step-ai",
     number: "03",
-    title: "IA aplicada que resuelve trabajo real",
+    title: "Automatización práctica que ahorra horas",
     description:
-      "Integro modelos generativos, búsqueda vectorial pgvector e inferencia local PyTorch donde realmente ahorran tiempo operativo, sin humo innecesario.",
+      "Uso inteligencia artificial donde realmente genera retorno: leer facturas en segundos, agilizar cotizaciones y responder más rápido.",
     gradient: "linear-gradient(140deg, #bef264 0%, #ffb347 100%)",
-    badge: "IA Útil",
-    mockupTitle: "Pipelines de Inteligencia Artificial",
+    badge: "Paso 03 · Automatización",
+    mockupTitle: "Menos Trabajo Manual",
     mockupBullets: [
-      "Asistentes con tool calling y contexto estructurado (Gemini API)",
-      "Embeddings semánticos con Supabase pgvector",
-      "Inferencia 100% local sin costos de API (PyTorch / ONNX)",
+      "Carga de productos y facturas sin transcribir línea por línea",
+      "Presupuestos, recibos y reportes en PDF generados al instante",
+      "Integración directa con WhatsApp, correo y pagos online",
     ],
-    mockupTag: "Cloud + Local AI",
+    mockupTag: "Ahorro diario",
   },
   {
-    id: "step-qa",
+    id: "step-launch",
     number: "04",
-    title: "Verificación rigurosa y despliegue continuo",
+    title: "Avances visibles cada semana y soporte directo",
     description:
-      "Entrego código auditado con typecheck estricto, pruebas E2E, accesibilidad verificada y flujo limpio en ramas dev → test → main conectado a Vercel.",
+      "Vas viendo y probando avances reales desde un enlace privado cada semana, hasta dejar el sistema listo con tu equipo.",
     gradient: "linear-gradient(140deg, #7dd3fc 0%, #c084fc 100%)",
-    badge: "Release Listo",
-    mockupTitle: "Pipeline de Calidad y Entrega",
+    badge: "Paso 04 · Lanzamiento",
+    mockupTitle: "Acompañamiento Completo",
     mockupBullets: [
-      "Validación automatizada: TypeScript strict, Vitest y Playwright",
-      "Verificación de migraciones y políticas SQL antes de producción",
-      "Previews por rama en Vercel y documentación clara en español",
+      "Pruebas reales en celular y computadora antes de salir en vivo",
+      "Capacitación práctica para que tu equipo lo use sin miedo",
+      "Soporte cercano para nuevas mejoras conforme crece tu empresa",
     ],
-    mockupTag: "main · test · dev",
+    mockupTag: "Trato directo",
   },
 ];
 
 export const CAPABILITY_BADGES: CapabilityBadge[] = [
-  { label: "Offline-First", detail: "Dexie · IndexedDB · PWA" },
-  { label: "Supabase RLS", detail: "PostgreSQL Multi-Tenant" },
-  { label: "Gemini AI", detail: "Tool Calling · pgvector" },
-  { label: "Multimoneda", detail: "decimal.js · USD/VES/COP" },
-  { label: "Python & ML", detail: "FastAPI · PyTorch · ONNX" },
-  { label: "Vercel Cloud", detail: "Next.js 16 · Edge · CI" },
+  { label: "Sigue sin internet", detail: "Ventas y pedidos en ruta" },
+  { label: "Varias monedas", detail: "USD, Bolívares y Pesos" },
+  { label: "Reportes PDF", detail: "Facturas y estados de cuenta" },
+  { label: "Automatización IA", detail: "Menos carga manual" },
+  { label: "Control por roles", detail: "Cada quien ve lo suyo" },
+  { label: "Celular y PC", detail: "Rápido desde cualquier lugar" },
 ];
 
 export const SCALE_CATEGORY_PILLS: ScaleCategoryPill[] = [
-  { label: "un SaaS B2B", bg: "#cf67ff", text: "#ffffff", category: "SaaS B2B" },
-  { label: "una app con IA", bg: "#9ed0ff", text: "#0a0a0a", category: "App con IA" },
-  { label: "un sistema offline-first", bg: "#c8f552", text: "#0a0a0a", category: "SaaS B2B" },
-  { label: "una web de alto impacto", bg: "#ff9b42", text: "#0a0a0a", category: "Plataforma Web" },
+  { label: "un sistema de ventas y stock", bg: "#cf67ff", text: "#ffffff", category: "Sistema a Medida" },
+  { label: "una web que atraiga clientes", bg: "#9ed0ff", text: "#0a0a0a", category: "Web Comercial" },
+  { label: "automatizaciones con IA", bg: "#c8f552", text: "#0a0a0a", category: "Automatización e IA" },
+  { label: "una app para tus vendedores", bg: "#ff9b42", text: "#0a0a0a", category: "Sistema a Medida" },
 ];
 
 export const SERVICE_CARDS: ServiceCardItem[] = [
   {
-    id: "saas-turnkey",
-    title: "Productos SaaS llave en mano",
+    id: "custom-systems",
+    title: "Sistemas a medida para tu empresa",
     description:
-      "De la arquitectura de base de datos a la interfaz final en producción: multi-empresa, roles, pagos, PDFs y operación resiliente.",
-    ctaLabel: "Cotizar producto",
-    presetCategory: "SaaS B2B",
-    presetBrief: "Hola Khristian, necesito diseñar y lanzar un producto SaaS / sistema web a medida para mi negocio.",
+      "Digitalizo tu operación con herramientas hechas para tu forma de trabajar: inventario, ventas, crédito, cobranzas, clínicas o pedidos.",
+    ctaLabel: "Cotizar sistema",
+    presetCategory: "Sistema a Medida",
+    presetBrief:
+      "Hola Khristian, me gustaría cotizar un sistema a medida para ordenar las ventas, inventario o gestión de mi negocio.",
     variant: "templates",
   },
   {
     id: "ai-automation",
-    title: "IA aplicada a tus flujos",
+    title: "Webs y automatización inteligente",
     description:
-      "Integro asistentes con Gemini AI, búsqueda semántica en tus datos (pgvector) o modelos locales en Python adaptados a tu operación.",
-    ctaLabel: "Explorar solución IA",
-    presetCategory: "App con IA",
-    presetBrief: "Hola Khristian, quiero integrar inteligencia artificial o automatización en un flujo real de trabajo.",
+      "Sitios web que transmiten confianza y herramientas con IA para leer documentos, agilizar cotizaciones y atender clientes más rápido.",
+    ctaLabel: "Explorar solución",
+    presetCategory: "Automatización e IA",
+    presetBrief:
+      "Hola Khristian, quiero una web comercial o automatizar tareas repetitivas en mi negocio con inteligencia artificial.",
     variant: "ai",
   },
   {
     id: "founder-direct",
-    title: "Directo con el fundador",
+    title: "Trato directo sin intermediarios",
     description:
-      "Sin capas intermedias: hablas directamente con quien diseña la arquitectura, escribe el código crítico y responde en tu equipo.",
-    ctaLabel: "Agendar conversación",
-    presetCategory: "Equipo Senior",
-    presetBrief: "Hola Khristian, me gustaría conversar sobre sumar ingeniería full-stack senior a nuestro equipo o proyecto.",
+      "Hablas directamente conmigo de principio a fin: analizamos tu necesidad, ves avances semanales y lanzamos sin burocracia.",
+    ctaLabel: "Conversar ahora",
+    presetCategory: "Asesoría Digital",
+    presetBrief:
+      "Hola Khristian, me gustaría conversar directamente contigo sobre cómo mejorar la parte digital de mi empresa.",
     variant: "founder",
   },
 ];
@@ -413,44 +421,44 @@ export const SERVICE_CARDS: ServiceCardItem[] = [
 export const FAQ_ITEMS: FaqItem[] = [
   {
     id: "faq-1",
-    question: "¿Trabajas proyectos completos como Glyph Agency o te integras a equipos?",
+    question: "¿Qué tipo de proyectos desarrollas para negocios y empresas?",
     answer:
-      "Ambas modalidades. Puedo liderar la construcción completa de un producto SaaS o plataforma web desde cero bajo Glyph Agency, o integrarme como Full-Stack Product Engineer senior en equipos remotos que necesiten acelerar arquitectura, Next.js/React, Supabase o IA.",
+      "Desde páginas web de alto impacto para captar clientes hasta sistemas completos de punto de venta, control de inventario, gestión de clínicas, plataformas de pedidos para distribuidoras y automatizaciones con inteligencia artificial.",
   },
   {
     id: "faq-2",
-    question: "¿Por qué varios de tus productos principales están en repositorios privados?",
+    question: "¿Qué diferencia hay entre contratar un sistema a medida y usar uno genérico?",
     answer:
-      "Productos como GlyphCore B2B, Glyphix (HCE) y sistemas comerciales de clientes contienen propiedad intelectual y reglas de negocio privadas. En este portafolio te muestro su arquitectura real y además mantengo proyectos públicos Open Source en GitHub (como GlyphBrain y AI Image Upscaler) donde puedes auditar mi código directamente.",
+      "Un sistema genérico te obliga a cambiar la forma en que trabajas y te cobra mensualidades por usuario para siempre. Un sistema a medida se construye alrededor de tus reglas reales (monedas, comisiones, créditos, sucursales) y crece contigo.",
   },
   {
     id: "faq-3",
-    question: "¿Cuál es tu stack principal en producción?",
+    question: "¿Los sistemas sirven si en mi negocio o tienda falla el internet?",
     answer:
-      "En web y frontend trabajo principalmente con Next.js (App Router), React, TypeScript estricto, Tailwind CSS y Zustand. En backend y datos uso PostgreSQL / Supabase (RLS, RPCs, pgvector), Dexie/IndexedDB para modo offline, y Python (FastAPI, Flask, PyTorch) para bots e IA.",
+      "Sí. Varios de los sistemas que desarrollo están preparados para seguir registrando pedidos, consultas o ventas cuando se cae la conexión y actualizar todo automáticamente en cuanto vuelve la señal.",
   },
   {
     id: "faq-4",
-    question: "¿Qué significa exactamente que construyes apps Offline-First?",
+    question: "¿Puedo ver avances antes de que el proyecto esté terminado?",
     answer:
-      "Significa que la interfaz lee y escribe primero en almacenamiento local seguro del navegador (IndexedDB / Dexie) para responder en milisegundos incluso si cae internet, y un worker sincroniza los cambios en segundo plano cuando regresa la conexión.",
+      "Sí, siempre. Trabajo con entregas semanales en un enlace privado de pruebas para que revises pantallas reales desde tu teléfono o computadora y hagamos ajustes sobre la marcha.",
   },
   {
     id: "faq-5",
-    question: "¿Cómo manejas seguridad y multi-tenancy en proyectos SaaS?",
+    question: "¿Incluyes diseño y textos o debo tener todo listo antes de empezar?",
     answer:
-      "Nunca confío la seguridad únicamente al frontend. Aplico Row Level Security (RLS) directamente en PostgreSQL, funciones RPC con SECURITY DEFINER cuando se requieren operaciones atómicas, validación estricta con Zod en APIs y separación de claves de servidor.",
+      "No necesitas tenerlo todo resuelto. Te ayudo a aterrizar la estructura, los flujos, el diseño visual y los textos clave enfocados en lo que tus clientes necesitan entender para comprarte o usar tu herramienta.",
   },
   {
     id: "faq-6",
-    question: "¿En qué zona horaria trabajas y cómo es la comunicación?",
+    question: "¿Cómo manejan múltiples monedas como dólares, bolívares o pesos?",
     answer:
-      "Opero desde Venezuela en horario UTC-4 (muy cercano a EST / costa este de EE. UU.), con entregas semanales visibles en Vercel Preview URLs, repositorios ordenados (main / test / dev) y comunicación directa en español o inglés.",
+      "Los sistemas comerciales contemplan tasas configurables, precios en varias divisas, registro exacto de abonos y reportes claros para que nunca pierdas control del margen ni tengas descuadres en caja.",
   },
   {
     id: "faq-7",
-    question: "¿Cuánto tarda normalmente lanzar una primera versión funcional (MVP)?",
+    question: "¿Cuánto tiempo toma tener una primera versión lista para usar?",
     answer:
-      "Una web comercial o landing interactiva de alto impacto suele tomar entre 1 y 2 semanas; un MVP SaaS multi-usuario con base de datos, autenticación y flujos clave suele tomar entre 4 y 8 semanas según el alcance.",
+      "Una web comercial moderna suele estar lista en 1 a 2 semanas. Un sistema administrativo o plataforma comercial completa toma normalmente entre 4 y 8 semanas según la cantidad de módulos y roles.",
   },
 ];

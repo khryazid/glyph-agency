@@ -24,8 +24,9 @@ export function Footer() {
               <span>{PROFILE.name}</span>
             </a>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#52525b]">
-              Full-Stack Product Engineer & Founder @ Glyph Agency. Software
-              resiliente, multi-tenant e impulsado por IA.
+              Fundador de Glyph Agency. Desarrollo de software a medida,
+              sistemas de gestión, webs comerciales y automatización para
+              negocios.
             </p>
           </div>
 
@@ -34,49 +35,23 @@ export function Footer() {
               Explorar
             </h3>
             <ul className="mt-3 space-y-2 text-sm text-[#18181b]">
-              <li><a href="#proyectos" className="hover:underline">Proyectos</a></li>
-              <li><a href="#proceso" className="hover:underline">Proceso</a></li>
-              <li><a href="#capacidades" className="hover:underline">Capacidades</a></li>
+              <li><a href="#proyectos" className="hover:underline">Soluciones</a></li>
+              <li><a href="#proceso" className="hover:underline">Cómo trabajo</a></li>
+              <li><a href="#capacidades" className="hover:underline">Beneficios</a></li>
               <li><a href="#servicios" className="hover:underline">Servicios</a></li>
-              <li><a href="#faq" className="hover:underline">FAQ</a></li>
+              <li><a href="#faq" className="hover:underline">Preguntas</a></li>
             </ul>
           </div>
 
           <div className="lg:col-span-3">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-[#737373]">
-              Open Source
+              Soluciones
             </h3>
             <ul className="mt-3 space-y-2 text-sm text-[#18181b]">
-              <li>
-                <a
-                  href="https://github.com/khryazid/glyphbrain"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 hover:underline"
-                >
-                  glyphbrain <ArrowUpRight className="size-3.5 text-zinc-400" aria-hidden="true" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/khryazid/ai-image-upscaler"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 hover:underline"
-                >
-                  ai-image-upscaler <ArrowUpRight className="size-3.5 text-zinc-400" aria-hidden="true" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href={PROFILE.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 hover:underline"
-                >
-                  Perfil en GitHub <ArrowUpRight className="size-3.5 text-zinc-400" aria-hidden="true" />
-                </a>
-              </li>
+              <li><a href="#proyectos" className="hover:underline">GlyphCore B2B (Distribuidoras)</a></li>
+              <li><a href="#proyectos" className="hover:underline">Glyphix (Clínicas y Salud)</a></li>
+              <li><a href="#proyectos" className="hover:underline">Sistema POS & Inventario</a></li>
+              <li><a href="#proyectos" className="hover:underline">Suite Comercial por Rubro</a></li>
             </ul>
           </div>
 
@@ -98,6 +73,16 @@ export function Footer() {
               <li>
                 <a href={PROFILE.instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
                   Instagram
+                </a>
+              </li>
+              <li>
+                <a
+                  href={PROFILE.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:underline"
+                >
+                  GitHub <ArrowUpRight className="size-3.5 text-zinc-400" aria-hidden="true" />
                 </a>
               </li>
               <li>

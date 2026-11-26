@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Khristian Ali — Full-Stack Product Engineer & Founder @ Glyph Agency";
+export const alt = "Khristian Ali — Fundador de Glyph Agency | Software para Empresas";
 export const size = {
   width: 1200,
   height: 630,
@@ -52,13 +52,13 @@ export default function OpenGraphImage() {
                 color: "#52525b",
               }}
             >
-              Khristian Ali · Glyph Agency
+              Khristian Ali · Fundador de Glyph Agency
             </span>
           </div>
 
           <div
             style={{
-              fontSize: "66px",
+              fontSize: "64px",
               fontWeight: 700,
               lineHeight: 1.0,
               letterSpacing: "-0.03em",
@@ -66,7 +66,7 @@ export default function OpenGraphImage() {
               marginBottom: "24px",
             }}
           >
-            Cada idea abre un producto real.
+            Software que ordena y hace crecer tu negocio.
           </div>
 
           <div
@@ -76,7 +76,7 @@ export default function OpenGraphImage() {
               color: "#52525b",
             }}
           >
-            SaaS Offline-First · PostgreSQL Multi-Tenant RLS · Aplicaciones con IA
+            Sistemas a Medida · Webs Comerciales · Automatización con IA
           </div>
         </div>
 

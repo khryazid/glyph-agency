@@ -14,10 +14,10 @@ interface ContactSectionProps {
 }
 
 const CATEGORIES: HeroCategory[] = [
-  "SaaS B2B",
-  "App con IA",
-  "Plataforma Web",
-  "Equipo Senior",
+  "Sistema a Medida",
+  "Web Comercial",
+  "Automatización e IA",
+  "Asesoría Digital",
 ];
 
 export function ContactSection({
@@ -41,7 +41,6 @@ export function ContactSection({
 
   const activeResult = submittedForSignal === resetSignal ? result : null;
 
-  // Patrón moderno de validación post-interacción (:user-invalid + aria-invalid + aria-live)
   useEffect(() => {
     const form = formRef.current;
     if (!form) return;
@@ -218,7 +217,7 @@ export function ContactSection({
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, "");
   const whatsappUrl = whatsappNumber
     ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-        `Hola Khristian, te contacto desde tu portafolio (${category}).`
+        `Hola Khristian, te escribo desde tu web (${category}).`
       )}`
     : null;
 
@@ -235,55 +234,48 @@ export function ContactSection({
         }}
       >
         <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
-          {/* Izquierda: CTA editorial */}
           <div className="text-[#18181b] lg:col-span-5">
             <span className="inline-flex items-center rounded-full bg-white/85 px-3 py-1 text-xs font-semibold text-[#18181b] shadow-2xs">
-              Disponible para proyectos & roles senior
+              Disponible para nuevos proyectos
             </span>
             <SplitHeadline
               as="h2"
-              text="¿Listo para abrir tu próximo producto?"
+              text="¿Listo para impulsar tu negocio?"
               className="mt-5 text-[clamp(2rem,4.2vw,3.15rem)] font-semibold tracking-[-0.03em] leading-[1.0] text-[#18181b]"
             />
             <p className="mt-4 text-sm leading-relaxed text-[#18181b]/85 sm:text-base">
-              Cuéntame qué necesitas construir o qué equipo quieres reforzar. Te
-              respondo directamente con una propuesta técnica clara.
+              Cuéntame qué necesitas ordenar, vender o automatizar en tu empresa.
+              Te respondo directamente con una propuesta clara y sin vueltas.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-2.5">
-              <a
-                href={PROFILE.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full bg-[#171717] px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-black"
-              >
-                LinkedIn
-                <ArrowUpRight className="size-3.5" aria-hidden="true" />
-              </a>
-              <a
-                href={PROFILE.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-4 py-2.5 text-xs font-semibold text-[#18181b] transition-colors hover:bg-white"
-              >
-                GitHub
-                <ArrowUpRight className="size-3.5" aria-hidden="true" />
-              </a>
               {whatsappUrl ? (
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-4 py-2.5 text-xs font-semibold text-[#18181b] transition-colors hover:bg-white"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-[#171717] px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-black"
                 >
-                  WhatsApp
+                  Escribir por WhatsApp
                   <ArrowUpRight className="size-3.5" aria-hidden="true" />
                 </a>
               ) : null}
+              <a
+                href={PROFILE.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 text-xs font-semibold transition-colors ${
+                  whatsappUrl
+                    ? "bg-white/90 text-[#18181b] hover:bg-white"
+                    : "bg-[#171717] text-white hover:bg-black"
+                }`}
+              >
+                LinkedIn
+                <ArrowUpRight className="size-3.5" aria-hidden="true" />
+              </a>
             </div>
           </div>
 
-          {/* Derecha: Tarjeta blanca de formulario accesible */}
           <div className="rounded-[26px] border border-white/70 bg-white/95 p-6 shadow-xl backdrop-blur-sm sm:p-8 lg:col-span-7">
             {activeResult ? (
               <div className="space-y-4 py-6 text-left">
@@ -293,12 +285,12 @@ export function ContactSection({
                 <h3 className="text-xl font-semibold text-[#18181b]">
                   {activeResult.delivery === "resend"
                     ? "Mensaje enviado correctamente"
-                    : "Brief recibido — elige cómo enviarlo directo"}
+                    : "Consulta lista — elige cómo enviármela directo"}
                 </h3>
                 <p className="text-sm leading-relaxed text-[#52525b]">
                   {activeResult.delivery === "resend"
                     ? "Gracias por escribir. Revisaré tu mensaje y te responderé muy pronto."
-                    : "Tu mensaje fue validado correctamente. Si aún no está activa la clave de correo automático en este entorno, puedes abrirlo en tu app de correo o escribirme por LinkedIn."}
+                    : "Tu mensaje quedó validado correctamente. Puedes enviarlo ahora por LinkedIn, WhatsApp o abrir tu app de correo."}
                 </p>
                 <div className="flex flex-wrap gap-2.5 pt-2">
                   {activeResult.mailtoUrl ? (
@@ -308,6 +300,17 @@ export function ContactSection({
                     >
                       <Mail className="size-3.5" aria-hidden="true" />
                       Abrir en mi correo
+                    </a>
+                  ) : null}
+                  {whatsappUrl ? (
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-[#171717] px-5 py-2.5 text-xs font-semibold text-white"
+                    >
+                      Enviar por WhatsApp
+                      <ArrowUpRight className="size-3.5" aria-hidden="true" />
                     </a>
                   ) : null}
                   <a
@@ -334,7 +337,6 @@ export function ContactSection({
               </div>
             ) : (
               <form ref={formRef} onSubmit={handleSubmit} className="space-y-4" noValidate>
-                {/* Honeypot anti-spam oculto visualmente */}
                 <div className="visually-hidden" aria-hidden="true">
                   <label htmlFor="companyWebsite">Sitio web</label>
                   <input
@@ -414,7 +416,7 @@ export function ContactSection({
                     htmlFor="contact-category"
                     className="block text-xs font-semibold text-[#18181b]"
                   >
-                    ¿Qué quieres construir o impulsar?
+                    ¿Qué solución estás buscando?
                   </label>
                   <select
                     id="contact-category"
@@ -436,10 +438,10 @@ export function ContactSection({
                     htmlFor="contact-message"
                     className="block text-xs font-semibold text-[#18181b]"
                   >
-                    Cuéntame sobre el proyecto
+                    Cuéntame sobre tu negocio o proyecto
                   </label>
                   <span id="contact-message-hint" className="block text-[11px] text-[#737373]">
-                    Mínimo 15 caracteres con el objetivo o contexto principal.
+                    Mínimo 15 caracteres con el objetivo principal.
                   </span>
                   <textarea
                     id="contact-message"
@@ -449,7 +451,7 @@ export function ContactSection({
                     minLength={15}
                     aria-describedby="contact-message-hint"
                     data-error="contact-message-error"
-                    placeholder="Ej: Necesitamos lanzar una plataforma SaaS multi-empresa con soporte offline y reportes PDF..."
+                    placeholder="Ej: Quiero un sistema para controlar ventas, inventario y cuentas por cobrar en dólares y bolívares..."
                     value={message}
                     onChange={(e) => onMessageChange(e.target.value)}
                     className="field-control mt-1 w-full resize-y rounded-xl border border-zinc-200 bg-[#fafafa] px-3.5 py-2.5 text-sm text-[#18181b] placeholder:text-zinc-400"
@@ -468,7 +470,7 @@ export function ContactSection({
 
                 <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
                   <p className="text-[11px] text-[#737373]">
-                    Respuesta directa desde Venezuela (UTC-4).
+                    Respuesta directa · Venezuela (UTC-4).
                   </p>
                   <button
                     type="submit"
@@ -476,7 +478,7 @@ export function ContactSection({
                     className="inline-flex items-center gap-2 rounded-full bg-[#171717] px-6 py-3 text-xs font-semibold text-white transition-colors hover:bg-black disabled:opacity-60"
                   >
                     <Send className="size-3.5" aria-hidden="true" />
-                    {submitting ? "Enviando..." : "Enviar mensaje"}
+                    {submitting ? "Enviando..." : "Enviar consulta"}
                   </button>
                 </div>
               </form>

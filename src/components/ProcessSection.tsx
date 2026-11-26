@@ -54,17 +54,16 @@ export function ProcessSection() {
         <div className="mb-14 max-w-2xl">
           <SplitHeadline
             as="h2"
-            text="De la idea a producción sin fricción"
+            text="De tu idea a un sistema funcionando"
             className="text-[clamp(2rem,4.4vw,3.35rem)] font-semibold tracking-[-0.03em] leading-[1.02] text-[#18181b]"
           />
           <p className="mt-4 text-base text-[#52525b]">
-            Un método de ingeniería probado en plataformas reales multi-tenant: menos
-            improvisación, cero sorpresas al escalar.
+            Un proceso claro, sin palabras enredadas ni sorpresas: ves avances
+            reales cada semana hasta que tu equipo lo domina.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
-          {/* Columna izquierda sticky con 4 pasos */}
           <div className="lg:col-span-5">
             <div className="space-y-3 lg:sticky lg:top-28">
               {PROCESS_STEPS.map((step, idx) => {
@@ -124,7 +123,6 @@ export function ProcessSection() {
             </div>
           </div>
 
-          {/* Columna derecha con marcos de degradado granulado y mockups blancos */}
           <div className="space-y-7 lg:col-span-7">
             {PROCESS_STEPS.map((step, idx) => (
               <div
@@ -135,10 +133,8 @@ export function ProcessSection() {
               >
                 <div className="relative z-10 rounded-2xl border border-white/70 bg-white/95 p-6 shadow-md backdrop-blur-sm">
                   <div className="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-100 pb-4">
-                    <span className="inline-flex items-center gap-2 rounded-full bg-zinc-100 px-3 py-1 font-mono text-xs font-medium text-[#18181b]">
-                      <span>{step.number}</span>
-                      <span>·</span>
-                      <span>{step.badge}</span>
+                    <span className="inline-flex items-center gap-2 rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-[#18181b]">
+                      {step.badge}
                     </span>
                     <span className="rounded-full bg-[#171717] px-3 py-1 text-xs font-medium text-white">
                       {step.mockupTag}

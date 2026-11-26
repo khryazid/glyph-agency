@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ArrowUpRight, CheckCircle2, Lock, X } from "lucide-react";
+import { Briefcase, CheckCircle2, X } from "lucide-react";
 import type { HeroCategory, ProjectItem } from "@/data/portfolio";
 
 interface CaseStudyDialogProps {
@@ -30,7 +30,6 @@ export function CaseStudyDialog({
     }
   }, [project]);
 
-  // Fallback para light-dismiss en navegadores sin closedBy nativo (p. ej. Safari)
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
@@ -59,7 +58,11 @@ export function CaseStudyDialog({
     };
 
     const handlePointerUp = (e: PointerEvent) => {
-      if (!("closedBy" in HTMLDialogElement.prototype) && pressedOutside && isOutside(e)) {
+      if (
+        !("closedBy" in HTMLDialogElement.prototype) &&
+        pressedOutside &&
+        isOutside(e)
+      ) {
         dialog.close();
       }
       pressedOutside = false;
@@ -78,7 +81,7 @@ export function CaseStudyDialog({
   const titleId = project ? `case-study-title-${project.id}` : "case-study-title";
 
   const targetCategory: HeroCategory =
-    project?.tab === "ai-oss" ? "App con IA" : "SaaS B2B";
+    project?.tab === "web-apps" ? "Web Comercial" : "Sistema a Medida";
 
   return (
     <dialog
@@ -89,14 +92,13 @@ export function CaseStudyDialog({
     >
       {project ? (
         <div>
-          {/* Cabecera con degradado editorial */}
           <div
             className="grain-surface relative flex flex-col justify-between gap-4 px-6 pt-7 pb-6 text-[#18181b] sm:px-8"
             style={{ background: project.gradient }}
           >
             <div className="relative z-10 flex items-center justify-between gap-3">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-[#18181b] shadow-2xs">
-                {!project.repoUrl ? <Lock className="size-3" aria-hidden="true" /> : null}
+                <Briefcase className="size-3" aria-hidden="true" />
                 {project.category} · {project.shortLabel}
               </span>
 
@@ -104,7 +106,7 @@ export function CaseStudyDialog({
                 type="button"
                 autoFocus
                 onClick={() => dialogRef.current?.close()}
-                aria-label="Cerrar detalle del proyecto"
+                aria-label="Cerrar detalle de la solución"
                 className="inline-flex size-9 items-center justify-center rounded-full bg-[#171717]/85 text-white backdrop-blur-sm transition-colors hover:bg-black"
               >
                 <X className="size-4" aria-hidden="true" />
@@ -125,7 +127,6 @@ export function CaseStudyDialog({
           </div>
 
           <div className="space-y-6 p-6 sm:p-8">
-            {/* Métricas clave */}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               {project.metrics.map((m) => (
                 <div
@@ -143,7 +144,7 @@ export function CaseStudyDialog({
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-zinc-200/80 bg-[#fafafa] p-4">
                 <h2 className="text-xs font-semibold uppercase tracking-wider text-[#737373]">
-                  El Problema
+                  El Reto del Negocio
                 </h2>
                 <p className="mt-2 text-sm leading-relaxed text-[#27272a]">
                   {project.problem}
@@ -151,7 +152,7 @@ export function CaseStudyDialog({
               </div>
               <div className="rounded-2xl border border-zinc-200/80 bg-[#fafafa] p-4">
                 <h2 className="text-xs font-semibold uppercase tracking-wider text-[#737373]">
-                  Solución & Arquitectura
+                  La Solución Construida
                 </h2>
                 <p className="mt-2 text-sm leading-relaxed text-[#27272a]">
                   {project.solution}
@@ -161,7 +162,7 @@ export function CaseStudyDialog({
 
             <div>
               <h2 className="text-xs font-semibold uppercase tracking-wider text-[#737373]">
-                Aspectos Técnicos Clave
+                Qué Resuelve en la Práctica
               </h2>
               <ul className="mt-3 space-y-2">
                 {project.highlights.map((item) => (
@@ -178,48 +179,35 @@ export function CaseStudyDialog({
 
             <div>
               <h2 className="text-xs font-semibold uppercase tracking-wider text-[#737373]">
-                Stack Utilizado
+                Capacidades Incluidas
               </h2>
               <div className="mt-2.5 flex flex-wrap gap-1.5">
-                {project.stack.map((tech) => (
+                {project.features.map((feat) => (
                   <span
-                    key={tech}
-                    className="rounded-full border border-zinc-200 bg-white px-3 py-1 font-mono text-xs text-[#27272a]"
+                    key={feat}
+                    className="rounded-full border border-zinc-200 bg-white px-3.5 py-1 text-xs font-medium text-[#27272a]"
                   >
-                    {tech}
+                    {feat}
                   </span>
                 ))}
               </div>
             </div>
 
             <div className="flex flex-wrap items-center justify-between gap-3 border-t border-zinc-200/80 pt-5">
-              {project.repoUrl ? (
-                <a
-                  href={project.repoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-[#f3f3f4] px-4 py-2.5 text-xs font-semibold text-[#18181b] transition-colors hover:bg-zinc-200"
-                >
-                  Ver repositorio en GitHub
-                  <ArrowUpRight className="size-4" aria-hidden="true" />
-                </a>
-              ) : (
-                <span className="inline-flex items-center gap-1.5 text-xs text-[#737373]">
-                  <Lock className="size-3.5" aria-hidden="true" />
-                  Repositorio privado comercial — demo técnica disponible bajo solicitud
-                </span>
-              )}
+              <span className="text-xs text-[#737373]">
+                Demo en vivo disponible bajo solicitud para tu empresa.
+              </span>
 
               <button
                 type="button"
                 onClick={() => {
-                  const brief = `Hola Khristian, vi el caso de ${project.title} y me gustaría conversar sobre un proyecto o solución similar.`;
+                  const brief = `Hola Khristian, me gustó la solución ${project.title} y quiero ver cómo adaptarla para mi negocio.`;
                   dialogRef.current?.close();
                   onRequestSimilar({ category: targetCategory, brief });
                 }}
                 className="inline-flex items-center gap-1.5 rounded-full bg-[#171717] px-5 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-black"
               >
-                Construir algo similar →
+                Quiero algo similar para mi negocio →
               </button>
             </div>
           </div>
