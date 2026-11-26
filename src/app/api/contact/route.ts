@@ -48,6 +48,34 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, delivery: "filtered" }, { status: 200 });
   }
 
+  const crmIngestUrl = process.env.GLYPH_CRM_INGEST_URL?.trim();
+  const crmApiKey = process.env.GLYPH_CRM_API_KEY?.trim();
+  let crmCaptured = false;
+
+  if (crmIngestUrl && crmApiKey) {
+    try {
+      const crmRes = await fetch(crmIngestUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Glyph-Key": crmApiKey,
+        },
+        body: JSON.stringify({
+          fullName: name,
+          email,
+          niche: category,
+          source: "Web",
+          message,
+        }),
+      });
+      if (crmRes.ok) {
+        crmCaptured = true;
+      }
+    } catch {
+      // No bloquear la experiencia de contacto si el CRM está temporalmente inalcanzable
+    }
+  }
+
   const resendKey = process.env.RESEND_API_KEY?.trim();
   const toEmail = process.env.CONTACT_TO_EMAIL?.trim();
   const fromEmail =
@@ -71,11 +99,18 @@ export async function POST(request: Request) {
       });
 
       if (resendRes.ok) {
-        return NextResponse.json({ ok: true, delivery: "resend" }, { status: 200 });
+        return NextResponse.json(
+          { ok: true, delivery: "resend", crmCaptured },
+          { status: 200 }
+        );
       }
     } catch {
       // Cae al modo fallback controlado si falla la red hacia Resend
     }
+  }
+
+  if (crmCaptured) {
+    return NextResponse.json({ ok: true, delivery: "crm" }, { status: 200 });
   }
 
   const subject = encodeURIComponent(`[Glyph Agency · ${category}] Consulta de ${name}`);

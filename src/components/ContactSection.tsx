@@ -293,12 +293,14 @@ export function ContactSection({
                   <CheckCircle2 className="size-6" aria-hidden="true" />
                 </div>
                 <h3 className="text-xl font-semibold text-[#18181b]">
-                  {activeResult.delivery === "resend"
+                  {activeResult.delivery === "resend" ||
+                  activeResult.delivery === "crm"
                     ? "Mensaje enviado correctamente"
                     : "Consulta lista — elige cómo enviárnosla directo"}
                 </h3>
                 <p className="text-sm leading-relaxed text-[#52525b]">
-                  {activeResult.delivery === "resend"
+                  {activeResult.delivery === "resend" ||
+                  activeResult.delivery === "crm"
                     ? "Gracias por escribir a Glyph Agency. Revisaremos tu consulta y te responderemos muy pronto."
                     : "Tu mensaje quedó validado correctamente. Puedes enviarlo ahora por LinkedIn, WhatsApp o abrir tu app de correo."}
                 </p>
