@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { PROFILE, SERVICE_CARDS, type HeroCategory } from "@/data/portfolio";
 import { SplitHeadline } from "./SplitHeadline";
@@ -113,14 +112,17 @@ export function ServicesSection({ onSelectService }: ServicesSectionProps) {
                       Glyph Agency
                     </div>
 
-                    <div className="arch-shape relative z-10 h-48 w-36 overflow-hidden border-2 border-white/80 bg-zinc-900 shadow-xl">
-                      <Image
-                        src="/khristian.jpg"
-                        alt={`Retrato de ${PROFILE.name}`}
-                        fill
-                        sizes="144px"
-                        className="object-cover"
+                    <div className="arch-shape relative z-10 flex h-48 w-36 flex-col items-center justify-center border-2 border-white/80 bg-[#141417] px-3 text-center text-white shadow-xl">
+                      <span
+                        aria-hidden="true"
+                        className="portal-gradient-core arch-shape mb-3 inline-block h-10 w-8 shadow-sm"
                       />
+                      <span className="font-display text-2xl font-semibold tracking-tight text-white">
+                        KA
+                      </span>
+                      <span className="mt-1 text-[10px] font-medium text-zinc-300">
+                        {PROFILE.name}
+                      </span>
                     </div>
 
                     <div className="relative z-10 mb-5 hidden rounded-xl bg-white/90 px-2.5 py-2 text-[10px] font-semibold text-[#18181b] shadow-sm sm:block">
