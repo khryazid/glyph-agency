@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FAQ_ITEMS, PROFILE } from "@/data/portfolio";
+import { AGENCY, FAQ_ITEMS } from "@/data/portfolio";
 import { SplitHeadline } from "./SplitHeadline";
 
 export function FaqSection() {
@@ -21,12 +21,12 @@ export function FaqSection() {
               className="text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[-0.03em] leading-[1.05] text-[#18181b]"
             />
             <p className="mt-4 text-sm leading-relaxed text-[#52525b] sm:text-base">
-              Respuestas claras sobre cómo trabajamos, tiempos de entrega,
-              operación sin internet y soporte para tu negocio.
+              Respuestas claras sobre cómo trabajamos, modalidades por servicio,
+              redes sociales, campañas y sistemas para tu negocio.
             </p>
             <div className="mt-6 flex flex-wrap gap-3 text-sm">
               <a
-                href={PROFILE.linkedinUrl}
+                href={AGENCY.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-medium text-[#18181b] underline decoration-zinc-300 underline-offset-4 hover:decoration-[#18181b]"

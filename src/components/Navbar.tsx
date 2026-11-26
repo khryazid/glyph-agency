@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { PROFILE } from "@/data/portfolio";
-import { GlyphMark } from "./GlyphLogo";
+import { GlyphLockup } from "./GlyphLogo";
 
 const NAV_LINKS = [
   { href: "#proyectos", label: "Soluciones" },
-  { href: "#proceso", label: "Cómo trabajo" },
-  { href: "#capacidades", label: "Beneficios" },
+  { href: "#proceso", label: "Cómo trabajamos" },
   { href: "#servicios", label: "Servicios" },
+  { href: "#equipo", label: "Equipo" },
   { href: "#faq", label: "Preguntas" },
 ];
 
@@ -29,10 +28,10 @@ export function Navbar() {
         <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between px-4 sm:px-6 lg:px-8">
           <a
             href="#top"
-            className="flex items-center gap-2.5 text-sm font-semibold tracking-tight text-[#18181b]"
+            aria-label="Glyph Agency — Ir al inicio"
+            className="flex items-center"
           >
-            <GlyphMark tone="badge-dark" className="size-7 shrink-0" />
-            <span>{PROFILE.name}</span>
+            <GlyphLockup tone="light" markClassName="size-7" textClassName="text-base" />
           </a>
 
           <nav aria-label="Navegación principal" className="hidden items-center gap-7 md:flex">

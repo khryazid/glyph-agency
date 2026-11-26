@@ -42,13 +42,15 @@ export function PortfolioClientShell() {
           onPickCategory={(category) =>
             jumpToContact({
               category,
-              brief: `Hola Khristian, me gustaría conversar sobre implementar ${
-                category === "Automatización e IA"
-                  ? "automatizaciones con inteligencia artificial"
+              brief: `Hola equipo de Glyph Agency, nos gustaría conversar sobre implementar ${
+                category === "Redes y Meta Ads"
+                  ? "gestión de redes sociales, diseño y campañas en Meta Ads"
                   : category === "Web Comercial"
-                  ? "una web comercial de alto impacto"
+                  ? "una web comercial enfocada en captar clientes"
+                  : category === "Plan Integral"
+                  ? "un plan integral de software, web y redes sociales"
                   : "un sistema a medida"
-              } para mi negocio.`,
+              } para nuestro negocio.`,
             })
           }
         />

@@ -1,51 +1,473 @@
-export type ProjectTab = "all" | "gestion" | "web-apps";
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://glyph-agency.vercel.app";
 
-export type ProjectCategory =
-  | "Sistema Empresarial"
-  | "Salud & Clínicas"
-  | "Comercio & Retail"
-  | "Plataforma Web"
-  | "App Móvil";
+export const AGENCY = {
+  name: "Glyph Agency",
+  shortName: "Glyph",
+  tagline:
+    "Software a medida, páginas web comerciales, redes sociales y Meta Ads para negocios y empresas.",
+  location: "Venezuela · Atención Remota Internacional",
+  heroEyebrow: "Glyph Agency · Software & Mercadeo Digital",
+  linkedinUrl: "https://www.linkedin.com/in/khyazid",
+  danielaLinkedinUrl: "https://www.linkedin.com/in/daniela-quiroz-ba4418246",
+  instagramUrl: "https://www.instagram.com/khr_yazid/",
+  xUrl: "https://x.com/khr_yazid",
+  githubUrl: "https://github.com/khryazid",
+} as const;
+
+export interface CofounderProfile {
+  id: string;
+  name: string;
+  initials: string;
+  role: string;
+  credential?: string;
+  specialty: string;
+  bio: string;
+  highlights: string[];
+  linkedinUrl: string;
+  accentBg: string;
+  accentText: string;
+}
+
+export const COFOUNDERS: CofounderProfile[] = [
+  {
+    id: "khristian",
+    name: "Khristian Ali",
+    initials: "KA",
+    role: "Cofundador · Desarrollo de Software, Webs y Automatización",
+    specialty: "Sistemas de Gestión, Webs Comerciales y Automatización",
+    bio: "Dirige la creación de sistemas internos para ventas, inventario y cobranzas, páginas web rápidas orientadas a conversión y herramientas de automatización que ahorran horas operativas cada semana.",
+    highlights: [
+      "Sistemas POS e inventario que trabajan sin internet",
+      "Plataformas administrativas y gestión clínica",
+      "Páginas web comerciales y flujos automatizados",
+    ],
+    linkedinUrl: "https://www.linkedin.com/in/khyazid",
+    accentBg: "#171717",
+    accentText: "#ffffff",
+  },
+  {
+    id: "daniela",
+    name: "Daniela Quiroz",
+    initials: "DQ",
+    role: "Cofundadora · Estrategia, Redes Sociales y Meta Ads",
+    credential: "Licenciada en Administración (Mención Mercadeo) · UCAT",
+    specialty: "Community Management, Diseño Visual y Pauta en Meta",
+    bio: "Licenciada en Administración mención Mercadeo (Universidad Católica del Táchira). Lidera la estrategia de marca, la gestión diaria de redes sociales para negocios, el diseño de piezas visuales y campañas pagadas en Instagram y Facebook.",
+    highlights: [
+      "Community Management para empresas y marcas",
+      "Diseño gráfico limpio y coherente para redes sociales",
+      "Campañas segmentadas en Meta Ads (Instagram y Facebook)",
+    ],
+    linkedinUrl: "https://www.linkedin.com/in/daniela-quiroz-ba4418246",
+    accentBg: "#ff8400",
+    accentText: "#18181b",
+  },
+];
 
 export type HeroCategory =
   | "Sistema a Medida"
   | "Web Comercial"
-  | "Automatización e IA"
-  | "Asesoría Digital";
+  | "Redes y Meta Ads"
+  | "Plan Integral";
+
+export const HERO_CATEGORY_PILLS: HeroCategory[] = [
+  "Sistema a Medida",
+  "Web Comercial",
+  "Redes y Meta Ads",
+  "Plan Integral",
+];
+
+export const HERO_TYPEWRITER_EXAMPLES: string[] = [
+  "Necesitamos un sistema de ventas e inventario que trabaje incluso sin internet...",
+  "Buscamos llevar nuestras redes sociales con diseño profesional y campañas en Instagram...",
+  "Queremos una página web moderna que genere confianza y capte clientes por WhatsApp...",
+  "Necesitamos ordenar las cobranzas en dólares y bolívares y automatizar reportes...",
+];
+
+export type ProjectTab = "all" | "gestion" | "web-marketing";
 
 export interface ProjectItem {
   id: string;
-  title: string;
-  shortLabel: string;
-  tagline: string;
-  category: ProjectCategory;
   tab: Exclude<ProjectTab, "all">;
-  gradient: string;
+  category: string;
+  shortLabel: string;
+  title: string;
+  tagline: string;
   summary: string;
   problem: string;
   solution: string;
-  highlights: string[];
-  metrics: { label: string; value: string }[];
+  gradient: string;
+  accentColor: string;
   features: string[];
+  highlights: string[];
   mockupLines: { title: string; subtitle: string; stat: string }[];
+  metrics: { label: string; value: string }[];
 }
+
+export const PROJECTS: ProjectItem[] = [
+  {
+    id: "glyphcore-b2b",
+    tab: "gestion",
+    category: "Sistema a Medida",
+    shortLabel: "Distribuidoras y Mayoristas",
+    title: "GlyphCore B2B",
+    tagline:
+      "Control total de rutas, ventas a crédito y cobranzas sin depender de internet.",
+    summary:
+      "Plataforma comercial diseñada para distribuidoras con vendedores en calle y despachos diarios: registra pedidos, controla créditos vencidos y mantiene el stock exacto incluso sin señal.",
+    problem:
+      "Los equipos comerciales perdían pedidos en ruta por mala conexión y tardaban días en conciliar pagos y comisiones.",
+    solution:
+      "Creamos una herramienta ágil donde el vendedor factura desde el teléfono aunque esté desconectado y la oficina ve cada abono y despacho al instante.",
+    gradient:
+      "linear-gradient(155deg, #ffa033 0%, #ff8400 35%, #ff8ee5 72%, #d559ff 100%)",
+    accentColor: "#ff8400",
+    features: ["Trabajo sin internet", "Multimoneda USD / Bs", "Facturación rápida"],
+    highlights: [
+      "Toma de pedidos en calle sin depender de datos móviles",
+      "Control automático de cuentas por cobrar y límites de crédito",
+      "Catálogo actualizado con precios y descuentos por cliente",
+      "Reportes diarios claros para gerencia y comisiones",
+    ],
+    mockupLines: [
+      {
+        title: "Cobranza y Rutas al Día",
+        subtitle: "Estado real de cuentas y despachos",
+        stat: "Control total",
+      },
+      {
+        title: "Pedido Móvil en Calle",
+        subtitle: "Funciona aunque caiga la señal",
+        stat: "Sin conexión",
+      },
+      {
+        title: "Precios USD / Bolívares",
+        subtitle: "Conversión clara en cada factura",
+        stat: "Exacto",
+      },
+    ],
+    metrics: [
+      { label: "Operación", value: "Continuidad total" },
+      { label: "Moneda", value: "Dólares y Bolívares" },
+      { label: "Enfoque", value: "Ventas B2B" },
+    ],
+  },
+  {
+    id: "redes-meta-ads",
+    tab: "web-marketing",
+    category: "Redes y Meta Ads",
+    shortLabel: "Instagram y Facebook",
+    title: "Redes Sociales & Meta Ads",
+    tagline:
+      "Gestión profesional de redes, diseño limpio y campañas pagadas para atraer clientes.",
+    summary:
+      "Servicio estratégico y operativo pensado para dueños de negocio que necesitan presencia constante y profesional en Instagram y Facebook sin dedicar horas improvisando publicaciones ni desperdiciando presupuesto en anuncios sin segmentación.",
+    problem:
+      "Publicar sin rumbo, con diseños desordenados o usando el botón promocionar sin estrategia termina generando poco alcance comercial y cero clientes calificados.",
+    solution:
+      "Estructuramos tu calendario mensual, diseñamos piezas visuales claras y alineadas a tu marca, gestionamos tu comunidad y configuramos campañas segmentadas en Meta Ads.",
+    gradient:
+      "linear-gradient(155deg, #ffc157 0%, #ff8400 45%, #ff8ee5 100%)",
+    accentColor: "#ff8400",
+    features: [
+      "Community Management",
+      "Diseño para Redes",
+      "Campañas Meta Ads",
+    ],
+    highlights: [
+      "Planificación mensual y grilla de contenido enfocada en ventas",
+      "Diseño gráfico limpio y funcional para feed, historias y portadas",
+      "Gestión diaria de comunidad, mensajes clave y coherencia de marca",
+      "Campañas publicitarias en Instagram y Facebook orientadas a consultas reales",
+    ],
+    mockupLines: [
+      {
+        title: "Calendario y Community",
+        subtitle: "Presencia activa y constante cada semana",
+        stat: "Instagram + FB",
+      },
+      {
+        title: "Diseño Gráfico Comercial",
+        subtitle: "Piezas claras que transmiten confianza",
+        stat: "Identidad visual",
+      },
+      {
+        title: "Campañas en Meta Ads",
+        subtitle: "Segmentación directa hacia clientes potenciales",
+        stat: "Consultas reales",
+      },
+    ],
+    metrics: [
+      { label: "Gestión", value: "Contenido y Pauta" },
+      { label: "Dirección", value: "Mercadeo y Estrategia" },
+      { label: "Objetivo", value: "Visibilidad y Ventas" },
+    ],
+  },
+  {
+    id: "glyphix-salud",
+    tab: "gestion",
+    category: "Gestión Clínica",
+    shortLabel: "Clínicas y Salud",
+    title: "Glyphix",
+    tagline:
+      "Historias clínicas, citas y control de consultorio privados y en orden.",
+    summary:
+      "Sistema pensado para consultorios y clínicas que necesitan organizar expedientes médicos, turnos y existencias de insumos sin depender de carpetas de papel.",
+    problem:
+      "Buscar historias en papel retrasa las consultas y dificulta llevar seguimiento ordenado de pacientes, recetas e inventario clínico.",
+    solution:
+      "Centralizamos pacientes, agenda e insumos en una interfaz limpia y rápida con resguardo privado y búsqueda inmediata.",
+    gradient:
+      "linear-gradient(160deg, #ff70e0 0%, #d559ff 50%, #9b4dff 100%)",
+    accentColor: "#d559ff",
+    features: ["Expediente Digital", "Agenda de Citas", "Privacidad Total"],
+    highlights: [
+      "Historial de pacientes organizado cronológicamente",
+      "Control de citas diarias y seguimiento entre consultas",
+      "Inventario de insumos médicos con alertas por reposición",
+      "Información resguardada bajo control exclusivo de tu clínica",
+    ],
+    mockupLines: [
+      {
+        title: "Expediente por Paciente",
+        subtitle: "Consultas previas al alcance de un clic",
+        stat: "Ordenado",
+      },
+      {
+        title: "Agenda y Recepción",
+        subtitle: "Turnos diarios sin solapamientos",
+        stat: "Flujo ágil",
+      },
+      {
+        title: "Control de Insumos",
+        subtitle: "Seguimiento claro de stock y salidas",
+        stat: "Sin quiebres",
+      },
+    ],
+    metrics: [
+      { label: "Enfoque", value: "Sector Salud" },
+      { label: "Acceso", value: "Búsqueda inmediata" },
+      { label: "Respaldo", value: "Privado y Seguro" },
+    ],
+  },
+  {
+    id: "sistema-pos-pyme",
+    tab: "gestion",
+    category: "Punto de Venta",
+    shortLabel: "Comercios y Tiendas",
+    title: "Sistema POS & Inventario",
+    tagline:
+      "Caja rápida, control de stock exacto y cierre diario transparente en dólares y bolívares.",
+    summary:
+      "Software de caja e inventario hecho para negocios comerciales que necesitan cobrar rápido, evitar pérdidas de mercancía y saber cuánto ganaron al final del día.",
+    problem:
+      "Las hojas de cálculo manuales generan errores de cobro, descuadres de caja al cierre y diferencias en la tasa cambiaria.",
+    solution:
+      "Caja visual intuitiva que suma pagos mixtos, descuenta mercancía al instante y entrega reportes diarios listos para imprimir.",
+    gradient:
+      "linear-gradient(155deg, #ffd166 0%, #ff9b21 48%, #ff6b6b 100%)",
+    accentColor: "#ff9b21",
+    features: ["Pagos Mixtos", "Caja sin Internet", "Cierre Diario PDF"],
+    highlights: [
+      "Cobra con efectivo, punto de venta, pago móvil o Zelle en una factura",
+      "Descuento inmediato de inventario con alerta de productos por agotarse",
+      "Cierre de caja en segundos con cálculo exacto de ganancias",
+      "Sigue facturando con normalidad incluso si falla el internet",
+    ],
+    mockupLines: [
+      {
+        title: "Facturación Rápida en Caja",
+        subtitle: "Cobra en varios métodos de pago sin trabas",
+        stat: "Multimoneda",
+      },
+      {
+        title: "Control de Mercancía",
+        subtitle: "Sabes qué queda y qué reponer hoy",
+        stat: "Stock real",
+      },
+      {
+        title: "Resumen para Gerencia",
+        subtitle: "Ventas, gastos y utilidades en PDF",
+        stat: "Cierre exacto",
+      },
+    ],
+    metrics: [
+      { label: "Disponibilidad", value: "Funciona offline" },
+      { label: "Cierre", value: "En segundos" },
+      { label: "Ideal para", value: "Tiendas y PyMEs" },
+    ],
+  },
+  {
+    id: "aerolex-global",
+    tab: "web-marketing",
+    category: "Web Comercial",
+    shortLabel: "Empresas y Servicios",
+    title: "AeroLex Global",
+    tagline:
+      "Presencia web corporativa diseñada para proyectar seriedad y captar cotizaciones.",
+    summary:
+      "Sitio web empresarial creado para presentar servicios complejos con claridad ejecutiva, elevar la confianza de nuevos clientes y convertir visitas en contactos comerciales.",
+    problem:
+      "Una empresa con gran trayectoria perdía contratos frente a competidores porque su web lucía anticuada, lenta o difícil de navegar en teléfono.",
+    solution:
+      "Diseñamos una vitrina digital rápida, clara y enfocada en que cualquier prospecto entienda el servicio y solicite cotización en segundos.",
+    gradient:
+      "linear-gradient(155deg, #4b83ff 0%, #6d59ff 50%, #ff8ee5 100%)",
+    accentColor: "#546dff",
+    features: ["Diseño Corporativo", "Adaptado a Móvil", "Captación de Leads"],
+    highlights: [
+      "Estructura clara que explica el valor del servicio desde el primer segundo",
+      "Botones y formularios directos hacia cotización y WhatsApp comercial",
+      "Navegación limpia pensada para clientes que revisan desde el teléfono",
+      "Base optimizada para posicionarse y acompañar pauta digital",
+    ],
+    mockupLines: [
+      {
+        title: "Propuesta Clara al Entrar",
+        subtitle: "El cliente entiende qué ofreces al instante",
+        stat: "Impacto inicial",
+      },
+      {
+        title: "Contacto Sin Fricción",
+        subtitle: "Solicitudes listas por correo o WhatsApp",
+        stat: "Más consultas",
+      },
+      {
+        title: "Imagen Corporativa Sólida",
+        subtitle: "Eleva el valor percibido de tu empresa",
+        stat: "Alta confianza",
+      },
+    ],
+    metrics: [
+      { label: "Objetivo", value: "Captar clientes" },
+      { label: "Experiencia", value: "Móvil y Escritorio" },
+      { label: "Resultado", value: "Imagen Profesional" },
+    ],
+  },
+  {
+    id: "suite-verticales",
+    tab: "web-marketing",
+    category: "Web + Operación",
+    shortLabel: "Tiendas, Gimnasios y Hoteles",
+    title: "Suite Comercial por Rubro",
+    tagline:
+      "Tu web comercial conectada con atención en redes y operación ordenada por industria.",
+    summary:
+      "Ecosistema digital adaptable según tu tipo de negocio: unimos imagen en línea, captación desde redes y herramientas de gestión diarias pensadas para cada rubro.",
+    problem:
+      "Tener la web por un lado, las redes por otro y los clientes anotados en libretas rompe la experiencia y hace perder ventas ya interesadas.",
+    solution:
+      "Integramos presencia web, estrategia en redes y módulos operativos hechos para tiendas, gimnasios, estudios y hoteles.",
+    gradient:
+      "linear-gradient(155deg, #5ce1e6 0%, #4b83ff 52%, #b56bff 100%)",
+    accentColor: "#4b83ff",
+    features: ["Catálogo Online", "Cobro de Planes", "Imagen Unificada"],
+    highlights: [
+      "Catálogo web o landing comercial conectada con pedidos por WhatsApp",
+      "Control de membresías, vencimientos y asistencias para gimnasios",
+      "Gestión visual de habitaciones, reservas y cobros para hoteles",
+      "Coherencia total entre lo que muestras en redes y cómo atiendes al cliente",
+    ],
+    mockupLines: [
+      {
+        title: "Tiendas y Catálogos",
+        subtitle: "Vitrina online + pedidos ordenados",
+        stat: "Venta ágil",
+      },
+      {
+        title: "Gimnasios y Centros",
+        subtitle: "Control de mensualidades y renovación",
+        stat: "Cero fugas",
+      },
+      {
+        title: "Hoteles y Posadas",
+        subtitle: "Reservas claras y recepción en orden",
+        stat: "Control diario",
+      },
+    ],
+    metrics: [
+      { label: "Integración", value: "Web + Redes + Gestión" },
+      { label: "Adaptación", value: "Según tu rubro" },
+      { label: "Crecimiento", value: "Escalable por etapas" },
+    ],
+  },
+];
 
 export interface ProcessStep {
   id: string;
   number: string;
   title: string;
+  badge: string;
   description: string;
   gradient: string;
-  badge: string;
+  mockupTag: string;
   mockupTitle: string;
   mockupBullets: string[];
-  mockupTag: string;
 }
 
-export interface CapabilityBadge {
-  label: string;
-  detail: string;
-}
+export const PROCESS_STEPS: ProcessStep[] = [
+  {
+    id: "diagnostico",
+    number: "01",
+    title: "Entendemos tu negocio y tus metas",
+    badge: "Sesión inicial",
+    description:
+      "Conversamos sobre cómo opera hoy tu empresa, qué te frena administrativamente o cómo quieres atraer más clientes por internet, redes y pauta.",
+    gradient:
+      "linear-gradient(135deg, #d7ecff 0%, #eaf5ff 55%, #f6fbff 100%)",
+    mockupTag: "Paso 01 · Diagnóstico",
+    mockupTitle: "Mapa claro de prioridades para tu empresa",
+    mockupBullets: [
+      "Identificamos fugas de tiempo, desorden en caja o fallas de visibilidad",
+      "Definimos qué resuelve software, qué resuelve tu web y qué impulsan tus redes",
+      "Propuesta transparente de alcance, tiempos y presupuesto sin tecnicismos",
+    ],
+  },
+  {
+    id: "construccion",
+    number: "02",
+    title: "Diseñamos y construimos a medida",
+    badge: "Avances semanales",
+    description:
+      "Trabajamos en paralelo la base digital: desarrollamos tu sistema o web comercial y damos forma a tu imagen visual y estrategia de contenido en Meta.",
+    gradient:
+      "linear-gradient(135deg, #e7ffd7 0%, #f1ffe6 55%, #fcfff9 100%)",
+    mockupTag: "Paso 02 · Ejecución",
+    mockupTitle: "Entregas visibles cada semana",
+    mockupBullets: [
+      "Pantallas intuitivas que tu equipo entiende desde el primer día",
+      "Línea gráfica coherente para web, Instagram y Facebook",
+      "Ajustes continuos con tus comentarios antes de salir al público",
+    ],
+  },
+  {
+    id: "lanzamiento",
+    number: "03",
+    title: "Lanzamiento, campañas y acompañamiento",
+    badge: "Puesta en marcha",
+    description:
+      "Dejamos el sistema o web operando con tu equipo capacitado, activamos la gestión de redes o campañas en Meta Ads y te acompañamos para seguir escalando.",
+    gradient:
+      "linear-gradient(135deg, #ffe7f7 0%, #fff0fa 55%, #fff9fd 100%)",
+    mockupTag: "Paso 03 · Crecimiento",
+    mockupTitle: "Tu negocio vendiendo con orden y respaldo",
+    mockupBullets: [
+      "Capacitación práctica incluida para todo tu personal",
+      "Seguimiento mensual de redes sociales, diseño y rendimiento en Meta Ads",
+      "Soporte directo con los cofundadores para nuevas etapas de crecimiento",
+    ],
+  },
+];
+
+export const CAPABILITY_BADGES = [
+  { label: "Funciona sin internet", detail: "Tu caja y pedidos nunca se paran" },
+  { label: "Redes sociales y Diseño", detail: "Presencia profesional en Instagram y FB" },
+  { label: "Campañas Meta Ads", detail: "Anuncios enfocados en atraer clientes" },
+  { label: "Multimoneda USD / Bs", detail: "Precios y cobranzas siempre claros" },
+  { label: "Reportes claros PDF", detail: "Cierres, ventas y resultados medibles" },
+  { label: "Respaldo directo", detail: "Acompañamiento real de principio a fin" },
+];
 
 export interface ScaleCategoryPill {
   label: string;
@@ -54,15 +476,78 @@ export interface ScaleCategoryPill {
   category: HeroCategory;
 }
 
+export const SCALE_CATEGORY_PILLS: ScaleCategoryPill[] = [
+  {
+    label: "sistemas de gestión",
+    bg: "#ff6ef2",
+    text: "#1a0418",
+    category: "Sistema a Medida",
+  },
+  {
+    label: "redes y Meta Ads",
+    bg: "#ff9b21",
+    text: "#1f0d00",
+    category: "Redes y Meta Ads",
+  },
+  {
+    label: "webs comerciales",
+    bg: "#9ef756",
+    text: "#0f2200",
+    category: "Web Comercial",
+  },
+  {
+    label: "planes integrales",
+    bg: "#7ce8ff",
+    text: "#00232b",
+    category: "Plan Integral",
+  },
+];
+
 export interface ServiceCardItem {
   id: string;
+  variant: "software" | "marketing" | "agency";
   title: string;
   description: string;
   ctaLabel: string;
   presetCategory: HeroCategory;
   presetBrief: string;
-  variant: "templates" | "ai" | "founder";
 }
+
+export const SERVICE_CARDS: ServiceCardItem[] = [
+  {
+    id: "software-web",
+    variant: "software",
+    title: "Software a Medida & Webs",
+    description:
+      "Sistemas de ventas, inventario, clínicas o distribuidoras que operan hasta sin internet, junto con webs corporativas pensadas para vender.",
+    ctaLabel: "Cotizar sistema o web",
+    presetCategory: "Sistema a Medida",
+    presetBrief:
+      "Hola equipo de Glyph Agency, queremos cotizar un sistema a medida o página web comercial para ordenar y hacer crecer nuestro negocio.",
+  },
+  {
+    id: "redes-meta",
+    variant: "marketing",
+    title: "Redes Sociales, Diseño & Meta Ads",
+    description:
+      "Gestión profesional como Community Manager, diseño limpio para tu marca y campañas segmentadas en Instagram y Facebook enfocadas en resultados.",
+    ctaLabel: "Impulsar mis redes",
+    presetCategory: "Redes y Meta Ads",
+    presetBrief:
+      "Hola equipo de Glyph Agency, nos interesa la gestión de redes sociales, diseño de contenido y campañas publicitarias en Instagram y Facebook.",
+  },
+  {
+    id: "plan-integral",
+    variant: "agency",
+    title: "Estrategia Integral Glyph",
+    description:
+      "Une imagen comercial, pauta en Meta, página web y control operativo interno bajo un mismo equipo directivo que entiende administración y tecnología.",
+    ctaLabel: "Solicitar plan integral",
+    presetCategory: "Plan Integral",
+    presetBrief:
+      "Hola equipo de Glyph Agency, queremos evaluar un plan integral que combine web o sistema interno con estrategia de redes y Meta Ads.",
+  },
+];
 
 export interface FaqItem {
   id: string;
@@ -70,395 +555,41 @@ export interface FaqItem {
   answer: string;
 }
 
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://khryazid-portfolio.vercel.app";
-
-export const PROFILE = {
-  name: "Khristian Ali",
-  handle: "@khryazid",
-  role: "Fundador de Glyph Agency — Desarrollador de Software & Soluciones Digitales para Empresas",
-  location: "Venezuela · Atención Remota",
-  githubUrl: "https://github.com/khryazid",
-  linkedinUrl: "https://www.linkedin.com/in/khyazid",
-  xUrl: "https://x.com/khr_yazid",
-  instagramUrl: "https://www.instagram.com/khryazid",
-};
-
-export const HERO_TYPEWRITER_EXAMPLES = [
-  "Un sistema para controlar ventas, inventario, crédito y cobranzas en varias monedas...",
-  "Una página web profesional que atraiga clientes y cotice nuestros servicios al instante...",
-  "Automatizar lectura de facturas, citas o atención al cliente con inteligencia artificial...",
-  "Un portal donde mis vendedores tomen pedidos en la calle aunque se caiga el internet...",
-];
-
-export const HERO_CATEGORY_PILLS: HeroCategory[] = [
-  "Sistema a Medida",
-  "Web Comercial",
-  "Automatización e IA",
-];
-
-export const PROJECTS: ProjectItem[] = [
-  {
-    id: "glyphcore",
-    title: "GlyphCore B2B",
-    shortLabel: "Distribuidoras y Mayoristas",
-    tagline:
-      "Plataforma comercial completa para controlar pedidos, vendedores en ruta, crédito y cobranzas sin depender del internet.",
-    category: "Sistema Empresarial",
-    tab: "gestion",
-    gradient: "linear-gradient(145deg, #ff8400 0%, #ff8ee5 52%, #d559ff 100%)",
-    summary:
-      "Sistema integral para distribuidoras y comercios mayoristas con cuatro espacios independientes: compradores, vendedores en calle, gerencia del comercio y administración global.",
-    problem:
-      "Muchas distribuidoras pierden ventas cuando sus vendedores se quedan sin señal en ruta, cometen errores al manejar USD/Bs/COP y sufren desorden entre lo pedido, lo despachado y lo cobrado.",
-    solution:
-      "Una plataforma lista para funcionar desde el teléfono o computadora incluso sin conexión, con reglas claras de crédito, aprobación parcial de pedidos, control de rutas y estados de cuenta en PDF con un clic.",
-    highlights: [
-      "4 accesos independientes: Comprador, Vendedor en Ruta, Comercio y Dirección",
-      "Repetición de pedidos en 1 clic y lista diaria priorizada por cliente",
-      "Manejo exacto de múltiples monedas (USD / Bs / COP) y abonos parciales",
-      "Estados de cuenta, recibos y reportes listos para imprimir o enviar",
-    ],
-    metrics: [
-      { label: "Áreas cubiertas", value: "4 portales" },
-      { label: "Monedas", value: "USD / Bs / COP" },
-      { label: "Operación", value: "Con y sin señal" },
-    ],
-    features: ["Pedidos sin internet", "Crédito y cobranzas", "Reportes PDF"],
-    mockupLines: [
-      { title: "Panel del Comercio", subtitle: "Aprobación y despacho de pedidos", stat: "$14,820" },
-      { title: "Ruta de Vendedores", subtitle: "12 clientes asignados hoy", stat: "Al día" },
-      { title: "Cuentas por Cobrar", subtitle: "Abonos y límite de crédito", stat: "Controlado" },
-    ],
-  },
-  {
-    id: "glyphix",
-    title: "Glyphix",
-    shortLabel: "Clínicas y Consultorios",
-    tagline:
-      "Sistema de gestión clínica e historias médicas que sigue trabajando aunque falle la conexión de tu centro de salud.",
-    category: "Salud & Clínicas",
-    tab: "gestion",
-    gradient: "linear-gradient(145deg, #ff70b8 0%, #cf67ff 55%, #7c6bff 100%)",
-    summary:
-      "Plataforma diseñada para consultorios independientes y redes de clínicas: agenda en vivo, historias clínicas rápidas, asistente inteligente de apoyo médico y control de caja por turnos.",
-    problem:
-      "Cuando falla el internet en una clínica, la recepción y los doctores se frenan, se duplican citas y el historial del paciente queda disperso entre papeles y archivos sueltos.",
-    solution:
-      "Una herramienta médica que guarda cada consulta al instante en el equipo y sincroniza automáticamente al volver la red, protegiendo la privacidad de cada sede y permitiendo exportar expedientes completos.",
-    highlights: [
-      "Accesos diferenciados para dueño, médicos, asistentes y laboratorio",
-      "Agenda actualizada en tiempo real y control estricto de caja por turno",
-      "Apoyo inteligente para agilizar diagnósticos y notas de consulta",
-      "Descarga inmediata de récipes, informes y expedientes completos",
-    ],
-    metrics: [
-      { label: "Atención", value: "Sin interrupciones" },
-      { label: "Perfiles", value: "8 roles claros" },
-      { label: "Expedientes", value: "PDF al instante" },
-    ],
-    features: ["Historias clínicas", "Agenda y caja", "Multisede privado"],
-    mockupLines: [
-      { title: "Consulta Médica", subtitle: "Guardado instantáneo en equipo", stat: "En línea" },
-      { title: "Asistente de Consulta", subtitle: "Apoyo rápido en diagnósticos", stat: "Activo" },
-      { title: "Caja y Suscripciones", subtitle: "Cierre de turno ordenado", stat: "Auditado" },
-    ],
-  },
-  {
-    id: "pos-bimonetario",
-    title: "Sistema POS & Inventario",
-    shortLabel: "Comercios y Tiendas",
-    tagline:
-      "Punto de venta, inventario inteligente, cotizaciones y lectura automática de facturas en varias monedas.",
-    category: "Comercio & Retail",
-    tab: "gestion",
-    gradient: "linear-gradient(145deg, #b9f442 0%, #ffe657 55%, #ff9b42 100%)",
-    summary:
-      "Sistema administrativo pensado para tiendas y negocios con alto movimiento: facturación ágil, control real de inventario, ventas a crédito y cierres de caja X/Z transparentes.",
-    problem:
-      "Cargar facturas de proveedores a mano toma horas y cualquier descuido con el cambio de moneda termina comiéndose el margen de ganancia del negocio.",
-    solution:
-      "Un punto de venta rápido que calcula automáticamente precios y márgenes por tasa, lee facturas con inteligencia artificial para cargar mercancía en segundos y envía recibos por WhatsApp.",
-    highlights: [
-      "Ventas al contado o a crédito con alertas cuando un cliente supera su límite",
-      "Carga inteligente de facturas desde foto o PDF para actualizar costos y stock",
-      "Cotizaciones profesionales en PDF que se convierten en venta con 1 clic",
-      "Cierre de turno X/Z con gastos del día y utilidad neta real",
-    ],
-    metrics: [
-      { label: "Precios", value: "USD y Bs" },
-      { label: "Carga facturas", value: "Automática" },
-      { label: "Recibos", value: "80mm y WhatsApp" },
-    ],
-    features: ["Punto de venta rápido", "Lectura de facturas", "Cierre X / Z"],
-    mockupLines: [
-      { title: "Caja y Facturación", subtitle: "Conversión automática al cobro", stat: "BCV / Ref" },
-      { title: "Carga de Compras", subtitle: "Lectura inteligente de factura", stat: "-80% tiempo" },
-      { title: "Cierre del Día", subtitle: "Ventas, gastos y utilidad neta", stat: "Cuadrado" },
-    ],
-  },
-  {
-    id: "suite-comercial",
-    title: "Suite Comercial por Rubro",
-    shortLabel: "Negocios de Servicios",
-    tagline:
-      "Soluciones listas para barberías, clínicas dentales, ferreterías, concesionarios y agroindustria con reservas y cotizaciones.",
-    category: "Sistema Empresarial",
-    tab: "gestion",
-    gradient: "linear-gradient(145deg, #a7f34d 0%, #5eead4 50%, #7dd3fc 100%)",
-    summary:
-      "Ecosistema de aplicaciones comerciales enfocadas en captar clientes y ordenar la operación diaria de pymes: reservas 24/7 sin choques de horario, cotizadores mayoristas y seguimiento de prospectos.",
-    problem:
-      "Muchos negocios atienden citas, presupuestos y clientes por notas sueltas o mensajes perdidos en WhatsApp, dejando dinero sobre la mesa por falta de seguimiento.",
-    solution:
-      "Herramientas simples y directas adaptadas a cada rubro: agenda que bloquea horarios ocupados, cotizadores instantáneos con PDF, alertas de seguimiento comercial y reportes claros para gerencia.",
-    highlights: [
-      "Agenda de citas 24/7 con recordatorios automáticos por WhatsApp",
-      "Cotizador comercial y portal postventa con historial por cliente",
-      "Tablero de oportunidades para no olvidar ningún presupuesto enviado",
-      "Propuestas comerciales en PDF listas para entregar al cliente",
-    ],
-    metrics: [
-      { label: "Rubros listos", value: "4 verticales" },
-      { label: "Reservas", value: "24/7 sin choques" },
-      { label: "Presupuestos", value: "PDF + WhatsApp" },
-    ],
-    features: ["Agenda de citas", "Cotizador rápido", "Control de clientes"],
-    mockupLines: [
-      { title: "Agenda de Citas", subtitle: "Reservas web sin choques de hora", stat: "24/7" },
-      { title: "Cotizador Comercial", subtitle: "Lista mayorista y envío directo", stat: "1 clic" },
-      { title: "Seguimiento de Ventas", subtitle: "Alertas y tablero comercial", stat: "Ordenado" },
-    ],
-  },
-  {
-    id: "aerolex-global",
-    title: "AeroLex Global",
-    shortLabel: "Firma Legal & Brokerage",
-    tagline:
-      "Web corporativa premium, calculadora de costos y portal privado para firma aeronáutica internacional.",
-    category: "Plataforma Web",
-    tab: "web-apps",
-    gradient: "linear-gradient(145deg, #93c5fd 0%, #818cf8 52%, #e879f9 100%)",
-    summary:
-      "Presencia digital de alto nivel diseñada para transmitir autoridad desde el primer segundo, explicar servicios complejos de forma clara y captar clientes calificados.",
-    problem:
-      "Los clientes de alto valor descartan servicios profesionales cuando la web luce anticuada o no les permite estimar costos y agendar una asesoría sin vueltas.",
-    solution:
-      "Sitio web editorial con recorrido interactivo por pilares de servicio, calculadora operativa en vivo, página dedicada de inspecciones, catálogo exclusivo y acceso directo a WhatsApp.",
-    highlights: [
-      "Diseño moderno pensado para generar confianza inmediata en clientes exigentes",
-      "Calculadora interactiva de costos y estimación de operaciones",
-      "Catálogo de oportunidades privadas con ficha de detalles",
-      "Panel interno para actualizar inventario y contenido sin programar",
-    ],
-    metrics: [
-      { label: "Enfoque", value: "Captación B2B" },
-      { label: "Herramienta", value: "Calculadora" },
-      { label: "Gestión", value: "Autoadministrable" },
-    ],
-    features: ["Web corporativa", "Calculadora en vivo", "Portal de clientes"],
-    mockupLines: [
-      { title: "Recorrido de Servicios", subtitle: "Presentación ejecutiva clara", stat: "4 pilares" },
-      { title: "Calculadora Operativa", subtitle: "Estimación inmediata de costos", stat: "Interactiva" },
-      { title: "Catálogo Privado", subtitle: "Consultas y agenda directa", stat: "Calificado" },
-    ],
-  },
-  {
-    id: "nova-movride",
-    title: "Nova / MOVRIDE",
-    shortLabel: "Delivery y Movilidad",
-    tagline:
-      "Superapp de pedidos, comercios locales y traslados con pantallas separadas para cliente, tienda y repartidor.",
-    category: "App Móvil",
-    tab: "web-apps",
-    gradient: "linear-gradient(145deg, #ffd15c 0%, #ff8400 55%, #ff5c8a 100%)",
-    summary:
-      "Experiencia completa de aplicación móvil para validar modelos de delivery, comercio local y movilidad urbana, integrando todo el recorrido desde el pedido hasta la entrega.",
-    problem:
-      "Presentar una idea de negocio móvil ante socios o inversionistas con diapositivas estáticas no transmite cómo funciona realmente la operación.",
-    solution:
-      "Prototipo funcional navegable con vista de cliente, portal para comercios afiliados, aplicación de conductor y panel central de monitoreo en tiempo real.",
-    highlights: [
-      "Flujo completo de compra: catálogo, carrito, pago y seguimiento en ruta",
-      "Módulo de traslados urbanos con selección de ruta y flota",
-      "Vistas dedicadas para comercios aliados, conductores y administración",
-      "Diseño pensado 100% para usarse con una mano desde el celular",
-    ],
-    metrics: [
-      { label: "Ecosistema", value: "4 perfiles" },
-      { label: "Pantallas", value: "20+ flujos" },
-      { label: "Experiencia", value: "100% Móvil" },
-    ],
-    features: ["Pedidos y delivery", "Panel de comercios", "App de conductor"],
-    mockupLines: [
-      { title: "App del Cliente", subtitle: "Tiendas, carrito y seguimiento", stat: "Fluido" },
-      { title: "Portal de Aliados", subtitle: "Gestión de órdenes y menú", stat: "Tiempo real" },
-      { title: "Panel Central", subtitle: "Control de entregas y flota", stat: "Visión 360°" },
-    ],
-  },
-];
-
-export const PROCESS_STEPS: ProcessStep[] = [
-  {
-    id: "step-diagnosis",
-    number: "01",
-    title: "Entiendo tu operación antes de construir",
-    description:
-      "Primero revisamos cómo vendes, cobras y controlas tu negocio hoy. El software se adapta a tu flujo real, no al revés.",
-    gradient: "linear-gradient(140deg, #ff8400 0%, #ff8ee5 100%)",
-    badge: "Paso 01 · Diagnóstico",
-    mockupTitle: "Mapa Claro de Tu Negocio",
-    mockupBullets: [
-      "Identificamos cuellos de botella en ventas, caja o inventario",
-      "Definimos permisos claros para dueños, vendedores y personal",
-      "Te muestro una propuesta concreta con alcance y tiempos reales",
-    ],
-    mockupTag: "Sin rodeos",
-  },
-  {
-    id: "step-resilience",
-    number: "02",
-    title: "Sistemas pensados para el mundo real",
-    description:
-      "Si en tu zona falla la luz o el internet, tu operación no puede parar. Construyo herramientas rápidas que siguen trabajando contigo.",
-    gradient: "linear-gradient(140deg, #ff70b8 0%, #a855f7 100%)",
-    badge: "Paso 02 · Continuidad",
-    mockupTitle: "Tu Negocio No Se Detiene",
-    mockupBullets: [
-      "Registra ventas y pedidos incluso sin conexión a internet",
-      "Control exacto de precios y cobranzas en varias monedas",
-      "Cada sucursal y dato comercial protegido y separado",
-    ],
-    mockupTag: "Cero pausas",
-  },
-  {
-    id: "step-ai",
-    number: "03",
-    title: "Automatización práctica que ahorra horas",
-    description:
-      "Uso inteligencia artificial donde realmente genera retorno: leer facturas en segundos, agilizar cotizaciones y responder más rápido.",
-    gradient: "linear-gradient(140deg, #bef264 0%, #ffb347 100%)",
-    badge: "Paso 03 · Automatización",
-    mockupTitle: "Menos Trabajo Manual",
-    mockupBullets: [
-      "Carga de productos y facturas sin transcribir línea por línea",
-      "Presupuestos, recibos y reportes en PDF generados al instante",
-      "Integración directa con WhatsApp, correo y pagos online",
-    ],
-    mockupTag: "Ahorro diario",
-  },
-  {
-    id: "step-launch",
-    number: "04",
-    title: "Avances visibles cada semana y soporte directo",
-    description:
-      "Vas viendo y probando avances reales desde un enlace privado cada semana, hasta dejar el sistema listo con tu equipo.",
-    gradient: "linear-gradient(140deg, #7dd3fc 0%, #c084fc 100%)",
-    badge: "Paso 04 · Lanzamiento",
-    mockupTitle: "Acompañamiento Completo",
-    mockupBullets: [
-      "Pruebas reales en celular y computadora antes de salir en vivo",
-      "Capacitación práctica para que tu equipo lo use sin miedo",
-      "Soporte cercano para nuevas mejoras conforme crece tu empresa",
-    ],
-    mockupTag: "Trato directo",
-  },
-];
-
-export const CAPABILITY_BADGES: CapabilityBadge[] = [
-  { label: "Sigue sin internet", detail: "Ventas y pedidos en ruta" },
-  { label: "Varias monedas", detail: "USD, Bolívares y Pesos" },
-  { label: "Reportes PDF", detail: "Facturas y estados de cuenta" },
-  { label: "Automatización IA", detail: "Menos carga manual" },
-  { label: "Control por roles", detail: "Cada quien ve lo suyo" },
-  { label: "Celular y PC", detail: "Rápido desde cualquier lugar" },
-];
-
-export const SCALE_CATEGORY_PILLS: ScaleCategoryPill[] = [
-  { label: "un sistema de ventas y stock", bg: "#cf67ff", text: "#ffffff", category: "Sistema a Medida" },
-  { label: "una web que atraiga clientes", bg: "#9ed0ff", text: "#0a0a0a", category: "Web Comercial" },
-  { label: "automatizaciones con IA", bg: "#c8f552", text: "#0a0a0a", category: "Automatización e IA" },
-  { label: "una app para tus vendedores", bg: "#ff9b42", text: "#0a0a0a", category: "Sistema a Medida" },
-];
-
-export const SERVICE_CARDS: ServiceCardItem[] = [
-  {
-    id: "custom-systems",
-    title: "Sistemas a medida para tu empresa",
-    description:
-      "Digitalizo tu operación con herramientas hechas para tu forma de trabajar: inventario, ventas, crédito, cobranzas, clínicas o pedidos.",
-    ctaLabel: "Cotizar sistema",
-    presetCategory: "Sistema a Medida",
-    presetBrief:
-      "Hola Khristian, me gustaría cotizar un sistema a medida para ordenar las ventas, inventario o gestión de mi negocio.",
-    variant: "templates",
-  },
-  {
-    id: "ai-automation",
-    title: "Webs y automatización inteligente",
-    description:
-      "Sitios web que transmiten confianza y herramientas con IA para leer documentos, agilizar cotizaciones y atender clientes más rápido.",
-    ctaLabel: "Explorar solución",
-    presetCategory: "Automatización e IA",
-    presetBrief:
-      "Hola Khristian, quiero una web comercial o automatizar tareas repetitivas en mi negocio con inteligencia artificial.",
-    variant: "ai",
-  },
-  {
-    id: "founder-direct",
-    title: "Trato directo sin intermediarios",
-    description:
-      "Hablas directamente conmigo de principio a fin: analizamos tu necesidad, ves avances semanales y lanzamos sin burocracia.",
-    ctaLabel: "Conversar ahora",
-    presetCategory: "Asesoría Digital",
-    presetBrief:
-      "Hola Khristian, me gustaría conversar directamente contigo sobre cómo mejorar la parte digital de mi empresa.",
-    variant: "founder",
-  },
-];
-
 export const FAQ_ITEMS: FaqItem[] = [
   {
-    id: "faq-1",
-    question: "¿Qué tipo de proyectos desarrollas para negocios y empresas?",
+    id: "faq-servicios",
+    question: "¿Puedo contratar solo redes sociales o solo software, o ambos juntos?",
     answer:
-      "Desde páginas web de alto impacto para captar clientes hasta sistemas completos de punto de venta, control de inventario, gestión de clínicas, plataformas de pedidos para distribuidoras y automatizaciones con inteligencia artificial.",
+      "Sí. Cada área funciona de forma independiente según lo que tu empresa necesite hoy: puedes contratar únicamente la gestión de redes sociales, diseño y pauta en Meta Ads, únicamente tu web o sistema de gestión, o combinar ambos frentes en un plan integral.",
   },
   {
-    id: "faq-2",
-    question: "¿Qué diferencia hay entre contratar un sistema a medida y usar uno genérico?",
+    id: "faq-redes-meta",
+    question: "¿Qué incluye el servicio de Redes Sociales y Meta Ads?",
     answer:
-      "Un sistema genérico te obliga a cambiar la forma en que trabajas y te cobra mensualidades por usuario para siempre. Un sistema a medida se construye alrededor de tus reglas reales (monedas, comisiones, créditos, sucursales) y crece contigo.",
+      "Trabajamos planificación estratégica de contenido, gestión diaria como Community Manager, diseño gráfico limpio adaptado a tu marca para Instagram y Facebook, y montaje de campañas pagadas en Meta Ads segmentadas para generar conversaciones y prospectos reales.",
   },
   {
-    id: "faq-3",
-    question: "¿Los sistemas sirven si en mi negocio o tienda falla el internet?",
+    id: "faq-offline",
+    question: "¿Los sistemas siguen funcionando si falla la conexión a internet?",
     answer:
-      "Sí. Varios de los sistemas que desarrollo están preparados para seguir registrando pedidos, consultas o ventas cuando se cae la conexión y actualizar todo automáticamente en cuanto vuelve la señal.",
+      "Sí. Diseñamos los sistemas de punto de venta, inventario y toma de pedidos para que tu equipo siga cobrando y registrando operaciones con normalidad sin internet, actualizándose de forma automática cuando vuelve la señal.",
   },
   {
-    id: "faq-4",
-    question: "¿Puedo ver avances antes de que el proyecto esté terminado?",
+    id: "faq-monedas",
+    question: "¿Se adaptan al manejo de dólares, bolívares y pagos mixtos?",
     answer:
-      "Sí, siempre. Trabajo con entregas semanales en un enlace privado de pruebas para que revises pantallas reales desde tu teléfono o computadora y hagamos ajustes sobre la marcha.",
+      "Totalmente. El cálculo multimoneda, las tasas diarias, las cuentas por cobrar y los pagos combinados en efectivo, punto o transferencia forman parte natural de nuestras soluciones para negocios.",
   },
   {
-    id: "faq-5",
-    question: "¿Incluyes diseño y textos o debo tener todo listo antes de empezar?",
+    id: "faq-tiempos",
+    question: "¿En cuánto tiempo podemos ver resultados o empezar a operar?",
     answer:
-      "No necesitas tenerlo todo resuelto. Te ayudo a aterrizar la estructura, los flujos, el diseño visual y los textos clave enfocados en lo que tus clientes necesitan entender para comprarte o usar tu herramienta.",
+      "Una campaña de redes y presencia comercial puede activarse en los primeros días tras definir la estrategia. Una página web comercial o sistema a medida toma entre 2 y 6 semanas según el alcance, siempre con avances visibles cada semana.",
   },
   {
-    id: "faq-6",
-    question: "¿Cómo manejan múltiples monedas como dólares, bolívares o pesos?",
+    id: "faq-remoto",
+    question: "¿Atienden negocios fuera de Venezuela?",
     answer:
-      "Los sistemas comerciales contemplan tasas configurables, precios en varias divisas, registro exacto de abonos y reportes claros para que nunca pierdas control del margen ni tengas descuadres en caja.",
-  },
-  {
-    id: "faq-7",
-    question: "¿Cuánto tiempo toma tener una primera versión lista para usar?",
-    answer:
-      "Una web comercial moderna suele estar lista en 1 a 2 semanas. Un sistema administrativo o plataforma comercial completa toma normalmente entre 4 y 8 semanas según la cantidad de módulos y roles.",
+      "Sí. Trabajamos de forma remota con empresas y comercios en Venezuela y el exterior, adaptando horarios, monedas, flujos comerciales y tono de marca a cada mercado.",
   },
 ];

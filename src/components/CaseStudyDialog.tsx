@@ -81,7 +81,11 @@ export function CaseStudyDialog({
   const titleId = project ? `case-study-title-${project.id}` : "case-study-title";
 
   const targetCategory: HeroCategory =
-    project?.tab === "web-apps" ? "Web Comercial" : "Sistema a Medida";
+    project?.id === "redes-meta-ads"
+      ? "Redes y Meta Ads"
+      : project?.tab === "web-marketing"
+      ? "Web Comercial"
+      : "Sistema a Medida";
 
   return (
     <dialog
@@ -195,13 +199,13 @@ export function CaseStudyDialog({
 
             <div className="flex flex-wrap items-center justify-between gap-3 border-t border-zinc-200/80 pt-5">
               <span className="text-xs text-[#737373]">
-                Demo en vivo disponible bajo solicitud para tu empresa.
+                Propuesta y demostración personalizada para tu empresa.
               </span>
 
               <button
                 type="button"
                 onClick={() => {
-                  const brief = `Hola Khristian, me gustó la solución ${project.title} y quiero ver cómo adaptarla para mi negocio.`;
+                  const brief = `Hola equipo de Glyph Agency, nos gustó la solución ${project.title} y queremos ver cómo adaptarla para nuestro negocio.`;
                   dialogRef.current?.close();
                   onRequestSimilar({ category: targetCategory, brief });
                 }}

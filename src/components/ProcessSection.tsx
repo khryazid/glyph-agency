@@ -54,12 +54,12 @@ export function ProcessSection() {
         <div className="mb-14 max-w-2xl">
           <SplitHeadline
             as="h2"
-            text="De tu idea a un sistema funcionando"
+            text="De tu objetivo a clientes y operación en orden"
             className="text-[clamp(2rem,4.4vw,3.35rem)] font-semibold tracking-[-0.03em] leading-[1.02] text-[#18181b]"
           />
           <p className="mt-4 text-base text-[#52525b]">
             Un proceso claro, sin palabras enredadas ni sorpresas: ves avances
-            reales cada semana hasta que tu equipo lo domina.
+            reales cada semana en tecnología, diseño y estrategia comercial.
           </p>
         </div>
 

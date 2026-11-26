@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Instrument_Sans, Inter, JetBrains_Mono } from "next/font/google";
-import { PROFILE, SITE_URL } from "@/data/portfolio";
+import { AGENCY, COFOUNDERS, SITE_URL } from "@/data/portfolio";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -27,37 +27,38 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Khristian Ali — Fundador de Glyph Agency | Software y Soluciones Digitales",
-    template: "%s | Khristian Ali",
+    default: "Glyph Agency — Software a Medida, Webs Comerciales, Redes Sociales y Meta Ads",
+    template: "%s | Glyph Agency",
   },
   description:
-    "Desarrollo software a medida, sistemas de ventas e inventario, plataformas web y automatizaciones con IA para negocios y empresas. Fundador de Glyph Agency.",
+    "Agencia digital enfocada en negocios y empresas: sistemas de ventas e inventario, páginas web comerciales, Community Management, diseño para redes y campañas en Meta Ads.",
   keywords: [
-    "Khristian Ali",
     "Glyph Agency",
     "Software para empresas",
     "Sistemas a medida",
     "Páginas web comerciales",
+    "Community Management",
+    "Redes sociales para empresas",
+    "Meta Ads",
+    "Publicidad en Instagram y Facebook",
     "Punto de venta",
-    "Automatización con IA",
-    "Portafolio",
   ],
-  authors: [{ name: "Khristian Ali", url: PROFILE.linkedinUrl }],
+  authors: COFOUNDERS.map((c) => ({ name: c.name, url: c.linkedinUrl })),
   openGraph: {
     type: "website",
     locale: "es_ES",
     url: SITE_URL,
-    siteName: "Khristian Ali — Glyph Agency",
-    title: "Khristian Ali — Software que ordena y hace crecer tu negocio",
+    siteName: "Glyph Agency",
+    title: "Glyph Agency — Atrae clientes, ordena tu negocio y escala",
     description:
-      "Sistemas a medida, webs que atraen clientes y automatización práctica para empresas y negocios.",
+      "Sistemas a medida, webs que convierten, gestión profesional de redes sociales y publicidad en Meta Ads para negocios y empresas.",
   },
   twitter: {
     card: "summary_large_image",
     creator: "@khr_yazid",
-    title: "Khristian Ali — Fundador de Glyph Agency",
+    title: "Glyph Agency — Software, Webs Comerciales y Redes Sociales",
     description:
-      "Desarrollo software, sistemas de gestión, webs comerciales y automatizaciones para negocios.",
+      "Software a medida, presencia web comercial, Community Management y campañas en Meta Ads para empresas.",
   },
 };
 
@@ -66,21 +67,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const personJsonLd = {
+  const organizationJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: PROFILE.name,
-    jobTitle: "Fundador y Desarrollador de Software",
-    worksFor: {
-      "@type": "Organization",
-      name: "Glyph Agency",
-    },
+    "@type": "Organization",
+    name: AGENCY.name,
+    description: AGENCY.tagline,
     url: SITE_URL,
+    founder: COFOUNDERS.map((person) => ({
+      "@type": "Person",
+      name: person.name,
+      jobTitle: person.role,
+      sameAs: person.linkedinUrl,
+    })),
     sameAs: [
-      PROFILE.linkedinUrl,
-      PROFILE.xUrl,
-      PROFILE.instagramUrl,
-      PROFILE.githubUrl,
+      AGENCY.linkedinUrl,
+      AGENCY.danielaLinkedinUrl,
+      AGENCY.xUrl,
+      AGENCY.instagramUrl,
+      AGENCY.githubUrl,
     ],
   };
 
@@ -95,7 +99,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-[#fafafa] text-[#18181b] selection:bg-[#ffc157]/40 selection:text-[#18181b]">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         {children}
       </body>

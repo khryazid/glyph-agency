@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AlertCircle, ArrowUpRight, CheckCircle2, Mail, Send } from "lucide-react";
-import { PROFILE, type HeroCategory } from "@/data/portfolio";
+import { AGENCY, type HeroCategory } from "@/data/portfolio";
 import { SplitHeadline } from "./SplitHeadline";
 
 interface ContactSectionProps {
@@ -16,8 +16,8 @@ interface ContactSectionProps {
 const CATEGORIES: HeroCategory[] = [
   "Sistema a Medida",
   "Web Comercial",
-  "Automatización e IA",
-  "Asesoría Digital",
+  "Redes y Meta Ads",
+  "Plan Integral",
 ];
 
 export function ContactSection({
@@ -217,7 +217,7 @@ export function ContactSection({
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, "");
   const whatsappUrl = whatsappNumber
     ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-        `Hola Khristian, te escribo desde tu web (${category}).`
+        `Hola equipo de Glyph Agency, les escribo desde su web (${category}).`
       )}`
     : null;
 
@@ -236,7 +236,7 @@ export function ContactSection({
         <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
           <div className="text-[#18181b] lg:col-span-5">
             <span className="inline-flex items-center rounded-full bg-white/85 px-3 py-1 text-xs font-semibold text-[#18181b] shadow-2xs">
-              Disponible para nuevos proyectos
+              Glyph Agency · Agenda abierta
             </span>
             <SplitHeadline
               as="h2"
@@ -244,8 +244,9 @@ export function ContactSection({
               className="mt-5 text-[clamp(2rem,4.2vw,3.15rem)] font-semibold tracking-[-0.03em] leading-[1.0] text-[#18181b]"
             />
             <p className="mt-4 text-sm leading-relaxed text-[#18181b]/85 sm:text-base">
-              Cuéntame qué necesitas ordenar, vender o automatizar en tu empresa.
-              Te respondo directamente con una propuesta clara y sin vueltas.
+              Cuéntanos qué necesitas ordenar en tu operación o impulsar en tus
+              redes sociales y web. Te respondemos directamente con una propuesta
+              clara y sin vueltas.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-2.5">
@@ -261,7 +262,7 @@ export function ContactSection({
                 </a>
               ) : null}
               <a
-                href={PROFILE.linkedinUrl}
+                href={AGENCY.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 text-xs font-semibold transition-colors ${
@@ -270,7 +271,16 @@ export function ContactSection({
                     : "bg-[#171717] text-white hover:bg-black"
                 }`}
               >
-                LinkedIn
+                LinkedIn · Software
+                <ArrowUpRight className="size-3.5" aria-hidden="true" />
+              </a>
+              <a
+                href={AGENCY.danielaLinkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-4 py-2.5 text-xs font-semibold text-[#18181b] transition-colors hover:bg-white"
+              >
+                LinkedIn · Mercadeo
                 <ArrowUpRight className="size-3.5" aria-hidden="true" />
               </a>
             </div>
@@ -285,11 +295,11 @@ export function ContactSection({
                 <h3 className="text-xl font-semibold text-[#18181b]">
                   {activeResult.delivery === "resend"
                     ? "Mensaje enviado correctamente"
-                    : "Consulta lista — elige cómo enviármela directo"}
+                    : "Consulta lista — elige cómo enviárnosla directo"}
                 </h3>
                 <p className="text-sm leading-relaxed text-[#52525b]">
                   {activeResult.delivery === "resend"
-                    ? "Gracias por escribir. Revisaré tu mensaje y te responderé muy pronto."
+                    ? "Gracias por escribir a Glyph Agency. Revisaremos tu consulta y te responderemos muy pronto."
                     : "Tu mensaje quedó validado correctamente. Puedes enviarlo ahora por LinkedIn, WhatsApp o abrir tu app de correo."}
                 </p>
                 <div className="flex flex-wrap gap-2.5 pt-2">
@@ -314,12 +324,21 @@ export function ContactSection({
                     </a>
                   ) : null}
                   <a
-                    href={PROFILE.linkedinUrl}
+                    href={AGENCY.linkedinUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 rounded-full bg-[#171717] px-5 py-2.5 text-xs font-semibold text-white"
                   >
-                    Enviar por LinkedIn
+                    LinkedIn · Software
+                    <ArrowUpRight className="size-3.5" aria-hidden="true" />
+                  </a>
+                  <a
+                    href={AGENCY.danielaLinkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-zinc-300 bg-white px-5 py-2.5 text-xs font-semibold text-[#18181b]"
+                  >
+                    LinkedIn · Mercadeo
                     <ArrowUpRight className="size-3.5" aria-hidden="true" />
                   </a>
                   <button
@@ -438,7 +457,7 @@ export function ContactSection({
                     htmlFor="contact-message"
                     className="block text-xs font-semibold text-[#18181b]"
                   >
-                    Cuéntame sobre tu negocio o proyecto
+                    Cuéntanos sobre tu negocio o proyecto
                   </label>
                   <span id="contact-message-hint" className="block text-[11px] text-[#737373]">
                     Mínimo 15 caracteres con el objetivo principal.
@@ -451,7 +470,7 @@ export function ContactSection({
                     minLength={15}
                     aria-describedby="contact-message-hint"
                     data-error="contact-message-error"
-                    placeholder="Ej: Quiero un sistema para controlar ventas, inventario y cuentas por cobrar en dólares y bolívares..."
+                    placeholder="Ej: Queremos gestionar nuestras redes y pauta en Meta Ads, o implementar un sistema de ventas e inventario..."
                     value={message}
                     onChange={(e) => onMessageChange(e.target.value)}
                     className="field-control mt-1 w-full resize-y rounded-xl border border-zinc-200 bg-[#fafafa] px-3.5 py-2.5 text-sm text-[#18181b] placeholder:text-zinc-400"

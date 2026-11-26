@@ -10,9 +10,9 @@ interface ProjectsShowcaseProps {
 }
 
 const TABS: { id: ProjectTab; label: string }[] = [
-  { id: "all", label: "Todos" },
+  { id: "all", label: "Todas" },
   { id: "gestion", label: "Sistemas de Gestión" },
-  { id: "web-apps", label: "Webs y Apps" },
+  { id: "web-marketing", label: "Web, Redes y Meta Ads" },
 ];
 
 export function ProjectsShowcase({ onSelectProject }: ProjectsShowcaseProps) {
@@ -32,12 +32,12 @@ export function ProjectsShowcase({ onSelectProject }: ProjectsShowcaseProps) {
         <div className="flex flex-col items-center text-center">
           <SplitHeadline
             as="h2"
-            text="Soluciones reales en acción"
+            text="Soluciones reales para crecer y ordenar"
             className="text-[clamp(2rem,4.5vw,3.35rem)] font-semibold tracking-[-0.03em] leading-[1.02] text-[#18181b]"
           />
-          <p className="mt-4 max-w-xl text-base text-[#52525b]">
-            Sistemas de ventas, plataformas médicas, sitios web ejecutivos y
-            aplicaciones móviles creadas para resolver problemas reales de negocio.
+          <p className="mt-4 max-w-2xl text-base text-[#52525b]">
+            Sistemas de ventas e inventario, gestión clínica, webs corporativas,
+            Community Management y campañas en Meta Ads pensadas para negocios.
           </p>
 
           <div
@@ -87,7 +87,7 @@ export function ProjectsShowcase({ onSelectProject }: ProjectsShowcaseProps) {
               >
                 <div className="relative z-10 flex items-center justify-center">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-[#18181b] shadow-2xs backdrop-blur-sm">
-                    {project.tab === "web-apps" ? (
+                    {project.tab === "web-marketing" ? (
                       <Sparkles className="size-3 text-[#ff8400]" aria-hidden="true" />
                     ) : (
                       <Briefcase className="size-3 text-zinc-700" aria-hidden="true" />

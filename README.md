@@ -1,11 +1,13 @@
-# Portafolio — Khristian Ali (Fundador de Glyph Agency)
+# Glyph Agency — Web Comercial Oficial
 
-Web de portafolio comercial y editorial en español enfocada en dueños de negocios y empresas: presenta soluciones reales (sistemas de ventas e inventario, gestión clínica, plataformas B2B, webs corporativas y automatización con IA) con diseño luminoso, transiciones suaves y formulario de contacto directo.
+Sitio web comercial de **Glyph Agency**, agencia digital cofundada por **Khristian Ali** (Desarrollo de Software, Webs y Automatización) y **Daniela Quiroz** (Lic. en Administración mención Mercadeo · Estrategia, Redes Sociales y Meta Ads).
+
+Diseñado con enfoque directo para dueños de negocios y empresas: presenta soluciones reales (sistemas de ventas e inventario sin internet, gestión clínica, plataformas B2B, sitios web corporativos, gestión de redes sociales como Community Manager, diseño comercial y campañas en Meta Ads) con identidad luminosa, animaciones suaves y contacto directo.
 
 ## Stack del Proyecto
 
 - **Framework:** Next.js 16 (App Router, RSC), React 19, TypeScript
-- **Estilos:** Tailwind CSS v4, `@property` CSS gradients y texturas granuladas editoriales
+- **Estilos:** Tailwind CSS v4, gradientes animables (`@property`) y texturas editoriales
 - **Animaciones:** GSAP + ScrollTrigger (respetando `prefers-reduced-motion`)
 - **Validación y Contacto:** Zod + `POST /api/contact` (soporte opcional para Resend y fallback directo)
 - **Despliegue:** Vercel (producción en `main`, previews en `test` y `dev`)

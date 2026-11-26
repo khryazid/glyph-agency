@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Khristian Ali — Fundador de Glyph Agency | Software para Empresas";
+export const alt =
+  "Glyph Agency — Software a Medida, Webs Comerciales, Redes Sociales y Meta Ads";
 export const size = {
   width: 1200,
   height: 630,
@@ -63,13 +64,13 @@ export default function OpenGraphImage() {
                 color: "#52525b",
               }}
             >
-              Khristian Ali · Glyph Agency
+              Glyph Agency · Software & Mercadeo Digital
             </span>
           </div>
 
           <div
             style={{
-              fontSize: "64px",
+              fontSize: "62px",
               fontWeight: 700,
               lineHeight: 1.0,
               letterSpacing: "-0.03em",
@@ -77,17 +78,17 @@ export default function OpenGraphImage() {
               marginBottom: "24px",
             }}
           >
-            Software que ordena y hace crecer tu negocio.
+            Atrae clientes, ordena tu negocio y escala.
           </div>
 
           <div
             style={{
-              fontSize: "26px",
+              fontSize: "25px",
               lineHeight: 1.38,
               color: "#52525b",
             }}
           >
-            Sistemas a Medida · Webs Comerciales · Automatización con IA
+            Sistemas a Medida · Webs Comerciales · Redes Sociales & Meta Ads
           </div>
         </div>
 

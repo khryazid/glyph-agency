@@ -108,7 +108,7 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
     const fallbackBrief =
       brief.trim() ||
       typedText.trim() ||
-      `Hola Khristian, me interesa conversar sobre una solución de ${selectedCategory} para mi negocio.`;
+      `Hola equipo de Glyph Agency, nos interesa conversar sobre una solución de ${selectedCategory} para nuestro negocio.`;
     onStartProject({ category: selectedCategory, brief: fallbackBrief });
   };
 
@@ -165,7 +165,7 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
           type="button"
           onClick={() => setPortalOpen((prev) => !prev)}
           data-open={portalOpen}
-          aria-label="Portal interactivo de Khristian Ali"
+          aria-label="Portal interactivo de Glyph Agency"
           className="hero-portal-trigger hero-portal-scene group mb-6 flex flex-col items-center focus-visible:rounded-2xl"
         >
           <div className="relative h-20 w-16 rounded-t-full rounded-b-[4px] border border-zinc-300/80 bg-white p-1 shadow-sm">
@@ -178,23 +178,26 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
           </div>
           <span className="mt-2.5 inline-flex items-center gap-1.5 rounded-full border border-zinc-200/90 bg-white px-3.5 py-1 text-[11px] font-medium text-[#52525b] shadow-2xs">
             <Sparkles className="size-3 text-[#ff8400]" aria-hidden="true" />
-            Khristian Ali · Fundador de Glyph Agency
+            Glyph Agency · Software & Mercadeo Digital
           </span>
         </button>
 
         <SplitHeadline
           as="h1"
           immediate
-          text="Software que ordena y hace crecer tu negocio."
+          text="Atrae clientes, ordena tu negocio y escala."
           className="text-[clamp(2.4rem,5.2vw,4rem)] font-semibold tracking-[-0.03em] leading-[0.98] text-[#2f2f2f]"
         />
 
-        <p className="mt-5 max-w-[560px] text-base leading-relaxed text-[#52525b] sm:text-[17px]">
-          Desarrollo{" "}
-          <span className="font-medium text-[#18181b]">sistemas a medida</span>,{" "}
+        <p className="mt-5 max-w-[580px] text-base leading-relaxed text-[#52525b] sm:text-[17px]">
+          En <span className="font-medium text-[#18181b]">Glyph Agency</span>{" "}
+          unimos{" "}
+          <span className="font-medium text-[#18181b]">software a medida</span>,{" "}
           <span className="font-medium text-[#18181b]">webs comerciales</span> y{" "}
-          <span className="font-medium text-[#18181b]">automatizaciones con IA</span>{" "}
-          para que vendas más, controles tu operación y no te frenes si falla el internet.
+          <span className="font-medium text-[#18181b]">
+            redes sociales con Meta Ads
+          </span>{" "}
+          para atraer clientes diarios y mantener tu operación bajo control.
         </p>
 
         {/* Caja central interactiva */}
@@ -203,7 +206,7 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
           className="hero-composer mt-8 w-full max-w-[560px] rounded-[26px] border border-zinc-200/90 bg-white p-3.5 text-left shadow-[0_20px_55px_rgba(24,24,27,0.07)] transition-shadow focus-within:border-zinc-300 focus-within:shadow-[0_24px_65px_rgba(24,24,27,0.1)]"
         >
           <label htmlFor="hero-brief" className="sr-only">
-            Cuéntame qué necesita tu negocio
+            Cuéntanos qué necesita tu negocio
           </label>
           <div className="relative min-h-[62px]">
             <textarea
@@ -218,7 +221,7 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
                   handleSubmit();
                 }
               }}
-              aria-label="Cuéntame qué necesita tu negocio"
+              aria-label="Cuéntanos qué necesita tu negocio"
               className="w-full resize-none bg-transparent px-1.5 pt-1 text-[14px] leading-[22px] text-[#171717] focus:outline-none"
             />
             {brief.length === 0 && !isFocused ? (
@@ -235,7 +238,7 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 px-1.5 pt-1 text-[14px] leading-[22px] text-[#a1a1aa]"
               >
-                Cuéntame qué proceso quieres ordenar o qué quieres lanzar en tu empresa...
+                Cuéntanos qué proceso quieres ordenar o qué campaña quieres lanzar en tu empresa...
               </div>
             ) : null}
           </div>
@@ -277,13 +280,13 @@ export function HeroSection({ onStartProject, onSelectProject }: HeroSectionProp
         </form>
 
         <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-xs text-[#737373]">
-          <span>Venezuela · Atención Remota</span>
+          <span>Venezuela · Atención Remota Internacional</span>
           <span aria-hidden="true">·</span>
           <a
             href="#proyectos"
             className="font-medium text-[#18181b] underline decoration-zinc-300 underline-offset-4 hover:decoration-[#18181b]"
           >
-            Explorar las 6 soluciones
+            Explorar nuestras 6 soluciones
           </a>
         </div>
       </div>

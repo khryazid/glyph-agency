@@ -7,13 +7,13 @@ const contactSchema = z.object({
   category: z.enum([
     "Sistema a Medida",
     "Web Comercial",
-    "Automatización e IA",
-    "Asesoría Digital",
+    "Redes y Meta Ads",
+    "Plan Integral",
   ]),
   message: z
     .string()
     .trim()
-    .min(15, "Cuéntame un poco más sobre tu negocio o proyecto (mínimo 15 caracteres).")
+    .min(15, "Cuéntanos un poco más sobre tu negocio o proyecto (mínimo 15 caracteres).")
     .max(3000),
   companyWebsite: z.string().optional(),
 });
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
   const resendKey = process.env.RESEND_API_KEY?.trim();
   const toEmail = process.env.CONTACT_TO_EMAIL?.trim();
   const fromEmail =
-    process.env.CONTACT_FROM_EMAIL?.trim() || "Portfolio <onboarding@resend.dev>";
+    process.env.CONTACT_FROM_EMAIL?.trim() || "Glyph Agency <onboarding@resend.dev>";
 
   if (resendKey && toEmail) {
     try {
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
           from: fromEmail,
           to: [toEmail],
           reply_to: email,
-          subject: `[Portafolio · ${category}] Nuevo contacto de ${name}`,
+          subject: `[Glyph Agency · ${category}] Nuevo contacto de ${name}`,
           text: `Nombre: ${name}\nCorreo: ${email}\nInterés: ${category}\n\nMensaje:\n${message}`,
         }),
       });
@@ -78,9 +78,9 @@ export async function POST(request: Request) {
     }
   }
 
-  const subject = encodeURIComponent(`[Consulta · ${category}] Mensaje de ${name}`);
+  const subject = encodeURIComponent(`[Glyph Agency · ${category}] Consulta de ${name}`);
   const mailBody = encodeURIComponent(
-    `Hola Khristian,\n\nSoy ${name} (${email}).\nCategoría: ${category}\n\n${message}`
+    `Hola equipo de Glyph Agency,\n\nSoy ${name} (${email}).\nCategoría: ${category}\n\n${message}`
   );
   const mailtoUrl = toEmail
     ? `mailto:${toEmail}?subject=${subject}&body=${mailBody}`

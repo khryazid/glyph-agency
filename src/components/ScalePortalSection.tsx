@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  Bot,
   Coins,
   FileText,
+  Megaphone,
   ShieldCheck,
-  Smartphone,
+  Sparkles,
   WifiOff,
 } from "lucide-react";
 import {
@@ -27,7 +27,14 @@ interface ScalePortalSectionProps {
   onPickCategory: (category: HeroCategory) => void;
 }
 
-const CAPABILITY_ICONS = [WifiOff, Coins, FileText, Bot, ShieldCheck, Smartphone];
+const CAPABILITY_ICONS = [
+  WifiOff,
+  Sparkles,
+  Megaphone,
+  Coins,
+  FileText,
+  ShieldCheck,
+];
 
 export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) {
   const wrapperRef = useRef<HTMLElement | null>(null);
@@ -168,11 +175,11 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
           </div>
 
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#737373]">
-            Orden · Ventas · Crecimiento
+            Visibilidad · Orden · Crecimiento
           </p>
 
           <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-[clamp(1.85rem,4vw,3.1rem)] font-semibold tracking-[-0.03em] text-[#18181b]">
-            <span>Conmigo puedes crear</span>
+            <span>Con nosotros puedes impulsar</span>
             <button
               type="button"
               onClick={() => {
@@ -187,8 +194,8 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
           </div>
 
           <p className="mt-4 max-w-lg text-sm text-[#52525b] sm:text-base">
-            Desde una web que genere confianza inmediata hasta un sistema completo
-            para controlar ventas, inventario y cobranzas.
+            Desde llevar tus redes sociales con Meta Ads hasta ordenar toda tu
+            caja, clientes e inventario en un sistema a la medida.
           </p>
 
           <button
