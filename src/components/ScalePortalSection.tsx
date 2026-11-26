@@ -178,19 +178,19 @@ export function ScalePortalSection({ onPickCategory }: ScalePortalSectionProps) 
             <div className="scale-portal-core arch-shape absolute inset-x-16 top-16 bottom-0 bg-[#141417] shadow-2xl" />
           </div>
 
-          <div className="scale-phase-a-copy relative z-10 mt-6 flex max-w-3xl flex-col items-center text-center lg:-mt-10">
-            <div className="flex flex-wrap items-center justify-center gap-2.5">
+          <div className="scale-phase-a-copy relative z-10 mt-6 flex w-full max-w-3xl flex-col items-center text-center lg:-mt-10">
+            <div className="grid w-full max-w-[340px] auto-rows-fr grid-cols-1 gap-2.5 sm:max-w-xl sm:grid-cols-2 lg:max-w-3xl lg:grid-cols-3">
               {CAPABILITY_BADGES.map((cap, idx) => {
                 const Icon = CAPABILITY_ICONS[idx % CAPABILITY_ICONS.length];
                 return (
                   <div
                     key={cap.label}
-                    className="scale-cap-badge inline-flex items-center gap-2 rounded-2xl border border-zinc-200/90 bg-white/95 px-3.5 py-2 shadow-sm backdrop-blur-sm"
+                    className="scale-cap-badge flex h-full w-full items-center gap-2.5 rounded-2xl border border-zinc-200/90 bg-white/95 px-3.5 py-2.5 shadow-sm backdrop-blur-sm"
                   >
-                    <span className="inline-flex size-6 items-center justify-center rounded-lg bg-[#171717] text-white">
+                    <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-lg bg-[#171717] text-white">
                       <Icon className="size-3.5" aria-hidden="true" />
                     </span>
-                    <div className="text-left">
+                    <div className="min-w-0 text-left">
                       <p className="text-xs font-semibold text-[#18181b]">
                         {cap.label}
                       </p>
