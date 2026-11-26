@@ -4,6 +4,7 @@ import { z } from "zod";
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Ingresa tu nombre completo.").max(120),
   email: z.string().trim().email("Ingresa un correo electrónico válido."),
+  whatsapp: z.string().trim().max(40).optional().default(""),
   category: z.enum([
     "Sistema a Medida",
     "Web Comercial",
@@ -41,15 +42,18 @@ export async function POST(request: Request) {
     );
   }
 
-  const { name, email, category, message, companyWebsite } = parsed.data;
+  const { name, email, whatsapp, category, message, companyWebsite } = parsed.data;
 
   // Honeypot anti-spam: responder silenciosamente sin procesar
   if (companyWebsite && companyWebsite.trim().length > 0) {
     return NextResponse.json({ ok: true, delivery: "filtered" }, { status: 200 });
   }
 
-  const crmIngestUrl = process.env.GLYPH_CRM_INGEST_URL?.trim();
-  const crmApiKey = process.env.GLYPH_CRM_API_KEY?.trim();
+  const cleanEnv = (raw: string | undefined) =>
+    (raw || "").trim().replace(/^["'`]+|["'`]+$/g, "").trim();
+
+  const crmIngestUrl = cleanEnv(process.env.GLYPH_CRM_INGEST_URL);
+  const crmApiKey = cleanEnv(process.env.GLYPH_CRM_API_KEY);
   let crmCaptured = false;
 
   if (crmIngestUrl && crmApiKey) {
@@ -63,6 +67,7 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           fullName: name,
           email,
+          whatsapp,
           niche: category,
           source: "Web",
           message,
@@ -76,10 +81,10 @@ export async function POST(request: Request) {
     }
   }
 
-  const resendKey = process.env.RESEND_API_KEY?.trim();
-  const toEmail = process.env.CONTACT_TO_EMAIL?.trim();
+  const resendKey = cleanEnv(process.env.RESEND_API_KEY);
+  const toEmail = cleanEnv(process.env.CONTACT_TO_EMAIL);
   const fromEmail =
-    process.env.CONTACT_FROM_EMAIL?.trim() || "Glyph Agency <onboarding@resend.dev>";
+    cleanEnv(process.env.CONTACT_FROM_EMAIL) || "Glyph Agency <onboarding@resend.dev>";
 
   if (resendKey && toEmail) {
     try {
@@ -94,7 +99,7 @@ export async function POST(request: Request) {
           to: [toEmail],
           reply_to: email,
           subject: `[Glyph Agency · ${category}] Nuevo contacto de ${name}`,
-          text: `Nombre: ${name}\nCorreo: ${email}\nInterés: ${category}\n\nMensaje:\n${message}`,
+          text: `Nombre: ${name}\nCorreo: ${email}\nWhatsApp: ${whatsapp || "No indicado"}\nInterés: ${category}\n\nMensaje:\n${message}`,
         }),
       });
 
@@ -115,7 +120,7 @@ export async function POST(request: Request) {
 
   const subject = encodeURIComponent(`[Glyph Agency · ${category}] Consulta de ${name}`);
   const mailBody = encodeURIComponent(
-    `Hola equipo de Glyph Agency,\n\nSoy ${name} (${email}).\nCategoría: ${category}\n\n${message}`
+    `Hola equipo de Glyph Agency,\n\nSoy ${name} (${email}).\nWhatsApp: ${whatsapp || "No indicado"}\nCategoría: ${category}\n\n${message}`
   );
   const mailtoUrl = toEmail
     ? `mailto:${toEmail}?subject=${subject}&body=${mailBody}`

@@ -30,6 +30,7 @@ export function ContactSection({
   const formRef = useRef<HTMLFormElement | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
   const [companyWebsite, setCompanyWebsite] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -195,6 +196,7 @@ export function ContactSection({
         body: JSON.stringify({
           name,
           email,
+          whatsapp,
           category,
           message,
           companyWebsite,
@@ -348,6 +350,7 @@ export function ContactSection({
                     onClick={() => {
                       setSubmittedForSignal(null);
                       setResult(null);
+                      setWhatsapp("");
                       onMessageChange("");
                     }}
                     className="rounded-full bg-[#f3f3f4] px-4 py-2.5 text-xs font-semibold text-[#18181b] hover:bg-zinc-200"
@@ -432,26 +435,55 @@ export function ContactSection({
                   </div>
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="contact-category"
-                    className="block text-xs font-semibold text-[#18181b]"
-                  >
-                    ¿Qué solución estás buscando?
-                  </label>
-                  <select
-                    id="contact-category"
-                    name="category"
-                    value={category}
-                    onChange={(e) => onCategoryChange(e.target.value as HeroCategory)}
-                    className="field-control mt-1.5 w-full rounded-xl border border-zinc-200 bg-[#fafafa] px-3.5 py-2.5 text-sm text-[#18181b]"
-                  >
-                    {CATEGORIES.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
-                      </option>
-                    ))}
-                  </select>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div>
+                    <label
+                      htmlFor="contact-whatsapp"
+                      className="block text-xs font-semibold text-[#18181b]"
+                    >
+                      WhatsApp
+                    </label>
+                    <span id="contact-whatsapp-hint" className="block text-[11px] text-[#737373]">
+                      Opcional · para responderte más rápido
+                    </span>
+                    <input
+                      id="contact-whatsapp"
+                      name="whatsapp"
+                      type="tel"
+                      autoComplete="tel"
+                      aria-describedby="contact-whatsapp-hint"
+                      placeholder="Ej: 0424 123 4567 o +58..."
+                      value={whatsapp}
+                      onChange={(e) => setWhatsapp(e.target.value)}
+                      className="field-control mt-1 w-full rounded-xl border border-zinc-200 bg-[#fafafa] px-3.5 py-2.5 text-sm text-[#18181b] placeholder:text-zinc-400"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="contact-category"
+                      className="block text-xs font-semibold text-[#18181b]"
+                    >
+                      ¿Qué solución estás buscando?
+                    </label>
+                    <span id="contact-category-hint" className="block text-[11px] text-[#737373]">
+                      Elige el enfoque principal
+                    </span>
+                    <select
+                      id="contact-category"
+                      name="category"
+                      aria-describedby="contact-category-hint"
+                      value={category}
+                      onChange={(e) => onCategoryChange(e.target.value as HeroCategory)}
+                      className="field-control mt-1 w-full rounded-xl border border-zinc-200 bg-[#fafafa] px-3.5 py-2.5 text-sm text-[#18181b]"
+                    >
+                      {CATEGORIES.map((cat) => (
+                        <option key={cat} value={cat}>
+                          {cat}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 <div>
